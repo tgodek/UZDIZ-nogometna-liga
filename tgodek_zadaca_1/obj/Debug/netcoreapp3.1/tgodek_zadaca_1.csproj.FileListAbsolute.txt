@@ -1,0 +1,14 @@
+E:\Develop\C#\tgodek\UzDiz\DZ_1\tgodek_zadaca_1\tgodek_zadaca_1\bin\Debug\netcoreapp3.1\tgodek_zadaca_1.exe
+E:\Develop\C#\tgodek\UzDiz\DZ_1\tgodek_zadaca_1\tgodek_zadaca_1\bin\Debug\netcoreapp3.1\tgodek_zadaca_1.deps.json
+E:\Develop\C#\tgodek\UzDiz\DZ_1\tgodek_zadaca_1\tgodek_zadaca_1\bin\Debug\netcoreapp3.1\tgodek_zadaca_1.runtimeconfig.json
+E:\Develop\C#\tgodek\UzDiz\DZ_1\tgodek_zadaca_1\tgodek_zadaca_1\bin\Debug\netcoreapp3.1\tgodek_zadaca_1.runtimeconfig.dev.json
+E:\Develop\C#\tgodek\UzDiz\DZ_1\tgodek_zadaca_1\tgodek_zadaca_1\bin\Debug\netcoreapp3.1\tgodek_zadaca_1.dll
+E:\Develop\C#\tgodek\UzDiz\DZ_1\tgodek_zadaca_1\tgodek_zadaca_1\bin\Debug\netcoreapp3.1\tgodek_zadaca_1.pdb
+E:\Develop\C#\tgodek\UzDiz\DZ_1\tgodek_zadaca_1\tgodek_zadaca_1\obj\Debug\netcoreapp3.1\tgodek_zadaca_1.csproj.AssemblyReference.cache
+E:\Develop\C#\tgodek\UzDiz\DZ_1\tgodek_zadaca_1\tgodek_zadaca_1\obj\Debug\netcoreapp3.1\tgodek_zadaca_1.GeneratedMSBuildEditorConfig.editorconfig
+E:\Develop\C#\tgodek\UzDiz\DZ_1\tgodek_zadaca_1\tgodek_zadaca_1\obj\Debug\netcoreapp3.1\tgodek_zadaca_1.AssemblyInfoInputs.cache
+E:\Develop\C#\tgodek\UzDiz\DZ_1\tgodek_zadaca_1\tgodek_zadaca_1\obj\Debug\netcoreapp3.1\tgodek_zadaca_1.AssemblyInfo.cs
+E:\Develop\C#\tgodek\UzDiz\DZ_1\tgodek_zadaca_1\tgodek_zadaca_1\obj\Debug\netcoreapp3.1\tgodek_zadaca_1.csproj.CoreCompileInputs.cache
+E:\Develop\C#\tgodek\UzDiz\DZ_1\tgodek_zadaca_1\tgodek_zadaca_1\obj\Debug\netcoreapp3.1\tgodek_zadaca_1.dll
+E:\Develop\C#\tgodek\UzDiz\DZ_1\tgodek_zadaca_1\tgodek_zadaca_1\obj\Debug\netcoreapp3.1\tgodek_zadaca_1.pdb
+E:\Develop\C#\tgodek\UzDiz\DZ_1\tgodek_zadaca_1\tgodek_zadaca_1\obj\Debug\netcoreapp3.1\tgodek_zadaca_1.genruntimeconfig.cache
