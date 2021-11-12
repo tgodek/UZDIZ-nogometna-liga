@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using tgodek_zadaca_1.Util;
 
 namespace tgodek_zadaca_1
 {
@@ -52,59 +53,59 @@ namespace tgodek_zadaca_1
                 Console.Write("Vaš odabir: ");
                 var unos = Console.ReadLine();
                 var vrijednosti = unos.Split(" ");
-                var zastavica = vrijednosti[0].ToUpper();
-                if (zastavica == "EXIT")
-                { 
-                    ponovno = false; 
+
+                if (vrijednosti[0] == "exit")
+                {
+                    ponovno = false;
                     break;
                 }
-
-                if (vrijednosti.Length <= 2)
+                else if (vrijednosti.Length == 3)
                 {
-
-                    if (zastavica == "T" || zastavica == "S" || zastavica == "K")
+                    Console.WriteLine(vrijednosti.Length);
+                    var zastavica = vrijednosti[0];
+                    int kolo;
+                    if ((zastavica == "R") &&
+                        Int32.TryParse(vrijednosti[2], out kolo))
                     {
-                        if (vrijednosti.Length == 2)
-                        {
-                            Int32 broj;
-                            if (Int32.TryParse(vrijednosti[1], out broj))
-                            {
-                                prvenstvo.IspisLjestvice(zastavica, broj);
-                            }
-                            else
-                            {
-                                Console.WriteLine("Drugi parametar mora biti broj!");
-                            }
-                        }
-                        else
-                        {
-                            prvenstvo.IspisLjestvice(zastavica);
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Prvi parametar je krivi!");
+                        var builder = new KonkretniIzbornik();
+                        builder.DodajZastavicu(zastavica).DodajKlub(vrijednosti[1]).DodajKolo(kolo);
+                        prvenstvo.IspisLjestvice(builder.Build());
                     }
                 }
-                else if (vrijednosti.Length == 3 && zastavica == "R")
+                else if (vrijednosti.Length == 2 &&
+                    (vrijednosti[0] == "T" || vrijednosti[0] == "S" || vrijednosti[0] == "K"))
                 {
-                    Int32 broj;
-                    if (Int32.TryParse(vrijednosti[2], out broj))
+                    var zastavica = vrijednosti[0];
+                    int kolo;
+                    if (Int32.TryParse(vrijednosti[1], out kolo))
                     {
-                        prvenstvo.IspisLjestviceKlubova(vrijednosti[1], broj);
+                        var builder = new KonkretniIzbornik();
+                        builder.DodajZastavicu(zastavica).DodajKolo(kolo);
+                        prvenstvo.IspisLjestvice(builder.Build());
                     }
-                    else
-                    {
-                        Console.WriteLine("Treći parametar mora biti broj!");
-                    }
+                }
+                else if (vrijednosti.Length == 2 && (vrijednosti[0] == "R"))
+                {
+                    var zastavica = vrijednosti[0];
+                    var klub = vrijednosti[1];
+                    var builder = new KonkretniIzbornik();
+                    builder.DodajZastavicu(zastavica).DodajKlub(klub);
+                    prvenstvo.IspisLjestvice(builder.Build());
+                }
+
+                else if (vrijednosti.Length == 1 &&
+                    (vrijednosti[0] == "T" || vrijednosti[0] == "S" || vrijednosti[0] == "K" || vrijednosti[0] == "R"))
+                {
+                    var zastavica = vrijednosti[0];
+                    var builder = new KonkretniIzbornik();
+                    builder.DodajZastavicu(zastavica);
+                    prvenstvo.IspisLjestvice(builder.Build());
                 }
                 else
                 {
-                    Console.WriteLine("Neispravan unos!");
+                    Console.WriteLine("Neispravan unos");
                 }
-
             }
-          
         }
 
         private static bool UcitavanjeUspjesno(Dictionary<string, string> hash)
@@ -112,43 +113,21 @@ namespace tgodek_zadaca_1
             bool ucitajPrvenstvo = false;
             if (hash.Keys.Count == 5)
             {
-                if (DatotekeIspravne(hash))
+                if (FileUtil.DatotekeIspravne(hash))
                 {
                     ucitajPrvenstvo = true;
                     FileLoaderFactory fileReaderFactory = new FileLoaderFactory();
-                    
-                    foreach (var value in hash)
-                    {
-                        if (value.Key == "k")
-                        {
-                            var klubovi = fileReaderFactory.DohvatiPodatke(value.Key);
-                            klubovi.UcitajPodatke(value.Value);
-                        }
-
-                        if (value.Key == "i")
-                        {
-                            var igraci = fileReaderFactory.DohvatiPodatke(value.Key);
-                            igraci.UcitajPodatke(value.Value);
-                        }
-                      
-                        if (value.Key == "u")
-                        {
-                            var utakmice = fileReaderFactory.DohvatiPodatke(value.Key);
-                            utakmice.UcitajPodatke(value.Value);
-                        }
-
-                        if (value.Key == "s")
-                        {
-                            var sastavUtakmice = fileReaderFactory.DohvatiPodatke(value.Key);
-                            sastavUtakmice.UcitajPodatke(value.Value);
-                        }
-
-                        if (value.Key == "d")
-                        {
-                            var sastavUtakmice = fileReaderFactory.DohvatiPodatke(value.Key);
-                            sastavUtakmice.UcitajPodatke(value.Value);
-                        }
-                    }
+                   
+                    var klubovi = fileReaderFactory.DohvatiPodatke(hash.FirstOrDefault(x => x.Key == "k").Key);
+                    klubovi.UcitajPodatke(hash.FirstOrDefault(x => x.Key == "k").Value);
+                    var igraci = fileReaderFactory.DohvatiPodatke(hash.FirstOrDefault(x => x.Key == "i").Key);
+                    igraci.UcitajPodatke(hash.FirstOrDefault(x => x.Key == "i").Value);
+                    var utakmice = fileReaderFactory.DohvatiPodatke(hash.FirstOrDefault(x => x.Key == "u").Key);
+                    utakmice.UcitajPodatke(hash.FirstOrDefault(x => x.Key == "u").Value);
+                    var sastavUtakmice = fileReaderFactory.DohvatiPodatke(hash.FirstOrDefault(x => x.Key == "s").Key);
+                    sastavUtakmice.UcitajPodatke(hash.FirstOrDefault(x => x.Key == "s").Value);
+                    var dogadaji = fileReaderFactory.DohvatiPodatke(hash.FirstOrDefault(x => x.Key == "d").Key);
+                    dogadaji.UcitajPodatke(hash.FirstOrDefault(x => x.Key == "d").Value);
                 }
                 else
                 {
@@ -157,26 +136,6 @@ namespace tgodek_zadaca_1
                 }
             }
             return ucitajPrvenstvo;
-        }
-
-
-        static private bool DatotekeIspravne(Dictionary<string, string> datoteke)
-        {
-            bool postojiDatoteka = false;
-            foreach (var datoteka in datoteke)
-            {
-                if (!File.Exists(datoteka.Value))
-                {
-                    Console.WriteLine("Datoteka " + datoteka.Value + " ne postoji!");
-                    postojiDatoteka = false;
-                    break;
-                }
-                else
-                {
-                    postojiDatoteka = true;
-                }
-            }
-            return postojiDatoteka;
         }
     }
 }

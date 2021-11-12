@@ -28,15 +28,11 @@ namespace tgodek_zadaca_1
             return instanca;
         }
 
-        public void IspisLjestvice(string zastavica, int kolo = 0)
+        public void IspisLjestvice(Izbornik izbornik)
         {
-            var ljestvica = new LjestvicaFactory().DohvatiLjestvicu(zastavica, kolo);
+            var ljestvica = new LjestvicaFactory().DohvatiLjestvicu(izbornik.Zastavica, izbornik.Kolo);
             ljestvica.Ispis();
-        }
-
-        public void IspisLjestviceKlubova(string klub, int kolo)
-        {
-            //Ljestvica za klubove
+            //Console.WriteLine("Zastavica: {0} Kolo: {1} Klub: {2}", izbornik.Zastavica, izbornik.Kolo, izbornik.Klub);
         }
 
         public List<Dogadaj> SviDogadaji()

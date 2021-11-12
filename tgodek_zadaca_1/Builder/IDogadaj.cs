@@ -5,7 +5,7 @@ using tgodek_zadaca_1.Model;
 
 namespace tgodek_zadaca_1.Builder
 {
-    interface IBuilder
+    interface IDogadaj
     {
         public void DodajOsnovno(int utakmica, string minute, int vrsta);
         public void DodajIgracaIKlub(string klub, string igrac);

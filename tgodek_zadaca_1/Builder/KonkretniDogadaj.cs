@@ -5,7 +5,7 @@ using tgodek_zadaca_1.Model;
 
 namespace tgodek_zadaca_1.Builder
 {
-    class KonkretniDogadaj : IBuilder
+    class KonkretniDogadaj : IDogadaj
     {
         Dogadaj _dogadaj = new Dogadaj();
 
@@ -31,7 +31,7 @@ namespace tgodek_zadaca_1.Builder
             this._dogadaj.Zamjena = zamjena;
         }
 
-        public void Reset()
+        private void Reset()
         {
             this._dogadaj = new Dogadaj();
         }
