@@ -10,13 +10,19 @@ namespace tgodek_zadaca_1.Model
     {
         public ILjestvica DohvatiLjestvicu(string oznaka, int kolo)
         {
+            
             if (oznaka == "T")
             {
+                return null;
             }
+            if (oznaka == "R")
+            {
+                return null;
+            }
+          
             if (oznaka == "K")
             {
                 return new LjestvicaKartoni(kolo);
-
             }
             if (oznaka == "S")
             {

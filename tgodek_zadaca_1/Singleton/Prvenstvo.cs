@@ -6,17 +6,21 @@ namespace tgodek_zadaca_1
 {
     class Prvenstvo
     {
-        private List<Igrac> igraci = new List<Igrac>();
-        private List<Klub> klubovi = new List<Klub>();
-        private List<Utakmica> utakmice = new List<Utakmica>();
-        private List<SastavUtakmice> sastaviUtakmica = new List<SastavUtakmice>();
-        private List<Dogadaj> dogadaji = new List<Dogadaj>();
+        private List<Igrac> igraci;
+        private List<Klub> klubovi;
+        private List<Utakmica> utakmice;
+        private List<SastavUtakmice> sastaviUtakmica;
+        private List<Dogadaj> dogadaji;
 
         private static Prvenstvo instanca;
 
-        public Prvenstvo()
+        private Prvenstvo() 
         {
-            
+            igraci = new List<Igrac>();
+            klubovi = new List<Klub>();
+            utakmice = new List<Utakmica>();
+            sastaviUtakmica = new List<SastavUtakmice>();
+            dogadaji = new List<Dogadaj>();
         }
 
         public static Prvenstvo DohvatiPrvenstvo()
@@ -30,53 +34,35 @@ namespace tgodek_zadaca_1
 
         public void IspisLjestvice(Izbornik izbornik)
         {
-            var ljestvica = new LjestvicaFactory().DohvatiLjestvicu(izbornik.Zastavica, izbornik.Kolo);
-            ljestvica.Ispis();
+            try
+            {
+                var ljestvica = new LjestvicaFactory().DohvatiLjestvicu(izbornik.Zastavica, izbornik.Kolo);
+                ljestvica.Ispis();
+            }
+            catch (NullReferenceException)
+            {
+                Console.WriteLine("Nje implenetirano");
+            }
             //Console.WriteLine("Zastavica: {0} Kolo: {1} Klub: {2}", izbornik.Zastavica, izbornik.Kolo, izbornik.Klub);
         }
 
-        public List<Dogadaj> SviDogadaji()
-        {
-            return dogadaji;
-        }
+        public List<Dogadaj> SviDogadaji() => dogadaji;
 
-        public List<Igrac> SviIgraci()
-        {
-            return igraci;
-        }
-        public List<Utakmica> SveUtakmice()
-        {
-            return utakmice;
-        }
-        public List<Klub> SviKlubovi()
-        {
-            return klubovi;
-        }
+        public List<Igrac> SviIgraci() => igraci;
 
-        public void DodajIgrac(Igrac igrac)
-        {
-            igraci.Add(igrac);
-        }
+        public List<Utakmica> SveUtakmice() => utakmice;
 
-        public void DodajKlub(Klub klub)
-        {
-            klubovi.Add(klub);
-        }
+        public List<Klub> SviKlubovi() => klubovi;
 
-        public void DodajUtakmicu(Utakmica utakmica)
-        {
-            utakmice.Add(utakmica);
-        }
+        public void DodajIgrac(Igrac igrac) => igraci.Add(igrac);
 
-        public void DodajSastavUtakmice(SastavUtakmice sastavUtakmice)
-        {
-            sastaviUtakmica.Add(sastavUtakmice);
-        }
+        public void DodajKlub(Klub klub) => klubovi.Add(klub);
 
-        public void DodajDogadaj(Dogadaj dogadaj)
-        {
-            dogadaji.Add(dogadaj);
-        }
+        public void DodajUtakmicu(Utakmica utakmica) => utakmice.Add(utakmica);
+
+        public void DodajSastavUtakmice(SastavUtakmice sastavUtakmice) => sastaviUtakmica.Add(sastavUtakmice);
+
+        public void DodajDogadaj(Dogadaj dogadaj) => dogadaji.Add(dogadaj);
 
         public void IspisiIgrace()
         {
