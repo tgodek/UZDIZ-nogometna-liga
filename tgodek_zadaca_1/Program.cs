@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using tgodek_zadaca_1.Composite;
+using tgodek_zadaca_1.FactoryMethod.Datoteke;
 using tgodek_zadaca_1.Util;
 
 namespace tgodek_zadaca_1
@@ -10,8 +12,16 @@ namespace tgodek_zadaca_1
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
+            var trener = new Trener("Pero", "Peric");
+            var trener2 = new Trener("Ivo", "Ivic");
+            var klub1 = new Klub("SL", "Slaven Belupo", trener);
+            var klub2 = new Klub("D", "Dinamo", trener2);
+            var igrac = new Igrac(klub1, "Tomislav Godek", Pozicija.LB, DateTime.Today);
+            var igrac2 = new Igrac(klub2, "Luka Jakovic", Pozicija.DN, DateTime.Today);
 
-            if (UcitavanjeUspjesno(PocetniParametni(args)))
+            var ucitavacDatoteka = UcitavacDatoteka.DohvatiUcitavacDatoteka();
+            
+            if (ucitavacDatoteka.UcitajDatoteke(args))
             {
                 Meni();
             }
@@ -47,30 +57,7 @@ namespace tgodek_zadaca_1
             }
         }
 
-        private static Dictionary<string, string> PocetniParametni(string[] args)
-        {
-            Dictionary<string, string> hash = new Dictionary<string, string>();
-            var zastavice = GeneralUtil.ListaDozvoljenihZastavica();
-
-            for (int i = 0; i < args.Length; i++)
-            {
-                if (args[i].StartsWith("-") && zastavice.Exists(zastavica => args[i].Contains(zastavica)))
-                {
-                    var zastavica = args[i].Trim('-');
-                    try
-                    {
-                        if (i < args.Length - 1)
-                            hash.Add(zastavica, args[i + 1]);
-                    }
-                    catch (ArgumentException)
-                    {
-                        Console.WriteLine("Postoje duplikati u argumentima!");
-                        break;
-                    }
-                }
-            }
-            return hash;
-        }
+      
 
         private static Izbornik KonstruirajIzbornik(string[] vrijednosti, KonkretniIzbornik builder)
         {
@@ -108,34 +95,6 @@ namespace tgodek_zadaca_1
             {
                 return null;
             }
-        }
-
-        private static bool UcitavanjeUspjesno(Dictionary<string, string> hash)
-        {
-            bool ucitajPrvenstvo = false;
-            if (hash.Keys.Count == 5 && FileUtil.DatotekeIspravne(hash))
-            {
-                FileLoaderFactory fileReaderFactory = new FileLoaderFactory();
-                   
-                var klubovi = fileReaderFactory.DohvatiPodatke(hash.FirstOrDefault(x => x.Key == "k").Key);
-                klubovi.UcitajPodatke(hash.FirstOrDefault(x => x.Key == "k").Value);
-                var igraci = fileReaderFactory.DohvatiPodatke(hash.FirstOrDefault(x => x.Key == "i").Key);
-                igraci.UcitajPodatke(hash.FirstOrDefault(x => x.Key == "i").Value);
-                var utakmice = fileReaderFactory.DohvatiPodatke(hash.FirstOrDefault(x => x.Key == "u").Key);
-                utakmice.UcitajPodatke(hash.FirstOrDefault(x => x.Key == "u").Value);
-                var sastavUtakmice = fileReaderFactory.DohvatiPodatke(hash.FirstOrDefault(x => x.Key == "s").Key);
-                sastavUtakmice.UcitajPodatke(hash.FirstOrDefault(x => x.Key == "s").Value);
-                var dogadaji = fileReaderFactory.DohvatiPodatke(hash.FirstOrDefault(x => x.Key == "d").Key);
-                dogadaji.UcitajPodatke(hash.FirstOrDefault(x => x.Key == "d").Value);
-                
-                ucitajPrvenstvo = true;
-            }
-            else
-            {
-                Console.WriteLine("Molimo unesite sve parametre");
-                ucitajPrvenstvo = false;
-            }
-            return ucitajPrvenstvo;
         }
     }
 }
