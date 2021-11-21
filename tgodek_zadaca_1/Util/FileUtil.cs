@@ -21,7 +21,7 @@ namespace tgodek_zadaca_1.Util
             return listaVrijednosti;
         }
 
-        public static bool DatotekeIspravne(Dictionary<string, string> datoteke)
+        public static bool DatotekeIspravne(SortedList<Enum, string> datoteke)
         {
             bool postojiDatoteka = false;
             foreach (var datoteka in datoteke)
