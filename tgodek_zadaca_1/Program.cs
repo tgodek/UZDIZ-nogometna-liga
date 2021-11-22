@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using tgodek_zadaca_1.Composite;
 using tgodek_zadaca_1.FactoryMethod.Datoteke;
-using tgodek_zadaca_1.Util;
 
 namespace tgodek_zadaca_1
 {
@@ -19,7 +16,10 @@ namespace tgodek_zadaca_1
             var igrac = new Igrac(klub1, "Tomislav Godek", Pozicija.LB, DateTime.Today);
             var igrac2 = new Igrac(klub2, "Luka Jakovic", Pozicija.DN, DateTime.Today);
 
-            var ucitavacDatoteka = UcitavacDatoteka.DohvatiUcitavacDatoteka();
+            igrac.DetaljiKomponente();
+
+            var ucitavacDatoteka = UcitavacDatotekaFacade.DohvatiUcitavacDatoteka();
+
             
             if (ucitavacDatoteka.UcitajDatoteke(args))
             {
@@ -56,8 +56,6 @@ namespace tgodek_zadaca_1
                 }
             }
         }
-
-      
 
         private static Izbornik KonstruirajIzbornik(string[] vrijednosti, KonkretniIzbornik builder)
         {

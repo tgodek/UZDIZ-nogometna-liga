@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace tgodek_zadaca_1
+﻿namespace tgodek_zadaca_1.FactoryMethod.Datoteke
 {
-    class FileLoaderFactory
+    internal class UcitavacDatotekaFactory
     {
-        public ILoader DohvatiPodatke(string key) 
+        internal IUcitavac DohvatiPodatke(string key)
         {
             if (key == "i")
                 return new UcitavacIgraca();

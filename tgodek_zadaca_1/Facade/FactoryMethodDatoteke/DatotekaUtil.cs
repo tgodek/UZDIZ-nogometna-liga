@@ -5,9 +5,20 @@ using System.Text;
 
 namespace tgodek_zadaca_1.Util
 {
-    class FileUtil
+    class DatotekaUtil
     {
-        public static List<string> ReadFile(string imeDatoteke)
+        enum UlazniParametri
+        {
+            K,
+            I,
+            U,
+            S,
+            D
+        }
+
+        private static List<string> _listaDozvoljenihZastavica = new List<string> { "d", "i", "k", "s", "u" };
+
+        internal static List<string> ReadFile(string imeDatoteke)
         {
             var listaVrijednosti = new List<String>();
             var citac = new StreamReader(imeDatoteke);
@@ -21,7 +32,7 @@ namespace tgodek_zadaca_1.Util
             return listaVrijednosti;
         }
 
-        public static bool DatotekeIspravne(SortedList<Enum, string> datoteke)
+        internal static bool DatotekeIspravne(SortedList<Enum, string> datoteke)
         {
             bool postojiDatoteka = false;
             foreach (var datoteka in datoteke)
@@ -38,6 +49,24 @@ namespace tgodek_zadaca_1.Util
                 }
             }
             return postojiDatoteka;
+        }
+
+        internal static List<string> ListaDozvoljenihZastavica()
+        {
+            return _listaDozvoljenihZastavica;
+        }
+
+        internal static Enum MapirajZastavicu(string zastavica)
+        {
+            switch (zastavica)
+            {
+                case "k": return UlazniParametri.K;
+                case "i": return UlazniParametri.I;
+                case "u": return UlazniParametri.U;
+                case "s": return UlazniParametri.S;
+                case "d": return UlazniParametri.D;
+                default: return null;
+            }
         }
     }
 }

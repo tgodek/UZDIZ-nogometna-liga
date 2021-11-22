@@ -1,24 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using tgodek_zadaca_1.Util;
 
 namespace tgodek_zadaca_1.FactoryMethod.Datoteke
 {
-    class UcitavacDatoteka
+    public class UcitavacDatotekaFacade
     {
-
-        private static UcitavacDatoteka instanca;
-        private UcitavacDatoteka()
+        private static UcitavacDatotekaFacade instanca;
+        private UcitavacDatotekaFacade()
         {
         }
 
-        public static UcitavacDatoteka DohvatiUcitavacDatoteka()
+        public static UcitavacDatotekaFacade DohvatiUcitavacDatoteka()
         {
             if (instanca == null)
             {
-                instanca = new UcitavacDatoteka();
+                instanca = new UcitavacDatotekaFacade();
             }
             return instanca;
         }
@@ -26,10 +23,10 @@ namespace tgodek_zadaca_1.FactoryMethod.Datoteke
         public bool UcitajDatoteke(string[] argumenti)
         {
             var popisDatoteka = ObradiPocetneParametre(argumenti);
-            FileLoaderFactory fileLoaderFactory = new FileLoaderFactory();
+            UcitavacDatotekaFactory fileLoaderFactory = new UcitavacDatotekaFactory();
 
             bool ucitavanjeUspjesno = false;
-            if (FileUtil.DatotekeIspravne(popisDatoteka))
+            if (DatotekaUtil.DatotekeIspravne(popisDatoteka))
             {
                 ucitavanjeUspjesno = true;
                 foreach (var datoteka in popisDatoteka)
@@ -44,7 +41,7 @@ namespace tgodek_zadaca_1.FactoryMethod.Datoteke
         private static SortedList<Enum, string> ObradiPocetneParametre(string[] args)
         {
             SortedList<Enum, string> hash = new SortedList<Enum, string>();
-            var zastavice = GeneralUtil.ListaDozvoljenihZastavica();
+            var zastavice = DatotekaUtil.ListaDozvoljenihZastavica();
 
             for (int i = 0; i < args.Length; i++)
             {
@@ -53,7 +50,7 @@ namespace tgodek_zadaca_1.FactoryMethod.Datoteke
                     var zastavica = args[i].Trim('-');
                     try
                     {
-                        var mapiranaZastavica = GeneralUtil.MapirajZastavicu(zastavica);
+                        var mapiranaZastavica = DatotekaUtil.MapirajZastavicu(zastavica);
                         if (i < args.Length - 1)
                             hash.Add(mapiranaZastavica, args[i + 1]);
                     }
