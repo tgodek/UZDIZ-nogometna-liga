@@ -1,8 +1,8 @@
-﻿namespace tgodek_zadaca_1.FactoryMethod.Datoteke
+﻿namespace ucitavanje_datoteka
 {
-    internal class UcitavacDatotekaFactory
+    class UcitavacDatotekaFactory
     {
-        internal IUcitavac DohvatiPodatke(string key)
+        public IUcitavac DohvatiPodatke(string key)
         {
             if (key == "i")
                 return new UcitavacIgraca();

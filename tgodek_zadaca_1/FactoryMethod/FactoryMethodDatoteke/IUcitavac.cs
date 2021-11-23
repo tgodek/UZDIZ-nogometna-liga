@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace tgodek_zadaca_1.FactoryMethod.Datoteke
+namespace ucitavanje_datoteka
 {
-    interface IUcitavac
+    internal interface IUcitavac
     {
         void UcitajPodatke(string imeDatoteke);
     }

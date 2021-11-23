@@ -1,8 +1,8 @@
 ﻿using System;
+using tgodek_zadaca_1;
 using tgodek_zadaca_1.Builder;
-using tgodek_zadaca_1.Util;
 
-namespace tgodek_zadaca_1.FactoryMethod.Datoteke
+namespace ucitavanje_datoteka
 {
     internal class UcitavacDogadaja : IUcitavac
     {

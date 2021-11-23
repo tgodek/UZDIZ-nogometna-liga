@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using tgodek_zadaca_1.Util;
+using ucitavanje_datoteka;
 
-namespace tgodek_zadaca_1.FactoryMethod.Datoteke
+namespace facade
 {
     public class UcitavacDatotekaFacade
     {
         private static UcitavacDatotekaFacade instanca;
+        private UcitavacDatotekaFactory fileLoaderFactory;
         private UcitavacDatotekaFacade()
         {
         }
@@ -23,7 +24,7 @@ namespace tgodek_zadaca_1.FactoryMethod.Datoteke
         public bool UcitajDatoteke(string[] argumenti)
         {
             var popisDatoteka = ObradiPocetneParametre(argumenti);
-            UcitavacDatotekaFactory fileLoaderFactory = new UcitavacDatotekaFactory();
+            fileLoaderFactory = new UcitavacDatotekaFactory();
 
             bool ucitavanjeUspjesno = false;
             if (DatotekaUtil.DatotekeIspravne(popisDatoteka))

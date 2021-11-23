@@ -1,6 +1,6 @@
-﻿using System;
+﻿using facade;
+using System;
 using tgodek_zadaca_1.Composite;
-using tgodek_zadaca_1.FactoryMethod.Datoteke;
 
 namespace tgodek_zadaca_1
 {
@@ -9,18 +9,31 @@ namespace tgodek_zadaca_1
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            var trener = new Trener("Pero", "Peric");
-            var trener2 = new Trener("Ivo", "Ivic");
-            var klub1 = new Klub("SL", "Slaven Belupo", trener);
+            var trener1 = new Trener("Pero Peric");
+            var trener2 = new Trener("Ivo ivic");
+            var klub1 = new Klub("SL", "Slaven Belupo", trener1);
             var klub2 = new Klub("D", "Dinamo", trener2);
-            var igrac = new Igrac(klub1, "Tomislav Godek", Pozicija.LB, DateTime.Today);
-            var igrac2 = new Igrac(klub2, "Luka Jakovic", Pozicija.DN, DateTime.Today);
+            var igrac1 = new Igrac("Tomislav Godek", Pozicija.LB, DateTime.Today);
+            var igrac2 = new Igrac("Luka Jakovic", Pozicija.DN, DateTime.Today);
+            var igrac3 = new Igrac("Marko Maric", Pozicija.CV, DateTime.Today);
 
-            igrac.DetaljiKomponente();
+            var prvenstvo = new Liga();
+            var lista = prvenstvo.liga;
 
+            klub1.DodajKomponentu(igrac1);
+            klub2.DodajKomponentu(igrac2);
+            klub2.DodajKomponentu(igrac3);
+            
+            var utakmica = new Utakmica(1,1,DateTime.Today,klub1,klub2);
+
+            lista.Add(utakmica);
+           
+            prvenstvo.DetaljiKomponente();
+
+
+            /*
             var ucitavacDatoteka = UcitavacDatotekaFacade.DohvatiUcitavacDatoteka();
 
-            
             if (ucitavacDatoteka.UcitajDatoteke(args))
             {
                 Meni();
@@ -28,7 +41,7 @@ namespace tgodek_zadaca_1
             else 
             {
                 Console.WriteLine("Učitavanje prvenstva je neuspješno");
-            }
+            }*/
         }
 
         private static void Meni()

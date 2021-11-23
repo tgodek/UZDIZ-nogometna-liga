@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace tgodek_zadaca_1.Util
+namespace ucitavanje_datoteka
 {
     class DatotekaUtil
     {

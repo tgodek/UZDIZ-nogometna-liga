@@ -7,31 +7,27 @@ namespace tgodek_zadaca_1.Composite
     {
     }
 
-    class Utakmica : NogometnaLiga
+    class Liga : INogometniKlub
     {
-        protected List<NogometniKlub> nogometniKlubovi = new List<NogometniKlub>();
+        public List<INogometniKlub> liga { get; set; } = new List<INogometniKlub>();
 
-        public int Broj { get; set; }
-        public int Kolo { get; set; }
-        public DateTime Pocetak { get; set; }
-
-        public Utakmica(int broj , int kolo, DateTime pocetak, NogometniKlub klub)
+        public void DetaljiKomponente()
         {
-            Broj = broj;
-            Kolo = kolo;
-            Pocetak = pocetak;
-            nogometniKlubovi.Add(klub);
+            foreach (var x in liga)
+            {
+                x.DetaljiKomponente();
+            }
+        }
+
+        public INogometniKlub KomponentaPostoji(string id)
+        {
+            INogometniKlub postoji = null;
+            foreach (var x in liga)
+            {
+                if (x.KomponentaPostoji(id) != null)
+                    postoji = x.KomponentaPostoji(id);
+            }
+            return postoji;
         }
     }
-
-    class SastavUtakmice : NogometnaLiga
-    {
-        protected List<NogometniKlub> komponenteKluba = new List<NogometniKlub>();
-        protected List<NogometnaLiga> komponenteLige = new List<NogometnaLiga>();
-
-        public SastavUtakmice()
-        {
-        }
-    }
-
 }

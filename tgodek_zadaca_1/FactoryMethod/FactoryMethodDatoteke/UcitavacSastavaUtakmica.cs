@@ -1,7 +1,7 @@
-﻿using tgodek_zadaca_1.Model;
-using tgodek_zadaca_1.Util;
+﻿using tgodek_zadaca_1;
+using tgodek_zadaca_1.Model;
 
-namespace tgodek_zadaca_1.FactoryMethod.Datoteke
+namespace ucitavanje_datoteka
 {
     internal class UcitavacSastavaUtakmica : IUcitavac
     {
