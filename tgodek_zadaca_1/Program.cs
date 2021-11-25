@@ -9,39 +9,20 @@ namespace tgodek_zadaca_1
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            var trener1 = new Trener("Pero Peric");
-            var trener2 = new Trener("Ivo ivic");
-            var klub1 = new Klub("SL", "Slaven Belupo", trener1);
-            var klub2 = new Klub("D", "Dinamo", trener2);
-            var igrac1 = new Igrac("Tomislav Godek", Pozicija.LB, DateTime.Today);
-            var igrac2 = new Igrac("Luka Jakovic", Pozicija.DN, DateTime.Today);
-            var igrac3 = new Igrac("Marko Maric", Pozicija.CV, DateTime.Today);
-
-            var prvenstvo = new Liga();
-            var lista = prvenstvo.liga;
-
-            klub1.DodajKomponentu(igrac1);
-            klub2.DodajKomponentu(igrac2);
-            klub2.DodajKomponentu(igrac3);
-            
-            var utakmica = new Utakmica(1,1,DateTime.Today,klub1,klub2);
-
-            lista.Add(utakmica);
-           
-            prvenstvo.DetaljiKomponente();
-
-
-            /*
             var ucitavacDatoteka = UcitavacDatotekaFacade.DohvatiUcitavacDatoteka();
 
             if (ucitavacDatoteka.UcitajDatoteke(args))
             {
-                Meni();
+                var liga = Prvenstvo.DohvatiPrvenstvo();
+                //liga.DetaljiKomponente();
+                var utakimca = liga.PronadiZapis("1") as Utakmica;
+                utakimca.DetaljiKomponente();
+                //Meni();
             }
             else 
             {
                 Console.WriteLine("Učitavanje prvenstva je neuspješno");
-            }*/
+            }
         }
 
         private static void Meni()

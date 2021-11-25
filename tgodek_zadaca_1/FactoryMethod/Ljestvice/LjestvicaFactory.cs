@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using tgodek_zadaca_1.FactoryMethod;
-using tgodek_zadaca_1.FactoryMethod.Ljestvice;
 
-namespace tgodek_zadaca_1.Model
+namespace tgodek_zadaca_1.FactoryMethod.Ljestvice
 {
     public class LjestvicaFactory
     {

@@ -14,6 +14,7 @@ namespace tgodek_zadaca_1.FactoryMethod.Ljestvice
         }
         public void Ispis()
         {
+            /*
             var prvenstvo = Prvenstvo.DohvatiPrvenstvo();
             var dogadaji = prvenstvo.SviDogadaji();
             var igraci = prvenstvo.SviIgraci();
@@ -72,7 +73,7 @@ namespace tgodek_zadaca_1.FactoryMethod.Ljestvice
                 {
                     igrac.ResetIgracStat();
                 }
-            }
+            }*/
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using tgodek_zadaca_1.Model;
+using tgodek_zadaca_1.Composite;
 
 namespace tgodek_zadaca_1.Builder
 {
@@ -13,20 +13,20 @@ namespace tgodek_zadaca_1.Builder
         {
             Reset();
         }
-        public void DodajOsnovno(int utakmica, string minute, int vrsta)
+        public void DodajOsnovno(Utakmica utakmica, string minute, int vrsta)
         {
-            this._dogadaj.Broj = utakmica;
+            this._dogadaj.Utakmica = utakmica;
             this._dogadaj.Min = minute;
             this._dogadaj.Vrsta = vrsta;
         }
 
-        public void DodajIgracaIKlub(string klub, string igrac)
+        public void DodajKlubIIgraca(Klub klub, Igrac igrac)
         {
             this._dogadaj.Klub = klub;
             this._dogadaj.Igrac = igrac;
         }
 
-        public void DodajZamjenu(string zamjena)
+        public void DodajZamjenu(Igrac zamjena)
         {
             this._dogadaj.Zamjena = zamjena;
         }
@@ -36,7 +36,7 @@ namespace tgodek_zadaca_1.Builder
             this._dogadaj = new Dogadaj();
         }
 
-        public Dogadaj DohvatiDohadaj() 
+        public Dogadaj Build() 
         {
             Dogadaj dogadaj = this._dogadaj;
             this.Reset();

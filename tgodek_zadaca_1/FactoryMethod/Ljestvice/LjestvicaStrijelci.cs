@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using tgodek_zadaca_1.Model;
 
-namespace tgodek_zadaca_1.FactoryMethod
+namespace tgodek_zadaca_1.FactoryMethod.Ljestvice
 {
     public class LjestvicaStrijelci : ILjestvica
     {
@@ -16,6 +16,7 @@ namespace tgodek_zadaca_1.FactoryMethod
 
         public void Ispis()
         {
+            /*
             var prvenstvo = Prvenstvo.DohvatiPrvenstvo();
             var dogadaji = prvenstvo.SviDogadaji();
             var igraci = prvenstvo.SviIgraci();
@@ -51,7 +52,7 @@ namespace tgodek_zadaca_1.FactoryMethod
             else
             {
                 Console.WriteLine("Kolo ne postoji");
-            }
+            }*/
         }
     }
 

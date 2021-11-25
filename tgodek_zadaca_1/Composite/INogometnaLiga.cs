@@ -4,9 +4,9 @@ using System.Text;
 
 namespace tgodek_zadaca_1.Composite
 {
-    public interface INogometniKlub
+    public interface INogometnaLiga
     {
         public abstract void DetaljiKomponente();
-        public abstract INogometniKlub KomponentaPostoji(string id);
+        public abstract INogometnaLiga PronadiZapis(string id);
     }
 }

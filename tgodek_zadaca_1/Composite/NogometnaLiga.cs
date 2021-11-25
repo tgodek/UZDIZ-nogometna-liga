@@ -3,13 +3,9 @@ using System.Collections.Generic;
 
 namespace tgodek_zadaca_1.Composite
 {
-    abstract class NogometnaLiga
+    class Liga : INogometnaLiga
     {
-    }
-
-    class Liga : INogometniKlub
-    {
-        public List<INogometniKlub> liga { get; set; } = new List<INogometniKlub>();
+        public List<INogometnaLiga> liga { get; set; } = new List<INogometnaLiga>();
 
         public void DetaljiKomponente()
         {
@@ -19,15 +15,15 @@ namespace tgodek_zadaca_1.Composite
             }
         }
 
-        public INogometniKlub KomponentaPostoji(string id)
+        public INogometnaLiga PronadiZapis(string id)
         {
-            INogometniKlub postoji = null;
+            INogometnaLiga komponenta = null;
             foreach (var x in liga)
             {
-                if (x.KomponentaPostoji(id) != null)
-                    postoji = x.KomponentaPostoji(id);
+                if (x.PronadiZapis(id) != null)
+                    komponenta = x.PronadiZapis(id);
             }
-            return postoji;
+            return komponenta;
         }
     }
 }

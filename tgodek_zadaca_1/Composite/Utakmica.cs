@@ -3,38 +3,59 @@ using System.Collections.Generic;
 
 namespace tgodek_zadaca_1.Composite
 {
-    class Utakmica : INogometniKlub
+    class Utakmica : INogometnaLiga
     {
-        protected List<INogometniKlub> klubovi = new List<INogometniKlub>();
+        protected List<INogometnaLiga> komponente = new List<INogometnaLiga>();
 
         public int Broj { get; set; }
         public int Kolo { get; set; }
+        public Klub Domacin { get; set; }
+        public Klub Gost { get; set; }
         public DateTime Pocetak { get; set; }
 
-        public Utakmica(int broj, int kolo, DateTime pocetak, INogometniKlub domacin, INogometniKlub gost)
+        public Utakmica(int broj, int kolo, Klub domacin, Klub gost, DateTime pocetak)
         {
             Broj = broj;
             Kolo = kolo;
             Pocetak = pocetak;
-            klubovi.Add(domacin);
-            klubovi.Add(gost);
+            Gost = gost;
+            Domacin = domacin;
+            komponente.Add(domacin);
+            komponente.Add(gost);
+        }
+
+        public void DodajKomponentu(INogometnaLiga komponenta)
+        {
+            komponente.Add(komponenta);
         }
 
         public void DetaljiKomponente()
         {
-            Console.WriteLine("Broj utakmice: {0} Kolo: {1}  Početak: {2}", Broj, Kolo, Pocetak);
-            foreach (var klub in klubovi)
+            Console.WriteLine("Broj utakmice: {0} Kolo: {1}  Početak: {2}, Domacin: {3} Gost: {4}", Broj, Kolo, Pocetak, Domacin.Naziv, Gost.Naziv);
+            foreach (var klub in komponente)
             {
                 klub.DetaljiKomponente();
             }
         }
 
-        public INogometniKlub KomponentaPostoji(string id)
+        public INogometnaLiga PronadiZapis(string id)
         {
-            if (id == Broj.ToString())
-                return this;
+            INogometnaLiga komponenta = null;
+            if (id == Broj.ToString()) 
+            {
+                komponenta = this;
+            }
             else
-                return null;
+            {
+                foreach (var x in komponente)
+                {
+                    if (x.PronadiZapis(id) != null)
+                    {
+                        return komponenta = x.PronadiZapis(id);
+                    }
+                }
+            }
+            return komponenta;
         }
     }
 }
