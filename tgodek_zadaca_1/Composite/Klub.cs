@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using tgodek_zadaca_1.Visitor;
 
 namespace tgodek_zadaca_1.Composite
 {
     public class Klub : INogometnaLiga
     {
-        protected List<INogometnaLiga> igraci = new List<INogometnaLiga>();
+        protected List<Igrac> igraci = new List<Igrac>();
         public string Oznaka { get; set; }
         public string Naziv { get; set; }
         public Trener Trener { get; set; }
+        public int ZutiKarton { get; set; }
+        public int DrugiZutiKarton { get; set; }
+        public int CrveniKarton { get; set; }
 
         public void DodajKomponentu(Igrac igrac)
         {
@@ -22,9 +26,26 @@ namespace tgodek_zadaca_1.Composite
             this.Trener = trener;
         }
 
+
+        public void ResetirajKlub()
+        {
+            ZutiKarton = 0;
+            DrugiZutiKarton = 0;
+            CrveniKarton = 0;
+        }
+
+        public void ResetIgrace()
+        {
+            Console.WriteLine("Resetiran igrace u klubu");
+            foreach (var igrac in igraci)
+            {
+                igrac.ResetStatistiku();
+            }
+        }
+
         public void DetaljiKomponente()
         {
-            Console.WriteLine("  |-- Oznaka kluba: {0}, Naziv kluba: {1} Trener: {2}", Oznaka, Naziv, Trener.Ime);
+            Console.WriteLine("  |-- Oznaka kluba: {0}, Naziv kluba: {1} Trener: {2} ZutiKarton: {3} Drugi Zuti: {4}", Oznaka, Naziv, Trener.Ime, ZutiKarton, DrugiZutiKarton);
             foreach(var x in igraci)
             {
                 x.DetaljiKomponente();
@@ -55,8 +76,16 @@ namespace tgodek_zadaca_1.Composite
                         komponenta = x.PronadiZapis(id);
                 }
             }
-           
             return komponenta;
+        }
+
+        public void Accept(IOperation operacija)
+        {
+            operacija.Visit(this);
+            foreach (var igrac in igraci)
+            {
+                igrac.Accept(operacija);
+            }
         }
     }
 }

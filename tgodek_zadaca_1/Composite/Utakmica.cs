@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using tgodek_zadaca_1.Visitor;
 
 namespace tgodek_zadaca_1.Composite
 {
-    class Utakmica : INogometnaLiga
+    public class Utakmica : INogometnaLiga
     {
         protected List<INogometnaLiga> komponente = new List<INogometnaLiga>();
 
@@ -20,8 +21,8 @@ namespace tgodek_zadaca_1.Composite
             Pocetak = pocetak;
             Gost = gost;
             Domacin = domacin;
-            komponente.Add(domacin);
-            komponente.Add(gost);
+            //komponente.Add(domacin);
+            //komponente.Add(gost);
         }
 
         public void DodajKomponentu(INogometnaLiga komponenta)
@@ -49,13 +50,21 @@ namespace tgodek_zadaca_1.Composite
             {
                 foreach (var x in komponente)
                 {
-                    if (x.PronadiZapis(id) != null)
-                    {
-                        return komponenta = x.PronadiZapis(id);
-                    }
+                    if(x.GetType() == typeof(SastavUtakmice))
+                        if (x.PronadiZapis(id) != null)
+                            return komponenta = x.PronadiZapis(id);
                 }
             }
             return komponenta;
+        }
+
+        public void Accept(IOperation operacija)
+        {
+            foreach (var komponenta in komponente)
+            {
+                komponenta.Accept(operacija);
+            }
+            operacija.Visit(this);
         }
     }
 }

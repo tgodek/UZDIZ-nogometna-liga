@@ -25,11 +25,13 @@ namespace ucitavanje_datoteka
 
             if (utakmica != null)
             {
-                postojeciKlub = utakmica.PronadiZapis(klub) as Klub;
+                postojeciKlub = utakmica.Domacin.PronadiZapis(klub) as Klub;
+                if(postojeciKlub == null)
+                    postojeciKlub = utakmica.Gost.PronadiZapis(klub) as Klub;
             }
 
             if (postojeciKlub != null)
-                postojeciIgrac = postojeciKlub.IgracPostoji(igrac) as Igrac;
+                postojeciIgrac = postojeciKlub.PronadiZapis(igrac) as Igrac;
 
             var sastavUtakmicaError = "";
             if (utakmica == null)

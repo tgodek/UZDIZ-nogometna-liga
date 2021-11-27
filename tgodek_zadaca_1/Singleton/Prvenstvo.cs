@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using tgodek_zadaca_1.Composite;
 using tgodek_zadaca_1.FactoryMethod.Ljestvice;
+using tgodek_zadaca_1.Visitor;
 
 namespace tgodek_zadaca_1
 {
@@ -54,6 +55,28 @@ namespace tgodek_zadaca_1
             catch (NullReferenceException)
             {
                 Console.WriteLine("Nje implenetirano");
+            }
+        }
+
+        public void Accept(IOperation operacija)
+        {
+            foreach (var komponenta in liga)
+            {
+                komponenta.Accept(operacija);
+            }
+        }
+
+        public void ResetirajKlubove()
+        {
+            foreach (var klub in liga)
+            {
+                Klub _klub;
+                if (klub.GetType() == typeof(Klub))
+                {
+                    _klub = (Klub)klub;
+                    _klub.ResetirajKlub();
+                }
+
             }
         }
     }

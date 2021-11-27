@@ -1,6 +1,7 @@
 ﻿using facade;
 using System;
 using tgodek_zadaca_1.Composite;
+using tgodek_zadaca_1.Visitor;
 
 namespace tgodek_zadaca_1
 {
@@ -14,9 +15,10 @@ namespace tgodek_zadaca_1
             if (ucitavacDatoteka.UcitajDatoteke(args))
             {
                 var liga = Prvenstvo.DohvatiPrvenstvo();
-                //liga.DetaljiKomponente();
-                var utakimca = liga.PronadiZapis("1") as Utakmica;
-                utakimca.DetaljiKomponente();
+                var operacija = new GetTablicaKartona("R");
+                liga.Accept(operacija);
+                liga.ResetirajKlubove();
+                liga.DetaljiKomponente();
                 //Meni();
             }
             else 

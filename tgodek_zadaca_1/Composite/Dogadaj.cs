@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using tgodek_zadaca_1.Visitor;
 
 namespace tgodek_zadaca_1.Composite
 {
-    class Dogadaj : INogometnaLiga
+    public class Dogadaj : INogometnaLiga
     {
         public Utakmica Utakmica { get; set; }
         public string Min { get; set; }
@@ -12,6 +13,11 @@ namespace tgodek_zadaca_1.Composite
         public Klub Klub { get; set; }
         public Igrac Igrac { get; set; }
         public Igrac Zamjena { get; set; }
+
+        public void Accept(IOperation operacija)
+        {
+            operacija.Visit(this);
+        }
 
         public void DetaljiKomponente()
         {

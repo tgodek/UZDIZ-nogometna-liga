@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using tgodek_zadaca_1.Visitor;
 
 namespace tgodek_zadaca_1.Composite
 {
@@ -19,18 +20,30 @@ namespace tgodek_zadaca_1.Composite
     {
         public Pozicija Pozicija { get; set; }
         public DateTime Datum { get; set; }
-        public INogometnaLiga Klub { get; set; }
+        public Klub Klub { get; set; }
 
-        public Igrac(string ime, Pozicija pozicija, DateTime datum)
+        public int ZutiKarton { get; set; }
+        public int DrugiZutiKarton { get; set; }
+        public int CrveniKarton { get; set; }
+
+        public Igrac(Klub klub, string ime, Pozicija pozicija, DateTime datum)
         {
+            this.Klub = klub;
             this.Ime = ime;
             this.Pozicija = pozicija;
             this.Datum = datum;
         }
 
+        public void ResetStatistiku()
+        {
+            this.CrveniKarton = 0;
+            this.ZutiKarton = 0;
+            this.DrugiZutiKarton = 0;
+        }
+
         public void DetaljiKomponente()
         {
-            Console.WriteLine("    |-- Ime igraca: {0} Pozicija: {1} Rodenje: {2}", Ime, Pozicija, Datum.Date);
+            Console.WriteLine("    |-- Ime igraca: {0} Pozicija: {1} Zuti Karton: {2} Drugi zuti: {3}", Ime, Pozicija, ZutiKarton, DrugiZutiKarton);
         }
 
         public INogometnaLiga PronadiZapis(string id)
@@ -39,6 +52,11 @@ namespace tgodek_zadaca_1.Composite
                 return this;
             else
                 return null;
+        }
+
+        public void Accept(IOperation operacija)
+        {
+            operacija.Visit(this);
         }
     }
 
@@ -60,6 +78,11 @@ namespace tgodek_zadaca_1.Composite
                 return this;
             else
                 return null;
+        }
+
+        public void Accept(IOperation operacija)
+        {
+            operacija.Visit(this);
         }
     }
 }

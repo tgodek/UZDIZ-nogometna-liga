@@ -51,17 +51,21 @@ namespace ucitavanje_datoteka
             }
             if (vrsta == 1 || vrsta == 2 || vrsta == 3 || vrsta == 10 || vrsta == 11)
             {
-                var _klub = utakmica.PronadiZapis(klub) as Klub;
-                var _igrac =_klub.PronadiZapis(igrac) as Igrac;
+                var postojeciKlub = utakmica.Domacin.PronadiZapis(klub) as Klub;
+                if(postojeciKlub == null)
+                    postojeciKlub = utakmica.Gost.PronadiZapis(klub) as Klub;
+                Igrac _igrac = null; 
+                if(postojeciKlub != null) 
+                    _igrac = postojeciKlub.PronadiZapis(igrac) as Igrac;
 
-                if (_klub == null)
+                if (postojeciKlub == null)
                     sastavDogadajaError += "-- Dogadaj nema klub";
                 if (_igrac == null)
                     sastavDogadajaError += "-- Dogadaj nema igraca";
                 if (sastavDogadajaError == "")
                 {
                     builder.DodajOsnovno(utakmica, min, vrsta);
-                    builder.DodajKlubIIgraca(_klub, _igrac);
+                    builder.DodajKlubIIgraca(postojeciKlub, _igrac);
                     utakmica.DodajKomponentu(builder.Build());
                 }
                 else
@@ -71,10 +75,20 @@ namespace ucitavanje_datoteka
             }
             if (vrsta == 20)
             {
-                var _klub = utakmica.PronadiZapis(klub) as Klub;
-                var _igrac = _klub.PronadiZapis(igrac) as Igrac;
-                var _zamjena = _klub.PronadiZapis(zamjena) as Igrac;
-                if (_klub == null)
+                var postojeciKlub = utakmica.Domacin.PronadiZapis(klub) as Klub;
+                if (postojeciKlub == null)
+                    postojeciKlub = utakmica.Gost.PronadiZapis(klub) as Klub;
+
+                Igrac _igrac = null;
+                Igrac _zamjena = null;
+
+                if (postojeciKlub != null)
+                {
+                    _igrac = postojeciKlub.PronadiZapis(zamjena) as Igrac;
+                    _zamjena = postojeciKlub.PronadiZapis(zamjena) as Igrac;
+                }
+
+                if (postojeciKlub == null)
                     sastavDogadajaError += "-- Dogadaj nema klub";
                 if (_igrac == null)
                     sastavDogadajaError += "-- Dogadaj nema igraca";
@@ -84,7 +98,7 @@ namespace ucitavanje_datoteka
                 if(sastavDogadajaError == "")
                 {
                     builder.DodajOsnovno(utakmica, min, vrsta);
-                    builder.DodajKlubIIgraca(_klub, _igrac);
+                    builder.DodajKlubIIgraca(postojeciKlub, _igrac);
                     builder.DodajZamjenu(_zamjena);
                     utakmica.DodajKomponentu(builder.Build());
                 }

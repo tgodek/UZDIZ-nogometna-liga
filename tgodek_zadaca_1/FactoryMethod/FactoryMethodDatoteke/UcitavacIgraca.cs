@@ -15,19 +15,22 @@ namespace ucitavanje_datoteka
             {
                 var value = item.Split(';');
                 var postojeciKlub = prvenstvo.PronadiZapis(value[0]) as Klub;
-                if (postojeciKlub != null)
-                {
-                    var igrac = ObradaIgraca(value[0], value[1], value[2], value[3]);
-                    if (igrac != null)
-                        postojeciKlub.DodajKomponentu(igrac);
-                }
+                var igrac = ObradaIgraca(value[0], value[1], value[2], value[3], prvenstvo);
+                if (igrac != null)
+                    postojeciKlub.DodajKomponentu(igrac);
+              
             }
         }
 
-        private Igrac ObradaIgraca(string klub, string ime, string pozicija, string datum)
+        private Igrac ObradaIgraca(string klub, string ime, string pozicija, string datum, Prvenstvo prvenstvo)
         {
+            var postojeciKlub = prvenstvo.PronadiZapis(klub) as Klub;
+
             var igracError = "";
-          
+
+            if(postojeciKlub == null)
+                igracError = "-- Klub ne postoji ";
+
             if (String.IsNullOrEmpty(ime))
                 igracError = "-- Igrac nema ime ";
             
@@ -41,7 +44,7 @@ namespace ucitavanje_datoteka
 
             if (igracError == "")
             {
-                var igrac = new Igrac(ime, novaPozicija, noviDatum);
+                var igrac = new Igrac(postojeciKlub,ime, novaPozicija, noviDatum);
                 return igrac;
             }
             else

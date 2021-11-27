@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using tgodek_zadaca_1.Visitor;
 
 namespace tgodek_zadaca_1.Composite
 {
-    class SastavUtakmice : INogometnaLiga
+    public class SastavUtakmice : INogometnaLiga
     {
         public Utakmica Utakmica { get; set; }
         public Klub Klub { get; set; }
@@ -34,6 +35,11 @@ namespace tgodek_zadaca_1.Composite
             else if (id == Igrac.Ime)
                 return this;
             else return null;
+        }
+
+        public void Accept(IOperation operacija)
+        {
+            operacija.Visit(this);
         }
     }
 }
