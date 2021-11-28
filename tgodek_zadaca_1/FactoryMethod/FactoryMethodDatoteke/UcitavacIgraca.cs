@@ -25,6 +25,7 @@ namespace ucitavanje_datoteka
         private Igrac ObradaIgraca(string klub, string ime, string pozicija, string datum, Prvenstvo prvenstvo)
         {
             var postojeciKlub = prvenstvo.PronadiZapis(klub) as Klub;
+            var postojeciIgrac = prvenstvo.PronadiZapis(ime) as Igrac;
 
             var igracError = "";
 
@@ -33,6 +34,9 @@ namespace ucitavanje_datoteka
 
             if (String.IsNullOrEmpty(ime))
                 igracError = "-- Igrac nema ime ";
+
+            if (postojeciIgrac != null)
+                igracError = "-- Igrac vec igra za jedan klub";
             
             Pozicija novaPozicija;
             if (!Enum.TryParse(pozicija, out novaPozicija))
@@ -40,6 +44,8 @@ namespace ucitavanje_datoteka
             
             DateTime noviDatum;
             if (!DateTime.TryParse(datum, out noviDatum))
+                igracError += "-- Igrac nema ispravan datum ";
+            if(noviDatum > DateTime.Today)
                 igracError += "-- Igrac nema ispravan datum ";
 
             if (igracError == "")

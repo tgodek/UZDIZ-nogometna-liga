@@ -21,8 +21,6 @@ namespace tgodek_zadaca_1.Composite
             Pocetak = pocetak;
             Gost = gost;
             Domacin = domacin;
-            //komponente.Add(domacin);
-            //komponente.Add(gost);
         }
 
         public void DodajKomponentu(INogometnaLiga komponenta)

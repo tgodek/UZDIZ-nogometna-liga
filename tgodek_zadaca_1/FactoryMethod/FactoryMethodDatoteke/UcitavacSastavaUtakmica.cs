@@ -31,7 +31,7 @@ namespace ucitavanje_datoteka
             }
 
             if (postojeciKlub != null)
-                postojeciIgrac = postojeciKlub.PronadiZapis(igrac) as Igrac;
+                    postojeciIgrac = postojeciKlub.IgracPostoji(igrac);
 
             var sastavUtakmicaError = "";
             if (utakmica == null)

@@ -49,7 +49,7 @@ namespace tgodek_zadaca_1.Composite
         public void DetaljiKomponente()
         {
             Console.WriteLine("  |-- Oznaka kluba: {0}, Naziv kluba: {1} Trener: {2} ZutiKarton: {3} Drugi Zuti: {4}", Oznaka, Naziv, Trener.Ime, ZutiKarton, DrugiZutiKarton);
-            foreach(var x in igraci)
+            foreach (var x in igraci)
             {
                 x.DetaljiKomponente();
             }
@@ -65,7 +65,7 @@ namespace tgodek_zadaca_1.Composite
             INogometnaLiga komponenta = null;
             if (id == Oznaka)
                 komponenta = this;
-            else 
+            else
             {
                 foreach (var x in igraci)
                 {
@@ -74,6 +74,20 @@ namespace tgodek_zadaca_1.Composite
                 }
             }
             return komponenta;
+        }
+
+        public Igrac IgracPostoji(string ime)
+        {
+            Igrac pronadenIgrac = null;
+            foreach (var igrac in igraci)
+            {
+                if (ime == igrac.Ime)
+                {
+                    pronadenIgrac = igrac;
+                    return pronadenIgrac;
+                }
+            }
+            return pronadenIgrac;
         }
 
         public void Accept(IOperation operacija)

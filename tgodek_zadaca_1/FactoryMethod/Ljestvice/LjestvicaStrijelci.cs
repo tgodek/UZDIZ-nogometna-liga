@@ -47,7 +47,7 @@ namespace tgodek_zadaca_1.FactoryMethod.Ljestvice
             Console.Write("-\n");
 
             Console.Write("| " + "Ukupno".PadRight(duljineZapisa[0]) + ' '
-                + "| " + ukSuma.ToString().PadRight(duljineZapisa[1]) + ' '
+                + "| " + ukSuma.ToString().PadLeft(duljineZapisa[1]) + ' '
                 + "| " + "".PadLeft(duljineZapisa[2]) + ' '
                 + "| " + "".ToString().PadLeft(duljineZapisa[3]) + " |\n");
 

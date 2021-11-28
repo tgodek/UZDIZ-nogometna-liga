@@ -7,6 +7,7 @@ namespace tgodek_zadaca_1.Composite
 {
     public class SastavUtakmice : INogometnaLiga
     {
+        protected List<INogometnaLiga> klubovi = new List<INogometnaLiga>();
         public Utakmica Utakmica { get; set; }
         public Klub Klub { get; set; }
         public string Vrsta { get; set; }
