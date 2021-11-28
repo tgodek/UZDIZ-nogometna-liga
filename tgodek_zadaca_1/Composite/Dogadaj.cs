@@ -32,6 +32,16 @@ namespace tgodek_zadaca_1.Composite
                 Utakmica.Broj, Min, Vrsta, Klub.Naziv, Igrac.Ime, Zamjena.Ime);
         }
 
+
+        internal void ObradiZuteKartone()
+        { 
+        }
+
+        internal void ObradiCrveneKartone()
+        {
+            
+        }
+
         public INogometnaLiga PronadiZapis(string id)
         {
             return null;

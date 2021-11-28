@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using tgodek_zadaca_1.Composite;
 using tgodek_zadaca_1.FactoryMethod.Ljestvice;
 using tgodek_zadaca_1.Visitor;
+using System.Linq;
 
 namespace tgodek_zadaca_1
 {
@@ -47,15 +48,8 @@ namespace tgodek_zadaca_1
 
         public void IspisLjestvice(Izbornik izbornik)
         {
-            try
-            {
-                var ljestvica = new LjestvicaFactory().DohvatiLjestvicu(izbornik.Zastavica, izbornik.Kolo);
-                ljestvica.Ispis();
-            }
-            catch (NullReferenceException)
-            {
-                Console.WriteLine("Nje implenetirano");
-            }
+            var ljestvica = new LjestvicaFactory().DohvatiLjestvicu(izbornik.Zastavica, izbornik.Kolo);
+            ljestvica.Ispis();
         }
 
         public void Accept(IOperation operacija)
@@ -66,7 +60,28 @@ namespace tgodek_zadaca_1
             }
         }
 
-        public void ResetirajKlubove()
+        public (List<Klub>, SumaKartona suma) PripremljenaTablicaKartona(int kolo)
+        {
+            List<Klub> klubovi = new List<Klub>();
+            var operacija = new GetTablicaKartona(kolo);
+            this.Accept(operacija);
+            foreach (var klub in liga)
+            {
+                Klub _klub;
+                if (klub.GetType() == typeof(Klub))
+                {
+                    _klub = (Klub) klub;
+                    if(_klub.UkupnoKartona() > 0)
+                        klubovi.Add(_klub);
+                }
+            }
+            return (klubovi.OrderByDescending(k => k.UkupnoKartona())
+                .ThenByDescending(k => k.CrveniKarton)
+                .ThenByDescending(k => k.DrugiZutiKarton)
+                .ToList(), operacija.Result);
+        }
+
+        public void Resetiraj()
         {
             foreach (var klub in liga)
             {
@@ -76,7 +91,6 @@ namespace tgodek_zadaca_1
                     _klub = (Klub)klub;
                     _klub.ResetirajKlub();
                 }
-
             }
         }
     }

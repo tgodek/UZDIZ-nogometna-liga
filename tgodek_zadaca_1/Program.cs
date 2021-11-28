@@ -14,12 +14,7 @@ namespace tgodek_zadaca_1
 
             if (ucitavacDatoteka.UcitajDatoteke(args))
             {
-                var liga = Prvenstvo.DohvatiPrvenstvo();
-                var operacija = new GetTablicaKartona("R");
-                liga.Accept(operacija);
-                liga.ResetirajKlubove();
-                liga.DetaljiKomponente();
-                //Meni();
+                Meni();
             }
             else 
             {

@@ -14,6 +14,12 @@ namespace tgodek_zadaca_1.Composite
         public int DrugiZutiKarton { get; set; }
         public int CrveniKarton { get; set; }
 
+        public int UkupnoKartona()
+        {
+            return ZutiKarton + DrugiZutiKarton + CrveniKarton;
+        }
+
+
         public void DodajKomponentu(Igrac igrac)
         {
             igraci.Add(igrac);
@@ -36,7 +42,6 @@ namespace tgodek_zadaca_1.Composite
 
         public void ResetIgrace()
         {
-            Console.WriteLine("Resetiran igrace u klubu");
             foreach (var igrac in igraci)
             {
                 igrac.ResetStatistiku();

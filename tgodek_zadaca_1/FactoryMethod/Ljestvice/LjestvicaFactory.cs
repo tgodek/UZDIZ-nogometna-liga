@@ -8,14 +8,11 @@ namespace tgodek_zadaca_1.FactoryMethod.Ljestvice
     {
         public ILjestvica DohvatiLjestvicu(string oznaka, int kolo)
         {
-            
             if (oznaka == "T")
             {
-                return null;
             }
             if (oznaka == "R")
             {
-                return null;
             }
           
             if (oznaka == "K")
