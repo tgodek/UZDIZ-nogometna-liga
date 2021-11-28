@@ -10,6 +10,7 @@ namespace tgodek_zadaca_1.FactoryMethod.Ljestvice
         {
             if (oznaka == "T")
             {
+                return new LjestvicaPrvenstva(kolo);
             }
             if (oznaka == "R")
             {

@@ -35,8 +35,6 @@ namespace tgodek_zadaca_1
             }
         }
 
-       
-
         public INogometnaLiga PronadiZapis(string id)
         {
             INogometnaLiga komponenta = null;
@@ -102,6 +100,27 @@ namespace tgodek_zadaca_1
             return (klubovi.OrderByDescending(k => k.UkupnoKartona())
                 .ThenByDescending(k => k.CrveniKarton)
                 .ThenByDescending(k => k.DrugiZutiKarton)
+                .ToList(), operacija.Result);
+        }
+
+        internal (List<Klub>,SumaLjestvicePrvenstva) PripremljenaLjestvicaPrvenstva(int kolo)
+        {
+            List<Klub> klubovi = new List<Klub>();
+            var operacija = new GetLjestvicaPrvenstva(kolo);
+            this.Accept(operacija);
+            foreach (var klub in liga)
+            {
+                Klub _klub;
+                if (klub.GetType() == typeof(Klub))
+                {
+                    _klub = (Klub)klub;
+                    klubovi.Add(_klub);
+                }
+            }
+            return (klubovi.OrderByDescending(k => k.BrojBodova)
+                .ThenByDescending(k => k.RazlikaGolova())
+                .ThenByDescending(k => k.BrojDanihGolova)
+                .ThenByDescending(k => k.BrojPobjeda)
                 .ToList(), operacija.Result);
         }
 

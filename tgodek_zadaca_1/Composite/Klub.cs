@@ -13,6 +13,18 @@ namespace tgodek_zadaca_1.Composite
         public int ZutiKarton { get; set; }
         public int DrugiZutiKarton { get; set; }
         public int CrveniKarton { get; set; }
+        public int BrojPobjeda { get; set; }
+        public int BrojPoraza { get; set; }
+        public int BrojNerješenih { get; set; }
+        public int BrojDanihGolova { get; set; }
+        public int BrojPrimljenihGolova { get; set; }
+        public int BrojOdigranihKola { get; set; }
+        public int BrojBodova { get; set; }
+
+        public int RazlikaGolova()
+        {
+            return BrojDanihGolova - BrojPrimljenihGolova;
+        }
 
         public int UkupnoKartona()
         {
@@ -36,6 +48,13 @@ namespace tgodek_zadaca_1.Composite
             ZutiKarton = 0;
             DrugiZutiKarton = 0;
             CrveniKarton = 0;
+            BrojPobjeda = 0;
+            BrojPoraza = 0;
+            BrojNerješenih = 0;
+            BrojDanihGolova = 0;
+            BrojPrimljenihGolova = 0;
+            BrojOdigranihKola = 0;
+            BrojBodova = 0;
         }
 
         public void ResetIgrace()

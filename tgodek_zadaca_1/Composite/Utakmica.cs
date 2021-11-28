@@ -37,6 +37,18 @@ namespace tgodek_zadaca_1.Composite
             }
         }
 
+        public bool PostojiDogadaj()
+        {
+            var postoji = false;
+            foreach (var x in komponente)
+            {
+                if (x.GetType() == typeof(Dogadaj))
+                    return true;
+            }
+            return postoji;
+
+        }
+
         public INogometnaLiga PronadiZapis(string id)
         {
             INogometnaLiga komponenta = null;

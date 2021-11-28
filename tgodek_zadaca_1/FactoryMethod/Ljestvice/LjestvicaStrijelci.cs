@@ -18,8 +18,8 @@ namespace tgodek_zadaca_1.FactoryMethod.Ljestvice
         public void Ispis()
         {
             duljineZapisa = naslovi.Select(i => i.Length).ToList();
-            duljineZapisa[0] = duljineZapisa[0] * 7;
-            duljineZapisa[2] = duljineZapisa[1] * 3;
+            duljineZapisa[0] = duljineZapisa[0] * 6;
+            duljineZapisa[2] = duljineZapisa[2] * 3;
 
             var liga = Prvenstvo.DohvatiPrvenstvo();
             var (igraci, ukSuma) = liga.PripremljenaTablicaStrijelaca(Kolo);
