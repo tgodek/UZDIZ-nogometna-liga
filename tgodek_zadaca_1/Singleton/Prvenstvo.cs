@@ -35,6 +35,8 @@ namespace tgodek_zadaca_1
             }
         }
 
+       
+
         public INogometnaLiga PronadiZapis(string id)
         {
             INogometnaLiga komponenta = null;
@@ -60,7 +62,29 @@ namespace tgodek_zadaca_1
             }
         }
 
-        public (List<Klub>, SumaKartona suma) PripremljenaTablicaKartona(int kolo)
+        internal (List<Igrac>, int) PripremljenaTablicaStrijelaca(int kolo)
+        {
+            List<Igrac> igraci = new List<Igrac>();
+            var operacija = new GetTablicaStrijelci(kolo);
+            this.Accept(operacija);
+            foreach (var klub in liga)
+            {
+                Klub _klub;
+                if (klub.GetType() == typeof(Klub))
+                {
+                    _klub = (Klub)klub;
+                    var _igraci = _klub.ListaIgraca();
+                    foreach (var igrac in _igraci)
+                    {
+                        if (igrac.BrojPogodaka > 0)
+                            igraci.Add(igrac);
+                    }
+                }
+            }
+            return (igraci.OrderByDescending(i => i.BrojPogodaka).ToList(), operacija.Result);
+        }
+
+        internal (List<Klub>, SumaKartona suma) PripremljenaTablicaKartona(int kolo)
         {
             List<Klub> klubovi = new List<Klub>();
             var operacija = new GetTablicaKartona(kolo);
@@ -90,6 +114,7 @@ namespace tgodek_zadaca_1
                 {
                     _klub = (Klub)klub;
                     _klub.ResetirajKlub();
+                    _klub.ResetIgrace();
                 }
             }
         }

@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using tgodek_zadaca_1.Model;
+using System.Linq;
 
 namespace tgodek_zadaca_1.FactoryMethod.Ljestvice
 {
     public class LjestvicaStrijelci : ILjestvica
     {
-        private int Kolo { get; set; }
+        private readonly int Kolo;
+        private List<int> duljineZapisa;
+        private readonly string[] naslovi = { "Igrac", "Broj golova", "Naziv kluba", "Oznaka kluba" };
 
         public LjestvicaStrijelci(int kolo) 
         {
@@ -16,43 +17,44 @@ namespace tgodek_zadaca_1.FactoryMethod.Ljestvice
 
         public void Ispis()
         {
-            /*
-            var prvenstvo = Prvenstvo.DohvatiPrvenstvo();
-            var dogadaji = prvenstvo.SviDogadaji();
-            var igraci = prvenstvo.SviIgraci();
-            var utakmice = prvenstvo.SveUtakmice();
+            duljineZapisa = naslovi.Select(i => i.Length).ToList();
+            duljineZapisa[0] = duljineZapisa[0] * 7;
+            duljineZapisa[2] = duljineZapisa[1] * 3;
 
-            var zadnjaUtakmica = utakmice.FindLast(u => u.Kolo == Kolo);
+            var liga = Prvenstvo.DohvatiPrvenstvo();
+            var (igraci, ukSuma) = liga.PripremljenaTablicaStrijelaca(Kolo);
 
-            if (zadnjaUtakmica != null && Kolo != 0)
+            duljineZapisa.ForEach(l => Console.Write("--" + new string('-', l) + '-'));
+            Console.Write("-\n");
+
+            string naslov = "";
+            for (int i = 0; i < naslovi.Length; i++)
+                naslov += "| " + naslovi[i].PadRight(duljineZapisa[i]) + ' ';
+            Console.Write(naslov + "|\n");
+
+            duljineZapisa.ForEach(l => Console.Write("--" + new string('-', l) + '-'));
+            Console.Write("-\n");
+
+            foreach (var igrac in igraci)
             {
-                foreach (var dogadaj in dogadaji)
-                {
-                    foreach (var igrac in igraci)
-                    {
-                        if ((dogadaj.Vrsta == 1 || dogadaj.Vrsta == 2 || dogadaj.Vrsta == 3) && (dogadaj.Igrac == igrac.Ime) && (dogadaj.Broj <= zadnjaUtakmica.Broj))
-                        {
-                            igrac.Golovi += 1;
-                        }
-                    }
-                }
-
-                Console.WriteLine("\n--------------------------------- STRIJELCI -----------------------------------");
-                Console.WriteLine("| {0,5} {1,20} {2,20} {3,13} {4,12} |", "Golovi", "Igrac", "Pozicija", "Klub", "Roden");
-                Console.WriteLine("-------------------------------------------------------------------------------");
-                foreach (var igrac in igraci)
-                {
-                    if (igrac.Golovi > 0)
-                    {
-                        Console.WriteLine("{0,5} {1,25} {2,15} {3,15} {4,15}", igrac.Golovi, igrac.Ime, igrac.Pozicija, igrac.Klub, igrac.Datum.ToString("dd/MM/yyyy"));
-                        igrac.Golovi = 0;
-                    }
-                }
+                Console.Write("| " + igrac.Ime.ToString().PadRight(duljineZapisa[0]) + ' '
+                    + "| " + igrac.BrojPogodaka.ToString().PadLeft(duljineZapisa[1]) + ' '
+                    + "| " + igrac.Klub.Naziv.PadRight(duljineZapisa[2]) + ' '
+                    + "| " + igrac.Klub.Oznaka.PadRight(duljineZapisa[3]) + " |\n");
             }
-            else
-            {
-                Console.WriteLine("Kolo ne postoji");
-            }*/
+
+            duljineZapisa.ForEach(l => Console.Write("--" + new string('-', l) + '-'));
+            Console.Write("-\n");
+
+            Console.Write("| " + "Ukupno".PadRight(duljineZapisa[0]) + ' '
+                + "| " + ukSuma.ToString().PadRight(duljineZapisa[1]) + ' '
+                + "| " + "".PadLeft(duljineZapisa[2]) + ' '
+                + "| " + "".ToString().PadLeft(duljineZapisa[3]) + " |\n");
+
+            duljineZapisa.ForEach(l => Console.Write("--" + new string('-', l) + '-'));
+            Console.Write("-\n");
+
+            liga.Resetiraj();
         }
     }
 

@@ -19,7 +19,6 @@ namespace tgodek_zadaca_1.Composite
             return ZutiKarton + DrugiZutiKarton + CrveniKarton;
         }
 
-
         public void DodajKomponentu(Igrac igrac)
         {
             igraci.Add(igrac);
@@ -31,7 +30,6 @@ namespace tgodek_zadaca_1.Composite
             this.Naziv = naziv;
             this.Trener = trener;
         }
-
 
         public void ResetirajKlub()
         {
@@ -57,15 +55,9 @@ namespace tgodek_zadaca_1.Composite
             }
         }
 
-        public INogometnaLiga IgracPostoji(string ime)
+        public List<Igrac> ListaIgraca()
         {
-            INogometnaLiga komponenta = null;
-            foreach (var igrac in igraci)
-            {
-                if (igrac.PronadiZapis(ime) != null)
-                    komponenta = igrac.PronadiZapis(ime);
-            }
-            return komponenta;
+            return igraci;
         }
 
         public INogometnaLiga PronadiZapis(string id)

@@ -24,10 +24,10 @@ namespace tgodek_zadaca_1.FactoryMethod.Ljestvice
             duljineZapisa.ForEach(l => Console.Write("--" + new string('-', l) + '-'));
             Console.Write("-\n");
 
-            string line = "";
+            string naslov = "";
             for (int i = 0; i < naslovi.Length; i++)
-                line += "| " + naslovi[i].PadRight(duljineZapisa[i]) + ' ';
-            Console.Write(line + "|\n");
+                naslov += "| " + naslovi[i].PadRight(duljineZapisa[i]) + ' ';
+            Console.Write(naslov + "|\n");
 
             duljineZapisa.ForEach(l => Console.Write("--" + new string('-', l) + '-'));
             Console.Write("-\n");

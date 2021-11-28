@@ -25,6 +25,7 @@ namespace tgodek_zadaca_1.Composite
         public int ZutiKarton { get; set; }
         public int DrugiZutiKarton { get; set; }
         public int CrveniKarton { get; set; }
+        public int BrojPogodaka { get; set; }
 
         public Igrac(Klub klub, string ime, Pozicija pozicija, DateTime datum)
         {
@@ -39,6 +40,7 @@ namespace tgodek_zadaca_1.Composite
             this.CrveniKarton = 0;
             this.ZutiKarton = 0;
             this.DrugiZutiKarton = 0;
+            this.BrojPogodaka = 0;
         }
 
         public void DetaljiKomponente()
