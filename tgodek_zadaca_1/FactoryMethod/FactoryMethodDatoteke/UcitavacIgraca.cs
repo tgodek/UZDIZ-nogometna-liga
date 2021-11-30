@@ -18,7 +18,6 @@ namespace ucitavanje_datoteka
                 var igrac = ObradaIgraca(value[0], value[1], value[2], value[3], prvenstvo);
                 if (igrac != null)
                     postojeciKlub.DodajKomponentu(igrac);
-              
             }
         }
 

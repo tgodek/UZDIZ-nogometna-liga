@@ -1,7 +1,6 @@
 ﻿using facade;
 using System;
-using tgodek_zadaca_1.Composite;
-using tgodek_zadaca_1.Visitor;
+using System.Text;
 
 namespace tgodek_zadaca_1
 {
@@ -9,17 +8,14 @@ namespace tgodek_zadaca_1
     {
         static void Main(string[] args)
         {
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.OutputEncoding = Encoding.UTF8;
+            Console.InputEncoding = Encoding.Unicode;
             var ucitavacDatoteka = UcitavacDatotekaFacade.DohvatiUcitavacDatoteka();
-
-            if (ucitavacDatoteka.UcitajDatoteke(args))
-            {
+            ucitavacDatoteka.UcitajDatoteke(args);
+            if (ucitavacDatoteka.DatotekaIgracUcitan && ucitavacDatoteka.DatotekaIgracUcitan) 
                 Meni();
-            }
             else 
-            {
-                Console.WriteLine("Učitavanje prvenstva je neuspješno");
-            }
+                Console.WriteLine("Učitavanje prvenstva je neuspješno! Potrebno je učitati sve obavezne datoteke.");
         }
 
         private static void Meni()
@@ -39,12 +35,33 @@ namespace tgodek_zadaca_1
                 }
                 else
                 {
+                    PokusajUcitatiDodatneDatoteke(vrijednosti);
                     var izbornik = KonstruirajIzbornik(vrijednosti, builder);
                     if(izbornik is Izbornik)
                         prvenstvo.IspisLjestvice(izbornik);
-                    else
-                        Console.WriteLine("Neispravni unos");
                 }
+            }
+        }
+
+        private static void PokusajUcitatiDodatneDatoteke(string[] vrijednosti)
+        {
+            if (vrijednosti.Length == 2 && vrijednosti[0] == "NU")
+            {
+                var ucitavac = UcitavacDatotekaFacade.DohvatiUcitavacDatoteka();
+                ucitavac.UcitajDatoteke(vrijednosti);
+                Console.WriteLine("Ucitana {0} datoteka",vrijednosti[1]);
+            }
+            else if (vrijednosti.Length == 2 && vrijednosti[0] == "NS")
+            {
+                var ucitavac = UcitavacDatotekaFacade.DohvatiUcitavacDatoteka();
+                ucitavac.UcitajDatoteke(vrijednosti);
+                Console.WriteLine("Ucitana {0} datoteka", vrijednosti[1]);
+            }
+            else if (vrijednosti.Length == 2 && vrijednosti[0] == "ND")
+            {
+                var ucitavac = UcitavacDatotekaFacade.DohvatiUcitavacDatoteka();
+                ucitavac.UcitajDatoteke(vrijednosti);
+                Console.WriteLine("Ucitana {0} datoteka", vrijednosti[1]);
             }
         }
 
@@ -80,10 +97,9 @@ namespace tgodek_zadaca_1
                 builder.DodajZastavicu(vrijednosti[0]);
                 return builder.Build();
             }
+            
             else
-            {
                 return null;
-            }
         }
     }
 }

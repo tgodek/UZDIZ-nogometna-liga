@@ -19,7 +19,7 @@ namespace tgodek_zadaca_1.FactoryMethod.Ljestvice
             duljineZapisa[0] = duljineZapisa[0] * 8;
 
             var liga = Prvenstvo.DohvatiPrvenstvo();
-            var (klubovi, ukSuma) = liga.PripremljenaTablicaKartona(Kolo);
+            var (klubovi, ukSuma) = liga.PripremljenaLjestvicaKartona(Kolo);
 
             duljineZapisa.ForEach(l => Console.Write("--" + new string('-', l) + '-'));
             Console.Write("-\n");

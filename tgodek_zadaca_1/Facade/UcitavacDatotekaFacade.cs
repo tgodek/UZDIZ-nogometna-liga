@@ -7,9 +7,21 @@ namespace facade
     public class UcitavacDatotekaFacade
     {
         private static UcitavacDatotekaFacade instanca;
-        private UcitavacDatotekaFactory fileLoaderFactory;
+        private UcitavacDatotekaFactory ucitavacDatoteka;
+
+        public bool DatotekaKlubUcitan { get; private set; }
+        public bool DatotekaIgracUcitan { get; private set; }
+        public bool DatotekaUtakmicaUcitan { get; private set; }
+        public bool DatotekaSastavUcitan { get; private set; }
+        public bool DatotekaDogadajUcitan { get; private set; }
+
         private UcitavacDatotekaFacade()
         {
+            DatotekaKlubUcitan = false;
+            DatotekaIgracUcitan = false;
+            DatotekaUtakmicaUcitan = false;
+            DatotekaSastavUcitan = false;
+            DatotekaDogadajUcitan = false;
         }
 
         public static UcitavacDatotekaFacade DohvatiUcitavacDatoteka()
@@ -21,34 +33,63 @@ namespace facade
             return instanca;
         }
 
-        public bool UcitajDatoteke(string[] argumenti)
+        public void UcitajDatoteke(string[] argumenti)
         {
             var popisDatoteka = ObradiPocetneParametre(argumenti);
-            fileLoaderFactory = new UcitavacDatotekaFactory();
+            ucitavacDatoteka = new UcitavacDatotekaFactory();
 
-            bool ucitavanjeUspjesno = false;
             if (DatotekaUtil.DatotekeIspravne(popisDatoteka))
             {
-                ucitavanjeUspjesno = true;
                 foreach (var datoteka in popisDatoteka)
                 {
-                    var rezultat = fileLoaderFactory.DohvatiPodatke(datoteka.Key.ToString().ToLower());
-                    rezultat.UcitajPodatke(datoteka.Value);
+                    if (datoteka.Key is UlazniParametri.K)
+                    {
+                        var rezultat = ucitavacDatoteka.DohvatiPodatke("k");
+                        rezultat.UcitajPodatke(datoteka.Value);
+                        DatotekaKlubUcitan = true;
+                    }
+                    if (datoteka.Key is UlazniParametri.I && DatotekaKlubUcitan)
+                    {
+                        var rezultat = ucitavacDatoteka.DohvatiPodatke("i");
+                        rezultat.UcitajPodatke(datoteka.Value);
+                        DatotekaIgracUcitan = true;
+                    }
+                    if ((datoteka.Key is UlazniParametri.U || datoteka.Key is UlazniParametri.NU) && DatotekaIgracUcitan)
+                    {
+                        var rezultat = ucitavacDatoteka.DohvatiPodatke("u");
+                        rezultat.UcitajPodatke(datoteka.Value);
+                        DatotekaUtakmicaUcitan = true;
+                    }
+                    if ((datoteka.Key is UlazniParametri.S || datoteka.Key is UlazniParametri.NS) && DatotekaUtakmicaUcitan)
+                    {
+                        var rezultat = ucitavacDatoteka.DohvatiPodatke("s");
+                        rezultat.UcitajPodatke(datoteka.Value);
+                        DatotekaSastavUcitan = true;
+                    }
+                    if ((datoteka.Key is UlazniParametri.D || datoteka.Key is UlazniParametri.ND) && DatotekaSastavUcitan)
+                    {
+                        var rezultat = ucitavacDatoteka.DohvatiPodatke("d");
+                        rezultat.UcitajPodatke(datoteka.Value);
+                        DatotekaDogadajUcitan = true;
+                    }
                 }
             }
-            return ucitavanjeUspjesno;
         }
 
-        private static SortedList<Enum, string> ObradiPocetneParametre(string[] args)
+        private SortedList<Enum, string> ObradiPocetneParametre(string[] args)
         {
             SortedList<Enum, string> hash = new SortedList<Enum, string>();
-            var zastavice = DatotekaUtil.ListaDozvoljenihZastavica();
+            var zastavice = DatotekaUtil.DohvatiDozvoljeneZastavice();
+            var naredbe = DatotekaUtil.DohvatiDozvoljeneNaredbe();
 
             for (int i = 0; i < args.Length; i++)
             {
-                if (args[i].StartsWith("-") && zastavice.Exists(zastavica => args[i].Contains(zastavica)))
+                if ((naredbe.Exists(naredba => args[i].Contains(naredba) && DatotekaKlubUcitan && DatotekaIgracUcitan) 
+                    || (args[i].StartsWith("-") && zastavice.Exists(zastavica => args[i].Contains(zastavica)))))
                 {
-                    var zastavica = args[i].Trim('-');
+                    string zastavica = args[i];
+                    if(args[i].StartsWith("-"))
+                        zastavica = args[i].Trim('-');
                     try
                     {
                         var mapiranaZastavica = DatotekaUtil.MapirajZastavicu(zastavica);
@@ -57,7 +98,7 @@ namespace facade
                     }
                     catch (ArgumentException)
                     {
-                        Console.WriteLine("Postoje duplikati u argumentima!");
+                        Console.WriteLine("Pogreška prilikom obrade ulaznih parametara!\n Datoteka s zadnjom dupliciranom zastavicom se izbacuje!");
                         break;
                     }
                 }

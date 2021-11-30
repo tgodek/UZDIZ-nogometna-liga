@@ -48,8 +48,18 @@ namespace tgodek_zadaca_1
 
         public void IspisLjestvice(Izbornik izbornik)
         {
-            var ljestvica = new LjestvicaFactory().DohvatiLjestvicu(izbornik.Zastavica, izbornik.Kolo);
-            ljestvica.Ispis();
+            if (!String.IsNullOrEmpty(izbornik.Klub))
+            {
+                var ljestvica = new LjestvicaRezultata(izbornik.Klub, izbornik.Kolo);
+                if (ljestvica != null)
+                    ljestvica.Ispis();
+            }
+            else
+            {
+                var ljestvica = new LjestvicaFactory().DohvatiLjestvicu(izbornik.Zastavica, izbornik.Kolo);
+                if(ljestvica != null)
+                    ljestvica.Ispis();
+            }
         }
 
         public void Accept(IOperation operacija)
@@ -60,7 +70,7 @@ namespace tgodek_zadaca_1
             }
         }
 
-        internal (List<Igrac>, int) PripremljenaTablicaStrijelaca(int kolo)
+        internal (List<Igrac>, int) PripremljenaLjestvicaStrijelaca(int kolo)
         {
             List<Igrac> igraci = new List<Igrac>();
             var operacija = new GetTablicaStrijelci(kolo);
@@ -82,7 +92,7 @@ namespace tgodek_zadaca_1
             return (igraci.OrderByDescending(i => i.BrojPogodaka).ToList(), operacija.Result);
         }
 
-        internal (List<Klub>, SumaKartona suma) PripremljenaTablicaKartona(int kolo)
+        internal (List<Klub>, SumaKartona suma) PripremljenaLjestvicaKartona(int kolo)
         {
             List<Klub> klubovi = new List<Klub>();
             var operacija = new GetTablicaKartona(kolo);
@@ -106,7 +116,7 @@ namespace tgodek_zadaca_1
         internal (List<Klub>,SumaLjestvicePrvenstva) PripremljenaLjestvicaPrvenstva(int kolo)
         {
             List<Klub> klubovi = new List<Klub>();
-            var operacija = new GetLjestvicaPrvenstva(kolo);
+            var operacija = new GetTablicaPrvenstva(kolo);
             this.Accept(operacija);
             foreach (var klub in liga)
             {
@@ -124,14 +134,42 @@ namespace tgodek_zadaca_1
                 .ToList(), operacija.Result);
         }
 
+
+        internal List<Utakmica> PripremljenaLjestvicaRezultata(string klub, int kolo)
+        {
+            List<Utakmica> utakmice = new List<Utakmica>();
+            var operacija = new GetTablicaRezultata(klub, kolo);
+            this.Accept(operacija);
+            foreach (var utakmica in liga)
+            {
+                Utakmica _utakmica;
+                if (utakmica.GetType() == typeof(Utakmica))
+                {
+                    _utakmica = (Utakmica)utakmica;
+                    if(_utakmica.Odigrana == true)
+                        utakmice.Add(_utakmica);
+                }
+            }
+            return utakmice;
+        }
+
         public void Resetiraj()
         {
-            foreach (var klub in liga)
+
+            foreach (var komponenta in liga)
             {
                 Klub _klub;
-                if (klub.GetType() == typeof(Klub))
+                Utakmica _utakmica;
+
+                if (komponenta.GetType() == typeof(Utakmica))
                 {
-                    _klub = (Klub)klub;
+                    _utakmica = (Utakmica)komponenta;
+                    _utakmica.ResetirajUtakmicu();
+                }
+
+                if (komponenta.GetType() == typeof(Klub))
+                {
+                    _klub = (Klub)komponenta;
                     _klub.ResetirajKlub();
                     _klub.ResetIgrace();
                 }

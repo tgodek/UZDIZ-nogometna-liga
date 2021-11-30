@@ -13,6 +13,16 @@ namespace tgodek_zadaca_1.Composite
         public Klub Domacin { get; set; }
         public Klub Gost { get; set; }
         public DateTime Pocetak { get; set; }
+        public int RezultatDomacin { get; set; }
+        public int RezultatGost { get; set; }
+        public bool Odigrana { get; set; }
+
+        public string RezultatUtakmice()
+        {
+            if (Odigrana)
+                return RezultatDomacin.ToString() + " - " + RezultatGost.ToString();
+            else return "";
+        }
 
         public Utakmica(int broj, int kolo, Klub domacin, Klub gost, DateTime pocetak)
         {
@@ -75,6 +85,11 @@ namespace tgodek_zadaca_1.Composite
                 komponenta.Accept(operacija);
             }
             operacija.Visit(this);
+        }
+
+        internal void ResetirajUtakmicu()
+        {
+            Odigrana = false;
         }
     }
 }

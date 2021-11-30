@@ -5,14 +5,14 @@ using tgodek_zadaca_1.Composite;
 
 namespace tgodek_zadaca_1.Visitor
 {
-    class GetLjestvicaPrvenstva : Get<SumaLjestvicePrvenstva>
+    class GetTablicaPrvenstva : Get<SumaLjestvicePrvenstva>
     {
         private int _kolo;
         private int domacinGolovi { get; set; }
         private int gostGolovi { get; set; }
 
         private SumaLjestvicePrvenstva suma;
-        public GetLjestvicaPrvenstva(int kolo = 0)
+        public GetTablicaPrvenstva(int kolo = 0)
         {
             suma = new SumaLjestvicePrvenstva();
             Result = suma;
@@ -54,7 +54,7 @@ namespace tgodek_zadaca_1.Visitor
 
                 if (dogadaj.Klub.Oznaka == dogadaj.Utakmica.Gost.Oznaka)
                 {
-                    OdrediGoloveZaKlubove(dogadaj.Utakmica.Gost, dogadaj.Klub);
+                    OdrediGoloveZaKlubove(dogadaj.Utakmica.Domacin, dogadaj.Klub);
                     domacinGolovi += 1;
                 }
             }

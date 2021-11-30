@@ -5,18 +5,26 @@ using System.Text;
 
 namespace ucitavanje_datoteka
 {
-    class DatotekaUtil
+    internal enum UlazniParametri
     {
-        enum UlazniParametri
-        {
-            K,
-            I,
-            U,
-            S,
-            D
-        }
+        K,
+        I,
+        U,
+        S,
+        D,
+        NU,
+        NS,
+        ND
+    }
 
+    internal class DatotekaUtil
+    {
         private static List<string> _listaDozvoljenihZastavica = new List<string> { "d", "i", "k", "s", "u" };
+        private static List<string> _listaDozvoljenihNaredbi = new List<string> { "NU","NS","ND" };
+
+        internal static List<string> DohvatiDozvoljeneZastavice() => _listaDozvoljenihZastavica;
+        internal static List<string> DohvatiDozvoljeneNaredbe() => _listaDozvoljenihNaredbi;
+       
 
         internal static List<string> ReadFile(string imeDatoteke)
         {
@@ -51,10 +59,7 @@ namespace ucitavanje_datoteka
             return postojiDatoteka;
         }
 
-        internal static List<string> ListaDozvoljenihZastavica()
-        {
-            return _listaDozvoljenihZastavica;
-        }
+       
 
         internal static Enum MapirajZastavicu(string zastavica)
         {
@@ -65,6 +70,9 @@ namespace ucitavanje_datoteka
                 case "u": return UlazniParametri.U;
                 case "s": return UlazniParametri.S;
                 case "d": return UlazniParametri.D;
+                case "NU": return UlazniParametri.NU;
+                case "NS": return UlazniParametri.NS;
+                case "ND": return UlazniParametri.ND;
                 default: return null;
             }
         }
