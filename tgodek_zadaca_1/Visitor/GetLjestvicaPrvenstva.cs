@@ -21,51 +21,56 @@ namespace tgodek_zadaca_1.Visitor
             _kolo = kolo;
         }
 
-        public override void Visit(Dogadaj dogadaj)
+        private void OdrediGoloveZaKlubove(Klub klubZabioGol, Klub klubPrimioGol)
         {
+            klubZabioGol.BrojDanihGolova += 1;
+            klubPrimioGol.BrojPrimljenihGolova += 1;
+            suma.SumaBrojaDanihGolova += 1;
+            suma.SumaBrojaPrimljenihGolova += 1;
+        }
 
-            if (_kolo == 0)
+        private void ObradiDogadajZaPogodak(Dogadaj dogadaj)
+        {
+            if (dogadaj.Vrsta == 1 || dogadaj.Vrsta == 2)
             {
-                if ((dogadaj.Vrsta == 1 || dogadaj.Vrsta == 2) && dogadaj.Klub.Oznaka == dogadaj.Utakmica.Domacin.Oznaka)
+                if (dogadaj.Klub.Oznaka == dogadaj.Utakmica.Domacin.Oznaka)
                 {
-                    dogadaj.Klub.BrojDanihGolova += 1;
+                    OdrediGoloveZaKlubove(dogadaj.Klub, dogadaj.Utakmica.Gost);
                     domacinGolovi += 1;
-                    dogadaj.Utakmica.Gost.BrojPrimljenihGolova += 1;
-                    suma.SumaBrojaDanihGolova += 1;
-                    suma.SumaBrojaPrimljenihGolova += 1;
                 }
-                if ((dogadaj.Vrsta == 1 || dogadaj.Vrsta == 2) && dogadaj.Klub.Oznaka == dogadaj.Utakmica.Gost.Oznaka)
+                if (dogadaj.Klub.Oznaka == dogadaj.Utakmica.Gost.Oznaka)
                 {
-                    dogadaj.Klub.BrojDanihGolova += 1;
+                    OdrediGoloveZaKlubove(dogadaj.Klub, dogadaj.Utakmica.Domacin);
                     gostGolovi += 1;
-                    dogadaj.Utakmica.Domacin.BrojPrimljenihGolova += 1;
-                    suma.SumaBrojaDanihGolova += 1;
-                    suma.SumaBrojaPrimljenihGolova += 1;
                 }
             }
+            if(dogadaj.Vrsta == 3)
+            {
+                if (dogadaj.Klub.Oznaka == dogadaj.Utakmica.Domacin.Oznaka)
+                {
+                    OdrediGoloveZaKlubove(dogadaj.Utakmica.Gost, dogadaj.Klub);
+                    gostGolovi += 1;
+                }
+
+                if (dogadaj.Klub.Oznaka == dogadaj.Utakmica.Gost.Oznaka)
+                {
+                    OdrediGoloveZaKlubove(dogadaj.Utakmica.Gost, dogadaj.Klub);
+                    domacinGolovi += 1;
+                }
+            }
+        }
+
+        public override void Visit(Dogadaj dogadaj)
+        {
+            if (_kolo == 0)
+                ObradiDogadajZaPogodak(dogadaj);
+
             else
             {
                 if (dogadaj.Utakmica.Kolo <= _kolo)
-                {
-                    if ((dogadaj.Vrsta == 1 || dogadaj.Vrsta == 2) && dogadaj.Klub.Oznaka == dogadaj.Utakmica.Domacin.Oznaka)
-                    {
-                        dogadaj.Klub.BrojDanihGolova += 1;
-                        domacinGolovi += 1;
-                        dogadaj.Utakmica.Gost.BrojPrimljenihGolova += 1;
-                        suma.SumaBrojaDanihGolova += 1;
-                        suma.SumaBrojaPrimljenihGolova += 1;
-                    }
-                    if ((dogadaj.Vrsta == 1 || dogadaj.Vrsta == 2) && dogadaj.Klub.Oznaka == dogadaj.Utakmica.Gost.Oznaka)
-                    {
-                        dogadaj.Klub.BrojDanihGolova += 1;
-                        gostGolovi += 1;
-                        dogadaj.Utakmica.Domacin.BrojPrimljenihGolova += 1;
-                        suma.SumaBrojaDanihGolova += 1;
-                        suma.SumaBrojaPrimljenihGolova += 1;
-                    }
-                }
-            
+                    ObradiDogadajZaPogodak(dogadaj);
             }
+               
         }
 
         public override void Visit(Igrac igrac)
@@ -84,83 +89,52 @@ namespace tgodek_zadaca_1.Visitor
         {
         }
 
+        private void ObradiUtakmicu(Utakmica utakmica)
+        {
+            if (utakmica.Gost.BrojOdigranihKola != utakmica.Kolo)
+                utakmica.Gost.BrojOdigranihKola += 1;
+            if (utakmica.Domacin.BrojOdigranihKola != utakmica.Kolo)
+                utakmica.Domacin.BrojOdigranihKola += 1;
+
+            if (domacinGolovi > gostGolovi)
+            {
+                utakmica.Domacin.BrojBodova += 3;
+                utakmica.Domacin.BrojPobjeda += 1;
+                utakmica.Gost.BrojPoraza += 1;
+                suma.SumaBrojaPobjeda += 1;
+                suma.SumaBrojaPoraza += 1;
+                suma.SumaBrojaBodova += 3;
+            }
+            if (gostGolovi > domacinGolovi)
+            {
+                utakmica.Gost.BrojBodova += 3;
+                utakmica.Gost.BrojPobjeda += 1;
+                utakmica.Domacin.BrojPoraza += 1;
+                suma.SumaBrojaPobjeda += 1;
+                suma.SumaBrojaPoraza += 1;
+                suma.SumaBrojaBodova += 3;
+            }
+            if (domacinGolovi == gostGolovi)
+            {
+                utakmica.Domacin.BrojBodova += 1;
+                utakmica.Gost.BrojBodova += 1;
+                utakmica.Gost.BrojNerješenih += 1;
+                utakmica.Domacin.BrojNerješenih += 1;
+                suma.SumaBrojaNerjesenih += 2;
+                suma.SumaBrojaBodova += 2;
+            }
+        }
+
         public override void Visit(Utakmica utakmica)
         {
             if (_kolo == 0 && utakmica.PostojiDogadaj())
-            {
-                if (utakmica.Gost.BrojOdigranihKola != utakmica.Kolo)
-                    utakmica.Gost.BrojOdigranihKola += 1;
-                if (utakmica.Domacin.BrojOdigranihKola != utakmica.Kolo)
-                    utakmica.Domacin.BrojOdigranihKola += 1;
-
-                if (domacinGolovi > gostGolovi)
-                {
-                    utakmica.Domacin.BrojBodova += 3;
-                    utakmica.Domacin.BrojPobjeda += 1;
-                    utakmica.Gost.BrojPoraza += 1;
-                    suma.SumaBrojaPobjeda += 1;
-                    suma.SumaBrojaPoraza += 1;
-                    suma.SumaBrojaBodova += 3;
-                }
-                if (gostGolovi > domacinGolovi)
-                {
-                    utakmica.Gost.BrojBodova += 3;
-                    utakmica.Gost.BrojPobjeda += 1;
-                    utakmica.Domacin.BrojPoraza += 1;
-                    suma.SumaBrojaPobjeda += 1;
-                    suma.SumaBrojaPoraza += 1;
-                    suma.SumaBrojaBodova += 3;
-                }
-                if (domacinGolovi == gostGolovi)
-                {
-                    utakmica.Domacin.BrojBodova += 1;
-                    utakmica.Gost.BrojBodova += 1;
-                    utakmica.Gost.BrojNerješenih += 1;
-                    utakmica.Domacin.BrojNerješenih += 1;
-                    suma.SumaBrojaNerjesenih += 2;
-                    suma.SumaBrojaBodova += 2;
-                }
-            }
+                ObradiUtakmicu(utakmica);
             else
             {
                 if (utakmica.Kolo <= _kolo && utakmica.PostojiDogadaj())
-                {
-                    if (utakmica.Gost.BrojOdigranihKola != utakmica.Kolo)
-                        utakmica.Gost.BrojOdigranihKola += 1;
-                    if (utakmica.Domacin.BrojOdigranihKola != utakmica.Kolo)
-                        utakmica.Domacin.BrojOdigranihKola += 1;
-
-                    if (domacinGolovi > gostGolovi)
-                    {
-                        utakmica.Domacin.BrojBodova += 3;
-                        utakmica.Domacin.BrojPobjeda += 1;
-                        utakmica.Gost.BrojPoraza += 1;
-                        suma.SumaBrojaPobjeda += 1;
-                        suma.SumaBrojaPoraza += 1;
-                        suma.SumaBrojaBodova += 3;
-                    }
-                    if (gostGolovi > domacinGolovi)
-                    {
-                        utakmica.Gost.BrojBodova += 3;
-                        utakmica.Gost.BrojPobjeda += 1;
-                        utakmica.Domacin.BrojPoraza += 1;
-                        suma.SumaBrojaPobjeda += 1;
-                        suma.SumaBrojaPoraza += 1;
-                        suma.SumaBrojaBodova += 3;
-                    }
-                    if (domacinGolovi == gostGolovi)
-                    {
-                        utakmica.Domacin.BrojBodova += 1;
-                        utakmica.Gost.BrojBodova += 1;
-                        utakmica.Gost.BrojNerješenih += 1;
-                        utakmica.Domacin.BrojNerješenih += 1;
-                        suma.SumaBrojaNerjesenih += 2;
-                        suma.SumaBrojaBodova += 2;
-                    }
-                }
+                    ObradiUtakmicu(utakmica);
             }
-            Console.WriteLine("gost: {0}", gostGolovi);
-            Console.WriteLine("domacin: {0}", domacinGolovi);
+          
             gostGolovi = 0;
             domacinGolovi = 0;
         }

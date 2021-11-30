@@ -9,7 +9,7 @@ namespace tgodek_zadaca_1.FactoryMethod.Ljestvice
         private readonly int Kolo;
         private List<int> duljineZapisa;
         private readonly string[] naslovi = { "Naziv kluba", "Oznaka", "Trener", "Broj odigranih kola",
-            "Broj pobjeda", "Broj neriješenih","Broj poraza","Broj danih golova", "Broj primljenih golova", "Razlika Golova", "BrojBodova"};
+            "Broj pobjeda", "Broj neriješenih","Broj poraza","Broj danih golova", "Broj primljenih golova", "Razlika golova", "Broj bodova"};
 
         public LjestvicaPrvenstva(int kolo = 0)
         {
