@@ -1,6 +1,6 @@
 ﻿using System;
 using tgodek_zadaca_2;
-using tgodek_zadaca_2.Builder;
+using tgodek_zadaca_2.Builder.DogadajBuilder;
 using tgodek_zadaca_2.Composite;
 
 namespace ucitavanje_datoteka
@@ -11,18 +11,21 @@ namespace ucitavanje_datoteka
         {
             var list = DatotekaUtil.ReadFile(imeDatoteke);
             var builder = new KonkretniDogadaj();
+            var direktor = new DogadajDirector();
+            direktor.Builder = builder;
             var prvenstvo = Prvenstvo.DohvatiPrvenstvo();
 
             for (var i = 0; i < list.Count; i++)
             {
                 var value = list[i].Split(";");
-                ObradaDogadaja(value[0], value[1], value[2], value[3], value[4], value[5], prvenstvo, builder, i);
+                ObradaDogadaja(value[0], value[1], value[2], value[3], value[4], value[5], prvenstvo, builder, i, direktor);
             }
         }
 
         private void ObradaDogadaja(string broj,string min,string _vrsta, string klub, string igrac, string zamjena, 
-            Prvenstvo prvenstvo, KonkretniDogadaj builder, int index)
+            Prvenstvo prvenstvo, KonkretniDogadaj builder, int index, DogadajDirector director)
         {
+            
             var sastavDogadajaError = "";
             var utakmica = prvenstvo.PronadiZapis(broj) as Utakmica;
 
@@ -40,7 +43,7 @@ namespace ucitavanje_datoteka
             {
                 if (sastavDogadajaError == "")
                 {
-                    builder.DodajOsnovno(utakmica, min, vrsta);
+                    director.IzradiOsnovniDogadaj(utakmica, min, vrsta);
                     utakmica.DodajKomponentu(builder.Build());
                 }
                 else
@@ -62,8 +65,7 @@ namespace ucitavanje_datoteka
                     sastavDogadajaError += "-- Igrac se ne nalazi u sastavu";
                 if (sastavDogadajaError == "")
                 {
-                    builder.DodajOsnovno(utakmica, min, vrsta)
-                        .DodajKlubIIgraca(_klubUSastavu.Klub, _igrac);
+                    director.IzradiDogadajZaIgraca(utakmica, min, vrsta, _klubUSastavu.Klub, _igrac);
                     utakmica.DodajKomponentu(builder.Build());
                 }
                 else
@@ -90,9 +92,7 @@ namespace ucitavanje_datoteka
 
                 if(sastavDogadajaError == "")
                 {
-                    builder.DodajOsnovno(utakmica, min, vrsta)
-                        .DodajKlubIIgraca(_klubUSastavu.Klub, _igrac)
-                        .DodajZamjenu(_zamjena);
+                    director.IzradiDogadajZaZamjenu(utakmica, min, vrsta, _klubUSastavu.Klub, _igrac, _zamjena);
                     utakmica.DodajKomponentu(builder.Build());
                 }
                 else
