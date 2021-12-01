@@ -31,10 +31,7 @@ namespace tgodek_zadaca_2.Composite
             return ZutiKarton + DrugiZutiKarton + CrveniKarton;
         }
 
-        public void DodajKomponentu(Igrac igrac)
-        {
-            igraci.Add(igrac);
-        }
+        public void DodajKomponentu(Igrac igrac) => igraci.Add(igrac);
 
         public Klub(string oznaka, string naziv, Trener trener)
         {

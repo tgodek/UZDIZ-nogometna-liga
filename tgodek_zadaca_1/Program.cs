@@ -55,8 +55,9 @@ namespace tgodek_zadaca_2
         private static Izbornik KonstruirajIzbornik(string[] vrijednosti, KonkretniIzbornik builder)
         {
             int kolo;
+            int broj;
             if (vrijednosti.Length == 3 && vrijednosti[0] == "R" &&
-                Int32.TryParse(vrijednosti[2], out kolo))
+                Int32.TryParse(vrijednosti[2], out kolo) && !Int32.TryParse(vrijednosti[1], out broj))
             {
                 builder.DodajZastavicu(vrijednosti[0])
                     .DodajKlub(vrijednosti[1])
@@ -71,7 +72,7 @@ namespace tgodek_zadaca_2
                     .DodajKolo(kolo);
                 return builder.Build();
             }
-            else if (vrijednosti.Length == 2 && (vrijednosti[0] == "R"))
+            else if (vrijednosti.Length == 2 && (vrijednosti[0] == "R") && !Int32.TryParse(vrijednosti[1], out broj))
             {
                 builder.DodajZastavicu(vrijednosti[0])
                     .DodajKlub(vrijednosti[1]);

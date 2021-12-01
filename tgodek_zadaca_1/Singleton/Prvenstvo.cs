@@ -42,10 +42,17 @@ namespace tgodek_zadaca_2
         {
             try
             {
-                if (izbornik.Zastavica == "R" && !String.IsNullOrEmpty(izbornik.Klub))
+                if (izbornik.Zastavica == "R")
                 {
-                    var ljestvica = new LjestvicaRezultata(izbornik.Klub, izbornik.Kolo);
-                    ljestvica.Ispis();
+                    var postojiKlub = PronadiZapis(izbornik.Klub);
+                    if (postojiKlub != null)
+                    {
+                        var ljestvica = new LjestvicaRezultata(izbornik.Klub, izbornik.Kolo);
+                        ljestvica.Ispis();
+                    }
+                    else
+                        Console.WriteLine("Klub ne postoji");
+                 
                 }
                 if (izbornik.Zastavica == "T")
                 {
