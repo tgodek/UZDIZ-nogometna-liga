@@ -1,6 +1,6 @@
 ﻿using System;
-using tgodek_zadaca_1;
-using tgodek_zadaca_1.Composite;
+using tgodek_zadaca_2;
+using tgodek_zadaca_2.Composite;
 
 namespace ucitavanje_datoteka
 {
@@ -11,17 +11,17 @@ namespace ucitavanje_datoteka
             var list = DatotekaUtil.ReadFile(imeDatoteke);
             var prvenstvo = Prvenstvo.DohvatiPrvenstvo();
 
-            foreach (var item in list)
+            for (var i = 0; i < list.Count; i++)
             {
-                var value = item.Split(';');
+                var value = list[i].Split(';');
                 var postojeciKlub = prvenstvo.PronadiZapis(value[0]) as Klub;
-                var igrac = ObradaIgraca(value[0], value[1], value[2], value[3], prvenstvo);
+                var igrac = ObradaIgraca(value[0], value[1], value[2], value[3], prvenstvo, i);
                 if (igrac != null)
                     postojeciKlub.DodajKomponentu(igrac);
             }
         }
 
-        private Igrac ObradaIgraca(string klub, string ime, string pozicija, string datum, Prvenstvo prvenstvo)
+        private Igrac ObradaIgraca(string klub, string ime, string pozicija, string datum, Prvenstvo prvenstvo, int index)
         {
             var postojeciKlub = prvenstvo.PronadiZapis(klub) as Klub;
             var postojeciIgrac = prvenstvo.PronadiZapis(ime) as Igrac;
@@ -54,8 +54,8 @@ namespace ucitavanje_datoteka
             }
             else
             {
-                Console.WriteLine("IGRAC | Preskacem igraca | Razlog: {0} | {1} {2} {3} {4}", 
-                    igracError, klub, ime, pozicija, datum);
+                Console.WriteLine("ZAPIS {0} | IGRAC | Preskacem igraca | Razlog: {1} | {2} {3} {4} {5}", 
+                    index+1,igracError, klub, ime, pozicija, datum);
                 return null;
             }
         }

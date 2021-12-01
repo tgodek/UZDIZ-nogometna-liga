@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using tgodek_zadaca_1.Composite;
+using tgodek_zadaca_2.Composite;
 
-namespace tgodek_zadaca_1.Builder
+namespace tgodek_zadaca_2.Builder
 {
     class KonkretniDogadaj : IDogadaj
     {
@@ -13,22 +13,25 @@ namespace tgodek_zadaca_1.Builder
         {
             Reset();
         }
-        public void DodajOsnovno(Utakmica utakmica, string minute, int vrsta)
+        public IDogadaj DodajOsnovno(Utakmica utakmica, string minute, int vrsta)
         {
             this._dogadaj.Utakmica = utakmica;
             this._dogadaj.Min = minute;
             this._dogadaj.Vrsta = vrsta;
+            return this;
         }
 
-        public void DodajKlubIIgraca(Klub klub, Igrac igrac)
+        public IDogadaj DodajKlubIIgraca(Klub klub, Igrac igrac)
         {
             this._dogadaj.Klub = klub;
             this._dogadaj.Igrac = igrac;
+            return this;
         }
 
-        public void DodajZamjenu(Igrac zamjena)
+        public IDogadaj DodajZamjenu(Igrac zamjena)
         {
             this._dogadaj.Zamjena = zamjena;
+            return this;
         }
 
         private void Reset()

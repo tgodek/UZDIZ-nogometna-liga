@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using tgodek_zadaca_1.Composite;
-using tgodek_zadaca_1.FactoryMethod.Ljestvice;
-using tgodek_zadaca_1.Visitor;
+using tgodek_zadaca_2.Composite;
+using tgodek_zadaca_2.FactoryMethod.Ljestvice;
+using tgodek_zadaca_2.Visitor;
 using System.Linq;
 
-namespace tgodek_zadaca_1
+namespace tgodek_zadaca_2
 {
     class Prvenstvo : INogometnaLiga
     {

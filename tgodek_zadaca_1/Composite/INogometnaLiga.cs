@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using tgodek_zadaca_1.Visitor;
+using tgodek_zadaca_2.Visitor;
 
-namespace tgodek_zadaca_1.Composite
+namespace tgodek_zadaca_2.Composite
 {
     public interface INogometnaLiga
     {

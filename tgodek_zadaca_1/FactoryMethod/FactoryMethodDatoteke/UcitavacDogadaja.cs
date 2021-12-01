@@ -1,7 +1,7 @@
 ﻿using System;
-using tgodek_zadaca_1;
-using tgodek_zadaca_1.Builder;
-using tgodek_zadaca_1.Composite;
+using tgodek_zadaca_2;
+using tgodek_zadaca_2.Builder;
+using tgodek_zadaca_2.Composite;
 
 namespace ucitavanje_datoteka
 {
@@ -13,15 +13,15 @@ namespace ucitavanje_datoteka
             var builder = new KonkretniDogadaj();
             var prvenstvo = Prvenstvo.DohvatiPrvenstvo();
 
-            foreach (var item in list)
+            for (var i = 0; i < list.Count; i++)
             {
-                var value = item.Split(';');
-                ObradaDogadaja(value[0], value[1], value[2], value[3], value[4], value[5], prvenstvo, builder);
+                var value = list[i].Split(";");
+                ObradaDogadaja(value[0], value[1], value[2], value[3], value[4], value[5], prvenstvo, builder, i);
             }
         }
 
         private void ObradaDogadaja(string broj,string min,string _vrsta, string klub, string igrac, string zamjena, 
-            Prvenstvo prvenstvo, KonkretniDogadaj builder)
+            Prvenstvo prvenstvo, KonkretniDogadaj builder, int index)
         {
             var sastavDogadajaError = "";
             var utakmica = prvenstvo.PronadiZapis(broj) as Utakmica;
@@ -45,8 +45,8 @@ namespace ucitavanje_datoteka
                 }
                 else
                 {
-                    Console.WriteLine("DOGADAJ | Preskacem dogadaj | Razlog: {0} | {1} {2} {3}",
-                      sastavDogadajaError, broj, min, vrsta);
+                    Console.WriteLine("ZAPIS {0} | DOGADAJ | Preskacem dogadaj | Razlog: {1} | {2} {3} {4}",
+                      index+1, sastavDogadajaError, broj, min, vrsta);
                 }
             }
             if (vrsta == 1 || vrsta == 2 || vrsta == 3 || vrsta == 10 || vrsta == 11)
@@ -62,14 +62,13 @@ namespace ucitavanje_datoteka
                     sastavDogadajaError += "-- Igrac se ne nalazi u sastavu";
                 if (sastavDogadajaError == "")
                 {
-                    builder.DodajOsnovno(utakmica, min, vrsta);
-                    builder.DodajKlubIIgraca(_klubUSastavu.Klub, _igrac);
+                    builder.DodajOsnovno(utakmica, min, vrsta)
+                        .DodajKlubIIgraca(_klubUSastavu.Klub, _igrac);
                     utakmica.DodajKomponentu(builder.Build());
                 }
                 else
-                    Console.WriteLine("DOGADAJ | Preskacem dogadaj | Razlog: {0} | {1} {2} {3} {4} {5}",
-                        sastavDogadajaError, broj, min, vrsta, klub, igrac);
-
+                    Console.WriteLine("ZAPIS {0} | DOGADAJ | Preskacem dogadaj | Razlog: {1} | {2} {3} {4} {5} {6}",
+                        index+1, sastavDogadajaError, broj, min, vrsta, klub, igrac);
             }
             if (vrsta == 20)
             {
@@ -91,14 +90,14 @@ namespace ucitavanje_datoteka
 
                 if(sastavDogadajaError == "")
                 {
-                    builder.DodajOsnovno(utakmica, min, vrsta);
-                    builder.DodajKlubIIgraca(_klubUSastavu.Klub, _igrac);
-                    builder.DodajZamjenu(_zamjena);
+                    builder.DodajOsnovno(utakmica, min, vrsta)
+                        .DodajKlubIIgraca(_klubUSastavu.Klub, _igrac)
+                        .DodajZamjenu(_zamjena);
                     utakmica.DodajKomponentu(builder.Build());
                 }
                 else
-                    Console.WriteLine("DOGADAJ | Preskacem dogadaj | Razlog: {0} | {1} {2} {3} {4} {5} {6}",
-                        sastavDogadajaError, broj, min, vrsta, klub, igrac, zamjena);
+                    Console.WriteLine("ZAPIS {0} | DOGADAJ | Preskacem dogadaj | Razlog: {1} | {2} {3} {4} {5} {6} {7}",
+                        index+1, sastavDogadajaError, broj, min, vrsta, klub, igrac, zamjena);
             }
         }
     }

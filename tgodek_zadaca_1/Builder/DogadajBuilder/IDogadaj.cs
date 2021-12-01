@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using tgodek_zadaca_1.Composite;
+using tgodek_zadaca_2.Composite;
 
-namespace tgodek_zadaca_1.Builder
+namespace tgodek_zadaca_2.Builder
 {
     interface IDogadaj
     {
-        public void DodajOsnovno(Utakmica utakmica, string minute, int vrsta);
-        public void DodajKlubIIgraca(Klub klub, Igrac igrac);
-        public void DodajZamjenu(Igrac zamjena);
+        public IDogadaj DodajOsnovno(Utakmica utakmica, string minute, int vrsta);
+        public IDogadaj DodajKlubIIgraca(Klub klub, Igrac igrac);
+        public IDogadaj DodajZamjenu(Igrac zamjena);
     }
 }

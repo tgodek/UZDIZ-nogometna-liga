@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace tgodek_zadaca_1.Visitor
+namespace tgodek_zadaca_2.Visitor
 {
     class SumaLjestvicePrvenstva
     {

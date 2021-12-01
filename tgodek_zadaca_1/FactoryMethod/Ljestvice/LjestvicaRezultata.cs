@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace tgodek_zadaca_1.FactoryMethod.Ljestvice
+namespace tgodek_zadaca_2.FactoryMethod.Ljestvice
 {
     class LjestvicaRezultata : ILjestvica
     {

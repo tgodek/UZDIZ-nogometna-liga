@@ -2,7 +2,7 @@
 using System;
 using System.Text;
 
-namespace tgodek_zadaca_1
+namespace tgodek_zadaca_2
 {
     class Program
     {

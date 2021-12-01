@@ -1,6 +1,6 @@
 ﻿using System;
-using tgodek_zadaca_1;
-using tgodek_zadaca_1.Composite;
+using tgodek_zadaca_2;
+using tgodek_zadaca_2.Composite;
 
 namespace ucitavanje_datoteka
 {
@@ -10,14 +10,15 @@ namespace ucitavanje_datoteka
         {
             var list = DatotekaUtil.ReadFile(imeDatoteke);
             var prvenstvo = Prvenstvo.DohvatiPrvenstvo();
-            foreach (var item in list)
+
+            for (var i = 0; i < list.Count; i++)
             {
-                var value = item.Split(';');
-                ObradaUtakmica(value[0], value[1], value[2], value[3], value[4], prvenstvo);
+                var value = list[i].Split(';');
+                ObradaUtakmica(value[0], value[1], value[2], value[3], value[4], prvenstvo, i);
             }
         }
 
-        private void ObradaUtakmica(string broj, string kolo, string domacin, string gost, string pocetak, Prvenstvo prvenstvo)
+        private void ObradaUtakmica(string broj, string kolo, string domacin, string gost, string pocetak, Prvenstvo prvenstvo, int index)
         {
             var postojeciDomacin = prvenstvo.PronadiZapis(domacin) as Klub;
             var postojeciGost = prvenstvo.PronadiZapis(gost) as Klub;
@@ -29,17 +30,17 @@ namespace ucitavanje_datoteka
             
             Int32 novoKolo;
             if (!Int32.TryParse(kolo, out novoKolo))
-                utakmicaError = "-- Utakmica nema kolo ";
+                utakmicaError = "-- Utakmica nema ispravno kolo ";
 
             if (postojeciDomacin == null)
-                utakmicaError = "-- Utakmica nema domacina ";
+                utakmicaError = "-- Utakmica nema ispravnog domacina ";
 
             if (postojeciGost == null)
-                utakmicaError = "-- Utakmica nema gosta ";
+                utakmicaError = "-- Utakmica nema ispravnog gosta ";
 
             DateTime noviPocetak;
             if (!DateTime.TryParse(pocetak, out noviPocetak))
-                utakmicaError += "-- Utakmica nema pocetak ";
+                utakmicaError += "-- Utakmica nema ispravan pocetak ";
 
             if (utakmicaError == "")
             {
@@ -48,7 +49,8 @@ namespace ucitavanje_datoteka
             }
 
             else
-                Console.WriteLine("UTAKMICA | Preskacem utakmicu | Razlog: {0}", utakmicaError);
+                Console.WriteLine("ZAPIS {0} | UTAKMICA | Preskacem utakmicu | Razlog: {1} | {2} {3} {4} {5} {6}", 
+                    index+1, utakmicaError, broj, kolo, domacin, gost, pocetak);
         }
     }
 }
