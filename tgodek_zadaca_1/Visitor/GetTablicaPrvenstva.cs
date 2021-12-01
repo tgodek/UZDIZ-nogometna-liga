@@ -70,23 +70,6 @@ namespace tgodek_zadaca_2.Visitor
                 if (dogadaj.Utakmica.Kolo <= _kolo)
                     ObradiDogadajZaPogodak(dogadaj);
             }
-               
-        }
-
-        public override void Visit(Igrac igrac)
-        {
-        }
-
-        public override void Visit(Klub klub)
-        {
-        }
-
-        public override void Visit(SastavUtakmice sastav)
-        {
-        }
-
-        public override void Visit(Trener trener)
-        {
         }
 
         private void ObradiUtakmicu(Utakmica utakmica)
@@ -137,6 +120,22 @@ namespace tgodek_zadaca_2.Visitor
           
             gostGolovi = 0;
             domacinGolovi = 0;
+        }
+
+        public override void Visit(Igrac igrac)
+        {
+        }
+
+        public override void Visit(Klub klub)
+        {
+        }
+
+        public override void Visit(SastavUtakmice sastav)
+        {
+        }
+
+        public override void Visit(Trener trener)
+        {
         }
     }
 }

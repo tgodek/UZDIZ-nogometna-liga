@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace tgodek_zadaca_2.FactoryMethod.Ljestvice
+namespace tgodek_zadaca_2.Ljestvice
 {
-    class LjestvicaRezultata : ILjestvica
+    class LjestvicaRezultata
     {
         private readonly int Kolo;
         private readonly string OznakaKluba;

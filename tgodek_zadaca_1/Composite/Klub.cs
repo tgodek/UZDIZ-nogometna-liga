@@ -65,15 +65,6 @@ namespace tgodek_zadaca_2.Composite
             }
         }
 
-        public void DetaljiKomponente()
-        {
-            Console.WriteLine("  |-- Oznaka kluba: {0}, Naziv kluba: {1} Trener: {2} ZutiKarton: {3} Drugi Zuti: {4}", Oznaka, Naziv, Trener.Ime, ZutiKarton, DrugiZutiKarton);
-            foreach (var x in igraci)
-            {
-                x.DetaljiKomponente();
-            }
-        }
-
         public List<Igrac> ListaIgraca()
         {
             return igraci;

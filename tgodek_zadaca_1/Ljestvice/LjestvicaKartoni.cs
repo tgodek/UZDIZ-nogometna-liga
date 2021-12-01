@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace tgodek_zadaca_2.FactoryMethod.Ljestvice
+namespace tgodek_zadaca_2.Ljestvice
 {
-    public class LjestvicaKartoni : ILjestvica
+    public class LjestvicaKartoni
     {
         private readonly int Kolo;
         private List<int> duljineZapisa;

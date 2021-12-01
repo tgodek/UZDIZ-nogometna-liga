@@ -43,11 +43,6 @@ namespace tgodek_zadaca_2.Composite
             this.BrojPogodaka = 0;
         }
 
-        public void DetaljiKomponente()
-        {
-            Console.WriteLine("    |-- Ime igraca: {0} Pozicija: {1} Zuti Karton: {2} Drugi zuti: {3}", Ime, Pozicija, ZutiKarton, DrugiZutiKarton);
-        }
-
         public INogometnaLiga PronadiZapis(string id)
         {
             if (id == this.Ime)
@@ -67,11 +62,6 @@ namespace tgodek_zadaca_2.Composite
         public Trener(string ime)
         {
             this.Ime = ime;
-        }
-
-        public void DetaljiKomponente()
-        {
-            Console.WriteLine("Ime trenera: {0}", Ime);
         }
 
         public INogometnaLiga PronadiZapis(string id)

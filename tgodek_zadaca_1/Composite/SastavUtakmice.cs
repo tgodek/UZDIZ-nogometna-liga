@@ -23,12 +23,6 @@ namespace tgodek_zadaca_2.Composite
             this.Pozicija = pozicija;
         }
 
-        public void DetaljiKomponente()
-        {
-            Console.WriteLine("  |-- broj utakmice: {0}, Naziv kluba: {1}, Vrsta: {2}, Igrac: {3}, Pozicija: {4}", 
-                Utakmica.Broj, Klub.Naziv, Vrsta, Igrac.Ime, Pozicija);
-        }
-
         public INogometnaLiga PronadiZapis(string id)
         {
             if (id == Klub.Oznaka)

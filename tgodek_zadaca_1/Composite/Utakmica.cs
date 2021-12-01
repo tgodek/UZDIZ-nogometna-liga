@@ -33,19 +33,7 @@ namespace tgodek_zadaca_2.Composite
             Domacin = domacin;
         }
 
-        public void DodajKomponentu(INogometnaLiga komponenta)
-        {
-            komponente.Add(komponenta);
-        }
-
-        public void DetaljiKomponente()
-        {
-            Console.WriteLine("Broj utakmice: {0} Kolo: {1}  Početak: {2}, Domacin: {3} Gost: {4}", Broj, Kolo, Pocetak, Domacin.Naziv, Gost.Naziv);
-            foreach (var klub in komponente)
-            {
-                klub.DetaljiKomponente();
-            }
-        }
+        public void DodajKomponentu(INogometnaLiga komponenta) => komponente.Add(komponenta);
 
         public bool PostojiDogadaj()
         {
@@ -56,7 +44,6 @@ namespace tgodek_zadaca_2.Composite
                     return true;
             }
             return postoji;
-
         }
 
         public INogometnaLiga PronadiZapis(string id)

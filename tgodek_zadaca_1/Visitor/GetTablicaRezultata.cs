@@ -39,18 +39,7 @@ namespace tgodek_zadaca_2.Visitor
             }
         }
 
-        public void Visit(Klub klub)
-        {
-        }
-
-        public void Visit(Igrac igrac)
-        {
-        }
-
-        public void Visit(Trener trener)
-        {
-        }
-
+       
         public void Visit(Utakmica utakmica)
         {
             if (_kolo == 0)
@@ -76,13 +65,25 @@ namespace tgodek_zadaca_2.Visitor
             domacinGolovi = 0;
         }
 
-        public void Visit(SastavUtakmice sastav)
-        {
-        }
-
         public void Visit(Dogadaj dogadaj)
         {
             ObradiDogadajZaPogodak(dogadaj);
         }
+
+        public void Visit(Klub klub)
+        {
+        }
+
+        public void Visit(Igrac igrac)
+        {
+        }
+
+        public void Visit(Trener trener)
+        {
+        }
+        public void Visit(SastavUtakmice sastav)
+        {
+        }
+
     }
 }

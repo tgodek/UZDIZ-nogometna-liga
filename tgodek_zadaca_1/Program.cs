@@ -45,23 +45,10 @@ namespace tgodek_zadaca_2
 
         private static void PokusajUcitatiDodatneDatoteke(string[] vrijednosti)
         {
-            if (vrijednosti.Length == 2 && vrijednosti[0] == "NU")
+            if (vrijednosti.Length == 2 && (vrijednosti[0] == "NU" || vrijednosti[0] == "NS" || vrijednosti[0] == "ND"))
             {
                 var ucitavac = UcitavacDatotekaFacade.DohvatiUcitavacDatoteka();
                 ucitavac.UcitajDatoteke(vrijednosti);
-                Console.WriteLine("Ucitana {0} datoteka",vrijednosti[1]);
-            }
-            else if (vrijednosti.Length == 2 && vrijednosti[0] == "NS")
-            {
-                var ucitavac = UcitavacDatotekaFacade.DohvatiUcitavacDatoteka();
-                ucitavac.UcitajDatoteke(vrijednosti);
-                Console.WriteLine("Ucitana {0} datoteka", vrijednosti[1]);
-            }
-            else if (vrijednosti.Length == 2 && vrijednosti[0] == "ND")
-            {
-                var ucitavac = UcitavacDatotekaFacade.DohvatiUcitavacDatoteka();
-                ucitavac.UcitajDatoteke(vrijednosti);
-                Console.WriteLine("Ucitana {0} datoteka", vrijednosti[1]);
             }
         }
 

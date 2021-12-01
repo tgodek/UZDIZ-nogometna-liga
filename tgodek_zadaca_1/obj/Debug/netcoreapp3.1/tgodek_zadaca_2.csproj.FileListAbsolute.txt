@@ -11,3 +11,4 @@ E:\Develop\Github\nogometna-Liga\tgodek_zadaca_1\obj\Debug\netcoreapp3.1\tgodek_
 E:\Develop\Github\nogometna-Liga\tgodek_zadaca_1\obj\Debug\netcoreapp3.1\tgodek_zadaca_2.dll
 E:\Develop\Github\nogometna-Liga\tgodek_zadaca_1\obj\Debug\netcoreapp3.1\tgodek_zadaca_2.pdb
 E:\Develop\Github\nogometna-Liga\tgodek_zadaca_1\obj\Debug\netcoreapp3.1\tgodek_zadaca_2.genruntimeconfig.cache
+E:\Develop\Github\nogometna-Liga\tgodek_zadaca_1\obj\Debug\netcoreapp3.1\tgodek_zadaca_2.csproj.AssemblyReference.cache

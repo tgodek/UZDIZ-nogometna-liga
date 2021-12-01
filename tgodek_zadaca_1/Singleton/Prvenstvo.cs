@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using tgodek_zadaca_2.Composite;
-using tgodek_zadaca_2.FactoryMethod.Ljestvice;
+using tgodek_zadaca_2.Ljestvice;
 using tgodek_zadaca_2.Visitor;
 using System.Linq;
 
@@ -27,14 +27,6 @@ namespace tgodek_zadaca_2
 
         public void DodajKomponentu(INogometnaLiga komponenta) => liga.Add(komponenta);
 
-        public void DetaljiKomponente()
-        {
-            foreach (var x in liga)
-            {
-                x.DetaljiKomponente();
-            }
-        }
-
         public INogometnaLiga PronadiZapis(string id)
         {
             INogometnaLiga komponenta = null;
@@ -48,18 +40,34 @@ namespace tgodek_zadaca_2
 
         public void IspisLjestvice(Izbornik izbornik)
         {
-            if (!String.IsNullOrEmpty(izbornik.Klub))
+            try
             {
-                var ljestvica = new LjestvicaRezultata(izbornik.Klub, izbornik.Kolo);
-                if (ljestvica != null)
+                if (izbornik.Zastavica == "R" && !String.IsNullOrEmpty(izbornik.Klub))
+                {
+                    var ljestvica = new LjestvicaRezultata(izbornik.Klub, izbornik.Kolo);
                     ljestvica.Ispis();
+                }
+                if (izbornik.Zastavica == "T")
+                {
+                    var ljestvica = new LjestvicaPrvenstva(izbornik.Kolo);
+                    ljestvica.Ispis();
+                }
+                if (izbornik.Zastavica == "K")
+                {
+                    var ljestvica = new LjestvicaKartoni(izbornik.Kolo);
+                    ljestvica.Ispis();
+                }
+                if (izbornik.Zastavica == "S")
+                {
+                    var ljestvica = new LjestvicaStrijelci(izbornik.Kolo);
+                    ljestvica.Ispis();
+                }
             }
-            else
+            catch (Exception)
             {
-                var ljestvica = new LjestvicaFactory().DohvatiLjestvicu(izbornik.Zastavica, izbornik.Kolo);
-                if(ljestvica != null)
-                    ljestvica.Ispis();
+                Console.WriteLine("Nije moguć ispis tablice");
             }
+           
         }
 
         public void Accept(IOperation operacija)

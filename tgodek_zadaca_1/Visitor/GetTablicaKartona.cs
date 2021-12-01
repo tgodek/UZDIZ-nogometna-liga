@@ -17,62 +17,49 @@ namespace tgodek_zadaca_2.Visitor
             _kolo = kolo;
         }
 
+        private void ObradiKartone(Dogadaj dogadaj)
+        {
+            if (dogadaj.Vrsta == 10)
+            {
+                if (dogadaj.Igrac.ZutiKarton == 1)
+                {
+                    dogadaj.Igrac.DrugiZutiKarton++;
+                    dogadaj.Klub.DrugiZutiKarton++;
+                    suma.UkDrugihZutih += 1;
+                }
+                if (dogadaj.Igrac.ZutiKarton == 0)
+                {
+                    dogadaj.Igrac.ZutiKarton++;
+                    dogadaj.Klub.ZutiKarton++;
+                    suma.UkZutih += 1;
+                }
+            }
+            if (dogadaj.Vrsta == 11)
+            {
+                if (dogadaj.Igrac.CrveniKarton == 0)
+                {
+                    dogadaj.Igrac.CrveniKarton++;
+                    dogadaj.Klub.CrveniKarton++;
+                    suma.UkCrvenih += 1;
+                }
+            }
+        }
+
         public override void Visit(Dogadaj dogadaj)
         {
             if (_kolo == 0)
-            {
-                if (dogadaj.Vrsta == 10)
-                {
-                    if (dogadaj.Igrac.ZutiKarton == 1)
-                    {
-                        dogadaj.Igrac.DrugiZutiKarton++;
-                        dogadaj.Klub.DrugiZutiKarton++;
-                        suma.UkDrugihZutih += 1;
-                    }
-                    if (dogadaj.Igrac.ZutiKarton == 0)
-                    {
-                        dogadaj.Igrac.ZutiKarton++;
-                        dogadaj.Klub.ZutiKarton++;
-                        suma.UkZutih += 1;
-                    }
-                }
-                if (dogadaj.Vrsta == 11)
-                {
-                    if (dogadaj.Igrac.CrveniKarton == 0)
-                    {
-                        dogadaj.Igrac.CrveniKarton++;
-                        dogadaj.Klub.CrveniKarton++;
-                        suma.UkCrvenih += 1;
-                    }
-                }
-            }
+                ObradiKartone(dogadaj);
             else 
             {
-                if (dogadaj.Vrsta == 10 && dogadaj.Utakmica.Kolo <= _kolo)
-                {
-                    if (dogadaj.Igrac.ZutiKarton == 1)
-                    {
-                        dogadaj.Igrac.DrugiZutiKarton++;
-                        dogadaj.Klub.DrugiZutiKarton++;
-                        suma.UkDrugihZutih += 1;
-                    }
-                    if (dogadaj.Igrac.ZutiKarton == 0)
-                    {
-                        dogadaj.Igrac.ZutiKarton++;
-                        dogadaj.Klub.ZutiKarton++;
-                        suma.UkZutih += 1;
-                    }
-                }
-                if (dogadaj.Vrsta == 11 && dogadaj.Utakmica.Kolo <= _kolo)
-                {
-                    if (dogadaj.Igrac.CrveniKarton == 0)
-                    {
-                        dogadaj.Igrac.CrveniKarton++;
-                        dogadaj.Klub.CrveniKarton++;
-                        suma.UkCrvenih +=1;
-                    }
-                }
+                if (dogadaj.Utakmica.Kolo <= _kolo)
+                    ObradiKartone(dogadaj);
             }
+        }
+
+        public override void Visit(Utakmica utakmica)
+        {
+            utakmica.Domacin.ResetIgrace();
+            utakmica.Gost.ResetIgrace();
         }
 
         public override void Visit(Igrac igrac)
@@ -90,11 +77,5 @@ namespace tgodek_zadaca_2.Visitor
         public override void Visit(Trener trener)
         {
         }
-
-        public override void Visit(Utakmica utakmica)
-        {
-            utakmica.Domacin.ResetIgrace();
-            utakmica.Gost.ResetIgrace();
-        }   
     }
 }

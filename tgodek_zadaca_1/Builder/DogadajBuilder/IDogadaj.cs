@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using tgodek_zadaca_2.Composite;
 
-namespace tgodek_zadaca_2.Builder
+namespace tgodek_zadaca_2.Builder.DogadajBuilder
 {
     interface IDogadaj
     {
