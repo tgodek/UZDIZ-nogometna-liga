@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using tgodek_zadaca_3.StatePattern;
 using tgodek_zadaca_3.Visitor;
 
 namespace tgodek_zadaca_3.Composite
@@ -21,6 +22,7 @@ namespace tgodek_zadaca_3.Composite
         public Pozicija Pozicija { get; set; }
         public DateTime Datum { get; set; }
         public Klub Klub { get; set; }
+        public State _state = new Idle();
 
         public int ZutiKarton { get; set; }
         public int DrugiZutiKarton { get; set; }
@@ -33,6 +35,16 @@ namespace tgodek_zadaca_3.Composite
             this.Ime = ime;
             this.Pozicija = pozicija;
             this.Datum = datum;
+        }
+
+        public void SetState(State state) => _state = state;
+
+        public void OnZamjena() => _state.OnZamjena(this);
+
+        public bool IgracUIgri() 
+        {
+            if (_state is Igra) return true;
+            else return false;
         }
 
         public void ResetStatistiku()
