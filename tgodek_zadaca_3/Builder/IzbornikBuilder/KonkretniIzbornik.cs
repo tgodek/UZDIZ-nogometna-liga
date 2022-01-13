@@ -31,6 +31,19 @@ namespace tgodek_zadaca_3
             return this;
         }
 
+        public IIzbornik DodajKlub2(string klub)
+        {
+            this._izbornik.Klub2 = klub;
+            return this;
+        }
+
+        public IIzbornik DodajSekunde(int sekunde)
+        {
+            this._izbornik.Sekunde = sekunde;
+            return this;
+        }
+
+
         private void Reset()
         {
             this._izbornik = new Izbornik();
@@ -41,6 +54,11 @@ namespace tgodek_zadaca_3
             Izbornik izbornik = this._izbornik;
             this.Reset();
             return izbornik;
+        }
+
+        public IIzbornik DodajSekunde(string klub)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -9,5 +9,7 @@ namespace tgodek_zadaca_3
         public IIzbornik DodajZastavicu(string zastavica);
         public IIzbornik DodajKolo(int kolo);
         public IIzbornik DodajKlub(string klub);
+        public IIzbornik DodajKlub2(string klub);
+        public IIzbornik DodajSekunde(int sekunde);
     }
 }

@@ -56,6 +56,7 @@ namespace tgodek_zadaca_3
         {
             int kolo;
             int broj;
+            int sekunde;
             if (vrijednosti.Length == 3 && vrijednosti[0] == "R" &&
                 Int32.TryParse(vrijednosti[2], out kolo) && !Int32.TryParse(vrijednosti[1], out broj))
             {
@@ -80,12 +81,23 @@ namespace tgodek_zadaca_3
             }
 
             else if (vrijednosti.Length == 1 &&
-                (vrijednosti[0] == "T" || vrijednosti[0] == "S" || vrijednosti[0] == "K"))
+                (vrijednosti[0] == "T" || vrijednosti[0] == "S" || vrijednosti[0] == "K")) 
             {
                 builder.DodajZastavicu(vrijednosti[0]);
                 return builder.Build();
             }
-            
+       
+            else if (vrijednosti.Length == 5 &&
+                vrijednosti[0] == "D" && Int32.TryParse(vrijednosti[1], out sekunde) && Int32.TryParse(vrijednosti[1], out kolo)) 
+            {
+                builder.DodajZastavicu(vrijednosti[0])
+                    .DodajKolo(kolo)
+                    .DodajKlub(vrijednosti[2])
+                    .DodajKlub2(vrijednosti[3])
+                    .DodajSekunde(sekunde);
+                return builder.Build();
+            }
+
             else
                 return null;
         }

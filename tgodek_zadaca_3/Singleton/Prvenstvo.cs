@@ -45,8 +45,7 @@ namespace tgodek_zadaca_3
                 if (izbornik.Zastavica == "R")
                 {
                     var postojiKlub = PronadiZapis(izbornik.Klub);
-                    if (postojiKlub != null)
-                    {
+                    if (postojiKlub != null) {
                         var ljestvica = new LjestvicaRezultata(izbornik.Klub, izbornik.Kolo);
                         ljestvica.Ispis();
                     }
@@ -69,12 +68,23 @@ namespace tgodek_zadaca_3
                     var ljestvica = new LjestvicaStrijelci(izbornik.Kolo);
                     ljestvica.Ispis();
                 }
+                if (izbornik.Zastavica == "D")
+                {
+                    var postojiKlub = PronadiZapis(izbornik.Klub);
+                    var postojiKlub2 = PronadiZapis(izbornik.Klub2);
+                    if (postojiKlub == null)
+                        Console.WriteLine("Klub " + izbornik.Klub + " ne postoji");
+
+                    else if (postojiKlub2 == null)
+                        Console.WriteLine("Klub " + izbornik.Klub2 + " ne postoji");
+                    else {
+                        Console.WriteLine("Implementiraj observer");
+                    }
+                }
             }
-            catch (Exception)
-            {
-                Console.WriteLine("Nije moguće ispisati tablice");
+            catch (Exception) {
+                Console.WriteLine("Nije moguće ispisati tablicu");
             }
-           
         }
 
         public void Accept(IOperation operacija)
@@ -88,6 +98,7 @@ namespace tgodek_zadaca_3
         internal (List<Igrac>, int) PripremljenaLjestvicaStrijelaca(int kolo)
         {
             List<Igrac> igraci = new List<Igrac>();
+
             var operacija = new GetTablicaStrijelci(kolo);
             this.Accept(operacija);
             foreach (var klub in liga)
@@ -168,25 +179,29 @@ namespace tgodek_zadaca_3
             return utakmice;
         }
 
+        public void PronadiUtakmicu(int kolo, Klub domacin, Klub gost) {
+
+            //pronadiUtakmicu
+        }
+
         public void Resetiraj()
         {
-
             foreach (var komponenta in liga)
             {
-                Klub _klub;
-                Utakmica _utakmica;
+                Klub klub;
+                Utakmica utakmica;
 
                 if (komponenta.GetType() == typeof(Utakmica))
                 {
-                    _utakmica = (Utakmica)komponenta;
-                    _utakmica.ResetirajUtakmicu();
+                    utakmica = (Utakmica)komponenta;
+                    utakmica.ResetirajUtakmicu();
                 }
 
                 if (komponenta.GetType() == typeof(Klub))
                 {
-                    _klub = (Klub)komponenta;
-                    _klub.ResetirajKlub();
-                    _klub.ResetIgrace();
+                    klub = (Klub)komponenta;
+                    klub.ResetirajKlub();
+                    klub.ResetIgrace();
                 }
             }
         }
