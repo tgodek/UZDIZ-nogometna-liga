@@ -13,8 +13,8 @@ namespace tgodek_zadaca_3.Composite
 
     public enum Pozicija
     {
-        G, B, V, N, LB, DB, CB, LDV, DDV, CDV,
-        LV, DV, CV, LOV, DOV, COV, LN, DN, CN
+        G, B, LB, DB, CB, V, LDV, DDV, CDV, LV,
+       DV, CV, LOV, DOV, COV, N, LN, DN, CN
     }
 
     public class Igrac : NKOsoba, INogometnaLiga
@@ -22,7 +22,7 @@ namespace tgodek_zadaca_3.Composite
         public Pozicija Pozicija { get; set; }
         public DateTime Datum { get; set; }
         public Klub Klub { get; set; }
-        public State _state = new Idle();
+        private State _state = new Idle();
 
         public int ZutiKarton { get; set; }
         public int DrugiZutiKarton { get; set; }
@@ -39,19 +39,27 @@ namespace tgodek_zadaca_3.Composite
 
         public void SetState(State state) => _state = state;
 
+        public string GetState() => _state.GetState();
+
         public void OnZamjena() => _state.OnZamjena(this);
 
-        public bool IgracUIgri() 
-        {
-            if (_state is Igra) return true;
-            else return false;
-        }
+        public void OnIskljucenje() => _state.OnIskljucenje(this);
 
-        public void ResetStatistiku()
+        public void OnPostava(string postava) => _state.OnPostava(this, postava);
+
+        public bool IgracUIgri() => _state.IgracUIgri();
+
+        public void ResetState() => _state = new Idle();
+
+        public void ResetirajKartone()
         {
             this.CrveniKarton = 0;
             this.ZutiKarton = 0;
             this.DrugiZutiKarton = 0;
+        }
+
+        public void ResetirajGolove() 
+        {
             this.BrojPogodaka = 0;
         }
 

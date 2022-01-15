@@ -4,6 +4,7 @@ using tgodek_zadaca_3.Composite;
 using tgodek_zadaca_3.Ljestvice;
 using tgodek_zadaca_3.Visitor;
 using System.Linq;
+using tgodek_zadaca_3.Raspored;
 
 namespace tgodek_zadaca_3
 {
@@ -26,6 +27,8 @@ namespace tgodek_zadaca_3
         }
 
         public void DodajKomponentu(INogometnaLiga komponenta) => liga.Add(komponenta);
+       
+        public List<INogometnaLiga> GetLiga() => liga;
 
         public INogometnaLiga PronadiZapis(string id)
         {
@@ -33,25 +36,24 @@ namespace tgodek_zadaca_3
             foreach (var x in liga)
             {
                 if (x.PronadiZapis(id) != null)
-                    komponenta = x.PronadiZapis(id);
+                    return komponenta = x.PronadiZapis(id);
             }
             return komponenta;
         }
 
         public void IspisLjestvice(Izbornik izbornik)
         {
-            try
-            {
                 if (izbornik.Zastavica == "R")
                 {
                     var postojiKlub = PronadiZapis(izbornik.Klub);
-                    if (postojiKlub != null) {
+                    if (postojiKlub != null)
+                    {
                         var ljestvica = new LjestvicaRezultata(izbornik.Klub, izbornik.Kolo);
                         ljestvica.Ispis();
                     }
                     else
                         Console.WriteLine("Klub ne postoji");
-                 
+
                 }
                 if (izbornik.Zastavica == "T")
                 {
@@ -70,21 +72,39 @@ namespace tgodek_zadaca_3
                 }
                 if (izbornik.Zastavica == "D")
                 {
-                    var postojiKlub = PronadiZapis(izbornik.Klub);
-                    var postojiKlub2 = PronadiZapis(izbornik.Klub2);
-                    if (postojiKlub == null)
+                    var domacin = PronadiZapis(izbornik.Klub) as Klub;
+                    var gost = PronadiZapis(izbornik.Klub2) as Klub;
+                    if (domacin == null)
                         Console.WriteLine("Klub " + izbornik.Klub + " ne postoji");
 
-                    else if (postojiKlub2 == null)
+                    else if (gost == null)
                         Console.WriteLine("Klub " + izbornik.Klub2 + " ne postoji");
-                    else {
-                        Console.WriteLine("Implementiraj observer");
+                    else
+                    {
                     }
                 }
-            }
-            catch (Exception) {
-                Console.WriteLine("Nije moguće ispisati tablicu");
-            }
+
+                if (izbornik.Zastavica == "SU")
+                {
+                    var domacin = PronadiZapis(izbornik.Klub) as Klub;
+                    var gost = PronadiZapis(izbornik.Klub2) as Klub;
+                    if (domacin == null)
+                        Console.WriteLine("Klub " + izbornik.Klub + " ne postoji");
+                    else if (gost == null)
+                        Console.WriteLine("Klub " + izbornik.Klub2 + " ne postoji");
+                    else
+                    {
+                        var sastavUtakmice = new RasporedSastav(izbornik.Kolo, domacin, gost);
+                        sastavUtakmice.Sastav();
+                    }
+                }
+                if (izbornik.Zastavica == "GR")
+                {
+                    var algoritam = izbornik.Kolo;
+                    var generator = new GeneratorUtakmica(algoritam);
+                    generator.GenerirajPremaAlgoritmu();
+
+                }
         }
 
         public void Accept(IOperation operacija)
@@ -129,7 +149,7 @@ namespace tgodek_zadaca_3
                 if (klub.GetType() == typeof(Klub))
                 {
                     _klub = (Klub) klub;
-                    if(_klub.UkupnoKartona() > 0)
+                    if(_klub.ZutiKarton > 0 || _klub.CrveniKarton > 0 || _klub.DrugiZutiKarton > 0)
                         klubovi.Add(_klub);
                 }
             }
@@ -177,11 +197,6 @@ namespace tgodek_zadaca_3
                 }
             }
             return utakmice;
-        }
-
-        public void PronadiUtakmicu(int kolo, Klub domacin, Klub gost) {
-
-            //pronadiUtakmicu
         }
 
         public void Resetiraj()

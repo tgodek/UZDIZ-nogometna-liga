@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using tgodek_zadaca_3.Chain;
 using tgodek_zadaca_3.Composite;
 
 namespace tgodek_zadaca_3.Visitor
@@ -9,57 +10,43 @@ namespace tgodek_zadaca_3.Visitor
     {
         private int _kolo;
         private SumaKartona suma;
+        private CrveniKartonHandler Handler = new CrveniKartonHandler();
+        private ZutiKartonHandler ZutKartonHandler = new ZutiKartonHandler();
+        private ZamjenaHandler ZamjenaHandler = new ZamjenaHandler();
 
         public GetTablicaKartona(int kolo = 0)
         {
             suma = new SumaKartona();
             Rezultat = suma;
             _kolo = kolo;
-        }
+            Handler.SetNextHandler(ZutKartonHandler).SetNextHandler(ZamjenaHandler);
 
-        private void ObradiKartone(Dogadaj dogadaj)
-        {
-            if (dogadaj.Vrsta == 10)
-            {
-                if (dogadaj.Igrac.ZutiKarton == 1)
-                {
-                    dogadaj.Igrac.DrugiZutiKarton++;
-                    dogadaj.Klub.DrugiZutiKarton++;
-                    suma.UkDrugihZutih += 1;
-                }
-                if (dogadaj.Igrac.ZutiKarton == 0)
-                {
-                    dogadaj.Igrac.ZutiKarton++;
-                    dogadaj.Klub.ZutiKarton++;
-                    suma.UkZutih += 1;
-                }
-            }
-            if (dogadaj.Vrsta == 11)
-            {
-                if (dogadaj.Igrac.CrveniKarton == 0)
-                {
-                    dogadaj.Igrac.CrveniKarton++;
-                    dogadaj.Klub.CrveniKarton++;
-                    suma.UkCrvenih += 1;
-                }
-            }
         }
 
         public override void Visit(Dogadaj dogadaj)
         {
-            if (_kolo == 0)
-                ObradiKartone(dogadaj);
-            else 
+            if (_kolo != 0 && dogadaj.Utakmica.Kolo <= _kolo)
             {
-                if (dogadaj.Utakmica.Kolo <= _kolo)
-                    ObradiKartone(dogadaj);
+                Handler.ProccessEvent(dogadaj);
+            }
+            else
+            {
+                Handler.ProccessEvent(dogadaj);
             }
         }
 
         public override void Visit(Utakmica utakmica)
         {
-            utakmica.Domacin.ResetIgrace();
-            utakmica.Gost.ResetIgrace();
+            foreach (var igrac in utakmica.Domacin.ListaIgraca())
+            {
+                igrac.ResetirajKartone();
+                igrac.ResetState();
+            }
+            foreach (var igrac in utakmica.Gost.ListaIgraca())
+            {
+                igrac.ResetirajKartone();
+                igrac.ResetState();
+            }
         }
 
         public override void Visit(Igrac igrac)
@@ -72,6 +59,7 @@ namespace tgodek_zadaca_3.Visitor
 
         public override void Visit(SastavUtakmice sastav)
         {
+            sastav.Igrac.OnPostava(sastav.Vrsta);
         }
 
         public override void Visit(Trener trener)

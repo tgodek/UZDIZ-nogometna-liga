@@ -58,7 +58,9 @@ namespace tgodek_zadaca_3.Composite
         {
             foreach (var igrac in igraci)
             {
-                igrac.ResetStatistiku();
+                igrac.ResetState();
+                igrac.ResetirajKartone();
+                igrac.ResetirajGolove();
             }
         }
 

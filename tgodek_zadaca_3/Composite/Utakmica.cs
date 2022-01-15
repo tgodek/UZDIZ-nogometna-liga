@@ -6,7 +6,7 @@ namespace tgodek_zadaca_3.Composite
 {
     public class Utakmica : INogometnaLiga
     {
-        protected List<INogometnaLiga> komponente = new List<INogometnaLiga>();
+        public List<INogometnaLiga> komponente { get; private set; } = new List<INogometnaLiga>();
 
         public int Broj { get; set; }
         public int Kolo { get; set; }
@@ -72,10 +72,13 @@ namespace tgodek_zadaca_3.Composite
                 komponenta.Accept(operacija);
             }
             operacija.Visit(this);
+
         }
 
         internal void ResetirajUtakmicu()
         {
+            RezultatDomacin = 0;
+            RezultatGost = 0;
             Odigrana = false;
         }
     }

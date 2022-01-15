@@ -19,7 +19,7 @@ namespace tgodek_zadaca_3.Visitor
             _kolo = kolo;
             _oznakaKluba = oznakaKluba;
         }
-
+         
         private void ObradiDogadajZaPogodak(Dogadaj dogadaj)
         {
             if (dogadaj.Vrsta == 1 || dogadaj.Vrsta == 2)
@@ -39,7 +39,6 @@ namespace tgodek_zadaca_3.Visitor
             }
         }
 
-       
         public void Visit(Utakmica utakmica)
         {
             if (_kolo == 0)

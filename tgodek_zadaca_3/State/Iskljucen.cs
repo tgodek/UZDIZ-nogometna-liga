@@ -5,11 +5,11 @@ using tgodek_zadaca_3.Composite;
 
 namespace tgodek_zadaca_3.StatePattern
 {
-    class Zamjenjen : State
+    class Iskljucen : State
     {
         public string GetState()
         {
-            return "ZAMJENJEN";
+            return "ISKLJUCEN";
         }
 
         public bool IgracUIgri()
@@ -17,17 +17,19 @@ namespace tgodek_zadaca_3.StatePattern
             return false;
         }
 
-        public void OnZamjena(Igrac igrac)
-        {
-            igrac.SetState(this);
-        }
-
         public void OnIskljucenje(Igrac igrac)
         {
+            throw new NotImplementedException();
         }
 
         public void OnPostava(Igrac igrac, string postava)
         {
+            throw new NotImplementedException();
+        }
+
+        public void OnZamjena(Igrac igrac)
+        {
+            igrac.SetState(this);
         }
     }
 }
