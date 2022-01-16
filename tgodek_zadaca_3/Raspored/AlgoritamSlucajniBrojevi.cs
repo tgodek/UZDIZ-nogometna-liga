@@ -23,9 +23,6 @@ namespace tgodek_zadaca_3.Raspored
         {
             var liga = Prvenstvo.DohvatiPrvenstvo();
             var klubovi = liga.GetLiga().FindAll(e => e.GetType() == typeof(Klub));
-            var klub = new Klub("X","Novi klub", new Trener("Tomislav Godek"));
-            klubovi.Add(klub);
-
             var brojKlubova = klubovi.Count;
 
             if (brojKlubova % 2 == 0)
@@ -70,20 +67,6 @@ namespace tgodek_zadaca_3.Raspored
                     }
                     preostaliIndexiKlubova.Remove(trenutni);
                 }
-            }
-        }
-
-        private void GenerirajZaDrugoKolo() 
-        {
-            int ukUtakmica = utakmice.Count;
-            int id = ukUtakmica;
-            
-            for (int i = 0; i < ukUtakmica; i++)
-            {
-                id++;
-                var datum = DateTime.Parse(DateTime.Now.ToString("g"));
-                var utakmica = new Utakmica(id, 2, gosti[i], domacini[i], datum);
-                utakmice.Add(utakmica);
             }
         }
 

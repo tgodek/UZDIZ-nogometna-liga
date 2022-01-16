@@ -16,6 +16,7 @@ namespace tgodek_zadaca_3.Chain
                     dogadaj.Igrac.CrveniKarton++;
                     dogadaj.Klub.CrveniKarton++;
                     dogadaj.Igrac.OnIskljucenje();
+                    
                 }
             }
             else base.ProccessEvent(dogadaj);

@@ -20,7 +20,7 @@ namespace tgodek_zadaca_3.Composite
         public int BrojPrimljenihGolova { get; set; }
         public int BrojOdigranihKola { get; set; }
         public int BrojBodova { get; set; }
-
+        
         public int RazlikaGolova()
         {
             return BrojDanihGolova - BrojPrimljenihGolova;
@@ -52,7 +52,7 @@ namespace tgodek_zadaca_3.Composite
             BrojPrimljenihGolova = 0;
             BrojOdigranihKola = 0;
             BrojBodova = 0;
-        }
+    }
 
         public void ResetIgrace()
         {

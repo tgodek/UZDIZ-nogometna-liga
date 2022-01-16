@@ -54,7 +54,6 @@ namespace tgodek_zadaca_3.Ljestvice
             
             duljineZapisa.ForEach(l => Console.Write("--" + new string('-', l) + '-'));
             Console.Write("-\n");
-
             liga.Resetiraj();
         }
     }

@@ -121,6 +121,7 @@ namespace tgodek_zadaca_3
 
             var operacija = new GetTablicaStrijelci(kolo);
             this.Accept(operacija);
+            var ukupno = 0;
             foreach (var klub in liga)
             {
                 Klub _klub;
@@ -130,12 +131,15 @@ namespace tgodek_zadaca_3
                     var _igraci = _klub.ListaIgraca();
                     foreach (var igrac in _igraci)
                     {
-                        if (igrac.BrojPogodaka > 0)
+                        if (igrac.BrojPogodaka > 0) 
+                        {
+                            ukupno += igrac.BrojPogodaka;
                             igraci.Add(igrac);
+                        }
                     }
                 }
             }
-            return (igraci.OrderByDescending(i => i.BrojPogodaka).ToList(), operacija.Rezultat);
+            return (igraci.OrderByDescending(i => i.BrojPogodaka).ToList(), ukupno);
         }
 
         internal (List<Klub>, SumaKartona suma) PripremljenaLjestvicaKartona(int kolo)
@@ -143,20 +147,23 @@ namespace tgodek_zadaca_3
             List<Klub> klubovi = new List<Klub>();
             var operacija = new GetTablicaKartona(kolo);
             this.Accept(operacija);
+            var sumaKartona = new SumaKartona();
             foreach (var klub in liga)
             {
                 Klub _klub;
                 if (klub.GetType() == typeof(Klub))
                 {
                     _klub = (Klub) klub;
-                    if(_klub.ZutiKarton > 0 || _klub.CrveniKarton > 0 || _klub.DrugiZutiKarton > 0)
-                        klubovi.Add(_klub);
+                    sumaKartona.UkZutih += _klub.ZutiKarton;
+                    sumaKartona.UkDrugihZutih += _klub.DrugiZutiKarton;
+                    sumaKartona.UkCrvenih += _klub.CrveniKarton;
+                    klubovi.Add(_klub);
                 }
             }
             return (klubovi.OrderByDescending(k => k.UkupnoKartona())
                 .ThenByDescending(k => k.CrveniKarton)
                 .ThenByDescending(k => k.DrugiZutiKarton)
-                .ToList(), operacija.Rezultat);
+                .ToList(), sumaKartona);
         }
 
         internal (List<Klub>,SumaLjestvicePrvenstva) PripremljenaLjestvicaPrvenstva(int kolo)

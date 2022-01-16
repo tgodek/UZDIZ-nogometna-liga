@@ -106,9 +106,19 @@ namespace tgodek_zadaca_3
                     .DodajKlub2(vrijednosti[3]);
                 return builder.Build();
             }
-            else if (vrijednosti.Length == 2 && vrijednosti[0] == "GR" && Int32.TryParse(vrijednosti[1], out broj)) 
+            else if (vrijednosti.Length == 2 && vrijednosti[0] == "GR" && Int32.TryParse(vrijednosti[1], out broj))
             {
                 builder.DodajZastavicu(vrijednosti[0]).DodajKolo(broj);
+                return builder.Build();
+            }
+            else if (vrijednosti.Length == 2 && vrijednosti[0] == "IR") 
+            {
+                builder.DodajZastavicu(vrijednosti[0]).DodajKlub(vrijednosti[1]);
+                return builder.Build();
+            }
+            else if (vrijednosti.Length == 2 && vrijednosti[0] == "IK" && Int32.TryParse(vrijednosti[1], out kolo))
+            {
+                builder.DodajZastavicu(vrijednosti[0]).DodajKolo(kolo);
                 return builder.Build();
             }
 

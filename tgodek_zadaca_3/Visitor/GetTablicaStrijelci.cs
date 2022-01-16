@@ -6,26 +6,23 @@ using tgodek_zadaca_3.Composite;
 
 namespace tgodek_zadaca_3.Visitor
 {
-    class GetTablicaStrijelci : Statistika<int>
+    class GetTablicaStrijelci : IOperation
     {
         private int _kolo;
         private GolHandler Handler = new GolHandler();
         private ZamjenaHandler ZamjenaHandler = new ZamjenaHandler();
         private ZutiKartonHandler ZutKartonHandler = new ZutiKartonHandler();
         private CrveniKartonHandler CrveniKartonHandler = new CrveniKartonHandler();
+        private AutogolHandler AutogolHandler = new AutogolHandler();
 
         public GetTablicaStrijelci(int kolo = 0)
         {
-            Rezultat = 0;
             _kolo = kolo;
-            Handler.SetNextHandler(ZamjenaHandler).SetNextHandler(ZutKartonHandler).SetNextHandler(CrveniKartonHandler);
+            Handler.SetNextHandler(ZamjenaHandler).SetNextHandler(ZutKartonHandler).SetNextHandler(CrveniKartonHandler).SetNextHandler(AutogolHandler);
         }
 
-        public override void Visit(Dogadaj dogadaj)
+        public void Visit(Dogadaj dogadaj)
         {
-
-            //TODO: Dodati statistiku za ukupni broj pogodka
-            
             if (_kolo != 0 && dogadaj.Utakmica.Kolo <= _kolo)
             {
                 Handler.ProccessEvent(dogadaj);
@@ -36,12 +33,12 @@ namespace tgodek_zadaca_3.Visitor
             }
         }
 
-        public override void Visit(SastavUtakmice sastav)
+        public void Visit(SastavUtakmice sastav)
         {
             sastav.Igrac.OnPostava(sastav.Vrsta);
         }
 
-        public override void Visit(Utakmica utakmica)
+        public void Visit(Utakmica utakmica)
         {
             foreach (var igrac in utakmica.Domacin.ListaIgraca())
             {
@@ -55,10 +52,10 @@ namespace tgodek_zadaca_3.Visitor
             }
         }
 
-        public override void Visit(Trener trener) {}
+        public void Visit(Trener trener) {}
 
-        public override void Visit(Igrac igrac) {}
+        public void Visit(Igrac igrac) {}
 
-        public override void Visit(Klub klub) {}
+        public void Visit(Klub klub) {}
     }
 }

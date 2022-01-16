@@ -117,9 +117,24 @@ namespace tgodek_zadaca_3.Visitor
                 if (utakmica.Kolo <= _kolo && utakmica.PostojiDogadaj())
                     ObradiUtakmicu(utakmica);
             }
-          
+
+            foreach (var igrac in utakmica.Domacin.ListaIgraca())
+            {
+                igrac.ResetirajKartone();
+                igrac.ResetState();
+            }
+            foreach (var igrac in utakmica.Gost.ListaIgraca())
+            {
+                igrac.ResetirajKartone();
+                igrac.ResetState();
+            }
             gostGolovi = 0;
             domacinGolovi = 0;
+        }
+
+        public override void Visit(SastavUtakmice sastav)
+        {
+            sastav.Igrac.OnPostava(sastav.Vrsta);
         }
 
         public override void Visit(Igrac igrac)
@@ -127,10 +142,6 @@ namespace tgodek_zadaca_3.Visitor
         }
 
         public override void Visit(Klub klub)
-        {
-        }
-
-        public override void Visit(SastavUtakmice sastav)
         {
         }
 

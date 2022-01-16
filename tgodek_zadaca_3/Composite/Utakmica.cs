@@ -17,6 +17,8 @@ namespace tgodek_zadaca_3.Composite
         public int RezultatGost { get; set; }
         public bool Odigrana { get; set; }
 
+
+
         public string RezultatUtakmice()
         {
             if (Odigrana)
