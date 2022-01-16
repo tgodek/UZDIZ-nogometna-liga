@@ -16,7 +16,6 @@ namespace tgodek_zadaca_3.Raspored
         private ZutiKartonHandler ZutKartonHandler = new ZutiKartonHandler();
         private CrveniKartonHandler CrveniKartonHandler = new CrveniKartonHandler();
 
-
         public RasporedSastav(int kolo, Klub domacin, Klub gost)
         {
             _kolo = kolo;
@@ -29,8 +28,8 @@ namespace tgodek_zadaca_3.Raspored
         {
             var liga = Prvenstvo.DohvatiPrvenstvo();
             var utakmica = DohvatiUtakmicu(liga);
+            if (utakmica == null) return;
             OdrediPocetniSastav(utakmica);
-
             Console.WriteLine("\nPOČETAK UTAKMICE\n");
             IspisiSastav(utakmica);
             OdigrajUtakmicu(utakmica);
@@ -42,9 +41,10 @@ namespace tgodek_zadaca_3.Raspored
         private Utakmica DohvatiUtakmicu(Prvenstvo liga)
         {
             var utakmice = liga.GetLiga().FindAll(e => e.GetType() == typeof(Utakmica));
+            var postojiKolo = utakmice.Select(u => u as Utakmica).Where(u => u.Kolo == _kolo).ToList();
             foreach (Utakmica utakmica in utakmice)
             {
-                if (utakmica.Kolo == _kolo && (utakmica.Domacin == Domacin && utakmica.Gost == Gost) || 
+                if (utakmica.Kolo == _kolo && (utakmica.Domacin == Domacin && utakmica.Gost == Gost) ||
                     (utakmica.Domacin == Gost && utakmica.Gost == Domacin))
                 {
                     return utakmica;
@@ -75,11 +75,19 @@ namespace tgodek_zadaca_3.Raspored
         {
             var domacinIgraci = utakmica.Domacin.ListaIgraca().FindAll(i => i.IgracUIgri()).OrderBy(i => i.Pozicija).ToList();
             var gostigraci = utakmica.Gost.ListaIgraca().FindAll(i => i.IgracUIgri()).OrderBy(i => i.Pozicija).ToList();
-            var brojZapisa = domacinIgraci.Count;
+            var brojZapisaD = domacinIgraci.Count;
+            var brojZapisaG = gostigraci.Count;
+            int brojZapisa = 0;
+            if (brojZapisaD > brojZapisaG)
+                brojZapisa = brojZapisaG;
+            else if (brojZapisaG > brojZapisaD) 
+                brojZapisa = brojZapisaD;
+            else
+                brojZapisa = brojZapisaD;
 
             List<int> duljineStupaca = new List<int>();
-            duljineStupaca.Add(utakmica.Domacin.Naziv.Length * 7);
-            duljineStupaca.Add(utakmica.Gost.Naziv.Length * 7);
+            duljineStupaca.Add(utakmica.Domacin.Naziv.Length * 3);
+            duljineStupaca.Add(utakmica.Gost.Naziv.Length * 3);
             Console.WriteLine(utakmica.Domacin.Naziv.PadRight(duljineStupaca[0]) + "   " + utakmica.Gost.Naziv.PadRight(duljineStupaca[1]) + "\n");
             for (int i = 0; i < brojZapisa; i++)
             {

@@ -5,7 +5,7 @@ using tgodek_zadaca_3.Composite;
 
 namespace tgodek_zadaca_3.Chain
 {
-    class AutogolHandler : AbstractHandler
+    class AutogolHandler : BaseHandler
     {
         public override void ProccessEvent(Dogadaj dogadaj)
         {

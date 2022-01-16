@@ -21,13 +21,14 @@ namespace tgodek_zadaca_3.Visitor
 
         public void Visit(Dogadaj dogadaj)
         {
-            if (_kolo != 0 && dogadaj.Utakmica.Kolo <= _kolo)
+            if (_kolo == 0)
             {
                 Handler.ProccessEvent(dogadaj);
             }
             else
             {
-                Handler.ProccessEvent(dogadaj);
+                if(dogadaj.Utakmica.Kolo <= _kolo)
+                    Handler.ProccessEvent(dogadaj);
             }
         }
 

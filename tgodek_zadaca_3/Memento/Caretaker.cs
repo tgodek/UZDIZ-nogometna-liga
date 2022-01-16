@@ -31,23 +31,21 @@ namespace tgodek_zadaca_3.Memento
             {
                 return;
             }
-            var memento = _mementos.Find(m => m.GetRaspored() == raspored);
-            if (memento != null)
-                memento.PostaviVazeci();
+            var postoji = _mementos.Find(m => m.GetRaspored() == raspored);
+            if (postoji != null)
+            {
+                var vazeci = this._mementos.Where(m => m.StanjeVazeci() == true).ToList();
+                if (vazeci != null)
+                {
+                    foreach (var elem in vazeci)
+                        elem.MakniVazeci();
+                }
+                var memento = _mementos.Find(m => m.GetRaspored() == raspored);
+                if (memento != null)
+                    memento.PostaviVazeci();
+            }
             else 
-            {
-                Console.WriteLine();
-                return;
-            }
-
-            var vazeci = this._mementos.Where(m => m.StanjeVazeci() == true).ToList();
-            if (vazeci != null) 
-            {
-                foreach (var elem in vazeci)
-                    elem.MakniVazeci();
-            }
-           
-           
+                Console.WriteLine("Ne postoji raspored: " + raspored);
         }
 
         public void Backup(IMemento memento)
@@ -84,25 +82,17 @@ namespace tgodek_zadaca_3.Memento
 
         public void PrikaziVazeceZaKlub(Klub klub)
         {
-            if (!_mementos.Exists(m => m.StanjeVazeci() == true))
+            foreach (var memento in this._mementos)
             {
-                Console.WriteLine("Nije postavljen važeći raspored!\n");
-                return;
-            }
-            else 
-            {
-                foreach (var memento in this._mementos)
+                if (memento.StanjeVazeci() == true)
                 {
-                    if (memento.StanjeVazeci() == true)
+                    var utakmice = memento.GetUtakmice().Where(u => u.Domacin == klub || u.Gost == klub).ToList();
+                    if (utakmice != null)
                     {
-                        var utakmice = memento.GetUtakmice().Where(u => u.Domacin == klub || u.Gost == klub).ToList();
-                        if (utakmice != null)
+                        foreach (Utakmica utakmica in utakmice)
                         {
-                            foreach (Utakmica utakmica in utakmice)
-                            {
-                                Console.WriteLine(memento.GetRaspored() + " " + memento.GetDatum() + " " + utakmica.Kolo +
-                                    " " + utakmica.Domacin.Naziv + " - " + utakmica.Gost.Naziv);
-                            }
+                            Console.WriteLine(memento.GetRaspored() + " " + memento.GetDatum() + " " + utakmica.Kolo +
+                                " " + utakmica.Domacin.Naziv + " - " + utakmica.Gost.Naziv);
                         }
                     }
                 }
@@ -111,29 +101,21 @@ namespace tgodek_zadaca_3.Memento
 
         public void PrikaziVazeceZaKolo(int kolo)
         {
-            if (!_mementos.Exists(m => m.StanjeVazeci() == true))
+            foreach (var memento in this._mementos)
             {
-                Console.WriteLine("Nije postavljen važeći raspored!\n");
-                return;
-            }
-            else 
-            {
-                foreach (var memento in this._mementos)
+                if (memento.StanjeVazeci() == true)
                 {
-                    if (memento.StanjeVazeci() == true)
+                    var utakmice = memento.GetUtakmice().Select(m => m as Utakmica).Where(u => u.Kolo == kolo).ToList();
+                    if (utakmice != null)
                     {
-                        var utakmice = memento.GetUtakmice().Select(m => m as Utakmica).Where(u => u.Kolo == kolo).ToList();
-                        if (utakmice != null)
+                        foreach (Utakmica utakmica in utakmice)
                         {
-                            foreach (Utakmica utakmica in utakmice)
-                            {
-                                Console.WriteLine(memento.GetRaspored() + " " + memento.GetDatum() + " " + utakmica.Kolo +
-                                    " " + utakmica.Domacin.Naziv + " - " + utakmica.Gost.Naziv);
-                            }
+                            Console.WriteLine(memento.GetRaspored() + " " + memento.GetDatum() + " " + utakmica.Kolo +
+                                " " + utakmica.Domacin.Naziv + " - " + utakmica.Gost.Naziv);
                         }
                     }
                 }
             }
-        }
+    }
     }
 }

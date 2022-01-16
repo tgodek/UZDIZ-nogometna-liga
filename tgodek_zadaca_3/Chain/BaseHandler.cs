@@ -5,7 +5,7 @@ using tgodek_zadaca_3.Composite;
 
 namespace tgodek_zadaca_3.Chain
 {
-    public abstract class AbstractHandler : IHandler
+    public abstract class BaseHandler : IHandler
     {
         private IHandler _nextHandler;
 

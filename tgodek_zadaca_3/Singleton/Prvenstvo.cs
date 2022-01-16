@@ -44,6 +44,8 @@ namespace tgodek_zadaca_3
 
         public void IspisLjestvice(Izbornik izbornik)
         {
+            try
+            {
                 if (izbornik.Zastavica == "R")
                 {
                     var postojiKlub = PronadiZapis(izbornik.Klub);
@@ -92,38 +94,44 @@ namespace tgodek_zadaca_3
                 if (izbornik.Zastavica == "GR")
                 {
                     var algoritam = izbornik.Kolo;
-                    var generator = new GeneratorUtakmica(algoritam);
+                    var generator = new GeneratorRasporeda(algoritam);
                     generator.GenerirajPremaAlgoritmu();
                 }
 
-            if (izbornik.Zastavica == "IR")
-            {
-                var klub = PronadiZapis(izbornik.Klub) as Klub;
-                if (klub == null)
+                if (izbornik.Zastavica == "IR")
                 {
-                    Console.WriteLine("Klub " + izbornik.Klub + " ne postoji");
+                    var klub = PronadiZapis(izbornik.Klub) as Klub;
+                    if (klub == null)
+                    {
+                        Console.WriteLine("Klub " + izbornik.Klub + " ne postoji");
+                    }
+                    else
+                    {
+                        var caretaker = Caretaker.DohvatiCaretaker();
+                        caretaker.PrikaziVazeceZaKlub(klub);
+                    }
                 }
-                else 
+                if (izbornik.Zastavica == "IK")
                 {
                     var caretaker = Caretaker.DohvatiCaretaker();
-                    caretaker.PrikaziVazeceZaKlub(klub);
+                    caretaker.PrikaziVazeceZaKolo(izbornik.Kolo);
+                }
+                if (izbornik.Zastavica == "IG")
+                {
+                    var caretaker = Caretaker.DohvatiCaretaker();
+                    caretaker.PrikaziPohranjene();
+                }
+                if (izbornik.Zastavica == "VR")
+                {
+                    var caretaker = Caretaker.DohvatiCaretaker();
+                    caretaker.Undo(izbornik.Broj);
                 }
             }
-            if (izbornik.Zastavica == "IK")
+            catch (Exception) 
             {
-                var caretaker = Caretaker.DohvatiCaretaker();
-                caretaker.PrikaziVazeceZaKolo(izbornik.Kolo);
+                Console.WriteLine("Nije moguce ispisati");
             }
-            if (izbornik.Zastavica == "IG")
-            {
-                var caretaker = Caretaker.DohvatiCaretaker();
-                caretaker.PrikaziPohranjene();
-            }
-            if (izbornik.Zastavica == "VR") 
-            {
-                var caretaker = Caretaker.DohvatiCaretaker();
-                caretaker.Undo(izbornik.Broj);
-            }
+           
         }
 
         public void Accept(IOperation operacija)

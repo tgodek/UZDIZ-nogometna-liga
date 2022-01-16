@@ -7,14 +7,14 @@ using tgodek_zadaca_3.Memento;
 
 namespace tgodek_zadaca_3.Raspored
 {
-    class GeneratorUtakmica
+    class GeneratorRasporeda
     {
         private int Algoritam;
         private List<Klub> domacini = new List<Klub>();
         private List<Klub> gosti = new List<Klub>();
         private List<Utakmica> utakmice = new List<Utakmica>();
 
-        public GeneratorUtakmica(int algoritam) 
+        public GeneratorRasporeda(int algoritam) 
         {
             Algoritam = algoritam;
         }
@@ -24,7 +24,7 @@ namespace tgodek_zadaca_3.Raspored
             var caretaker = Caretaker.DohvatiCaretaker();
             var raspored = caretaker.ZadnjiRaspored() + 1;
             var datum = DateTime.Parse(DateTime.Now.ToString("G"));
-            var memento = new ConcreteMemento(raspored,datum,utakmice);
+            var memento = new RasporedMemento(raspored,datum,utakmice);
             caretaker.Backup(memento);
         }
 
