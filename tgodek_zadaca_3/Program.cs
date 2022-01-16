@@ -94,7 +94,7 @@ namespace tgodek_zadaca_3
                     .DodajKolo(kolo)
                     .DodajKlub(vrijednosti[2])
                     .DodajKlub2(vrijednosti[3])
-                    .DodajSekunde(sekunde);
+                    .DodajBroj(sekunde);
                 return builder.Build();
             }
 
@@ -111,7 +111,7 @@ namespace tgodek_zadaca_3
                 builder.DodajZastavicu(vrijednosti[0]).DodajKolo(broj);
                 return builder.Build();
             }
-            else if (vrijednosti.Length == 2 && vrijednosti[0] == "IR") 
+            else if (vrijednosti.Length == 2 && vrijednosti[0] == "IR")
             {
                 builder.DodajZastavicu(vrijednosti[0]).DodajKlub(vrijednosti[1]);
                 return builder.Build();
@@ -121,7 +121,16 @@ namespace tgodek_zadaca_3
                 builder.DodajZastavicu(vrijednosti[0]).DodajKolo(kolo);
                 return builder.Build();
             }
-
+            else if (vrijednosti.Length == 1 && vrijednosti[0] == "IG")
+            {
+                builder.DodajZastavicu(vrijednosti[0]);
+                return builder.Build();
+            }
+            else if (vrijednosti.Length == 2 && vrijednosti[0] == "VR" && Int32.TryParse(vrijednosti[1], out broj)) 
+            {
+                builder.DodajZastavicu(vrijednosti[0]).DodajBroj(broj);
+                return builder.Build();
+            }
             else
                 return null;
         }

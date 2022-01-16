@@ -5,6 +5,7 @@ using tgodek_zadaca_3.Ljestvice;
 using tgodek_zadaca_3.Visitor;
 using System.Linq;
 using tgodek_zadaca_3.Raspored;
+using tgodek_zadaca_3.Memento;
 
 namespace tgodek_zadaca_3
 {
@@ -72,16 +73,6 @@ namespace tgodek_zadaca_3
                 }
                 if (izbornik.Zastavica == "D")
                 {
-                    var domacin = PronadiZapis(izbornik.Klub) as Klub;
-                    var gost = PronadiZapis(izbornik.Klub2) as Klub;
-                    if (domacin == null)
-                        Console.WriteLine("Klub " + izbornik.Klub + " ne postoji");
-
-                    else if (gost == null)
-                        Console.WriteLine("Klub " + izbornik.Klub2 + " ne postoji");
-                    else
-                    {
-                    }
                 }
 
                 if (izbornik.Zastavica == "SU")
@@ -103,8 +94,36 @@ namespace tgodek_zadaca_3
                     var algoritam = izbornik.Kolo;
                     var generator = new GeneratorUtakmica(algoritam);
                     generator.GenerirajPremaAlgoritmu();
-
                 }
+
+            if (izbornik.Zastavica == "IR")
+            {
+                var klub = PronadiZapis(izbornik.Klub) as Klub;
+                if (klub == null)
+                {
+                    Console.WriteLine("Klub " + izbornik.Klub + " ne postoji");
+                }
+                else 
+                {
+                    var caretaker = Caretaker.DohvatiCaretaker();
+                    caretaker.PrikaziVazeceZaKlub(klub);
+                }
+            }
+            if (izbornik.Zastavica == "IK")
+            {
+                var caretaker = Caretaker.DohvatiCaretaker();
+                caretaker.PrikaziVazeceZaKolo(izbornik.Kolo);
+            }
+            if (izbornik.Zastavica == "IG")
+            {
+                var caretaker = Caretaker.DohvatiCaretaker();
+                caretaker.PrikaziPohranjene();
+            }
+            if (izbornik.Zastavica == "VR") 
+            {
+                var caretaker = Caretaker.DohvatiCaretaker();
+                caretaker.Undo(izbornik.Broj);
+            }
         }
 
         public void Accept(IOperation operacija)

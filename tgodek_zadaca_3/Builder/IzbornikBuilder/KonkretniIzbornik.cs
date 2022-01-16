@@ -37,9 +37,9 @@ namespace tgodek_zadaca_3
             return this;
         }
 
-        public IIzbornik DodajSekunde(int sekunde)
+        public IIzbornik DodajBroj(int sekunde)
         {
-            this._izbornik.Sekunde = sekunde;
+            this._izbornik.Broj = sekunde;
             return this;
         }
 

@@ -9,7 +9,7 @@ namespace tgodek_zadaca_3
         public string Zastavica { get; set; }
         public string Klub { get; set; }
         public int Kolo { get; set; }
-        public int Sekunde { get; set; }
+        public int Broj { get; set; }
         public string Klub2 { get; set; }
     }
 }
