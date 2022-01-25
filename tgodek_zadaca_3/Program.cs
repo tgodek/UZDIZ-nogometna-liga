@@ -1,6 +1,6 @@
-﻿using facade;
-using System;
+﻿using System;
 using System.Text;
+using ucitavanje_facade;
 
 namespace tgodek_zadaca_3
 {
@@ -12,10 +12,9 @@ namespace tgodek_zadaca_3
             Console.InputEncoding = Encoding.Unicode;
             var ucitavacDatoteka = UcitavacDatotekaFacade.DohvatiUcitavacDatoteka();
             ucitavacDatoteka.UcitajDatoteke(args);
-            if (ucitavacDatoteka.DatotekaIgracUcitan && ucitavacDatoteka.DatotekaIgracUcitan) 
-                Meni();
-            else 
-                Console.WriteLine("Učitavanje prvenstva je neuspješno! Potrebno je učitati sve obavezne datoteke.");
+
+            if (ucitavacDatoteka.DatotekaIgracUcitan) Meni();
+            else Console.WriteLine("Učitavanje prvenstva je neuspješno! Potrebno je učitati sve obavezne datoteke.\n");
         }
 
         private static void Meni()
@@ -27,112 +26,20 @@ namespace tgodek_zadaca_3
                 Console.Write("Vaš odabir: ");
                 var unos = Console.ReadLine();
                 var vrijednosti = unos.Split(" ");
-                var builder = new KonkretniIzbornik();
 
-                if (vrijednosti[0] == "exit")
+                var builder = new IzbornikBuilder();
+                var direktor = new IzbornikDirektor { Builder = builder };
+                direktor.IzradiIzbornik(vrijednosti);
+                var izbornik = builder.Build();
+                
+                if (vrijednosti[0] == "exit") break;
+                else if (vrijednosti.Length == 2 && (vrijednosti[0] == "NU" || vrijednosti[0] == "NS" || vrijednosti[0] == "ND")) 
                 {
-                    break;
+                    var ucitavac = UcitavacDatotekaFacade.DohvatiUcitavacDatoteka();
+                    ucitavac.UcitajDatoteke(vrijednosti);
                 }
-                else
-                {
-                    PokusajUcitatiDodatneDatoteke(vrijednosti);
-                    var izbornik = KonstruirajIzbornik(vrijednosti, builder);
-                    if(izbornik is Izbornik)
-                        prvenstvo.IspisLjestvice(izbornik);
-                }
+                else prvenstvo.ObradiZahtjev(izbornik);
             }
-        }
-
-        private static void PokusajUcitatiDodatneDatoteke(string[] vrijednosti)
-        {
-            if (vrijednosti.Length == 2 && (vrijednosti[0] == "NU" || vrijednosti[0] == "NS" || vrijednosti[0] == "ND"))
-            {
-                var ucitavac = UcitavacDatotekaFacade.DohvatiUcitavacDatoteka();
-                ucitavac.UcitajDatoteke(vrijednosti);
-            }
-        }
-
-        private static Izbornik KonstruirajIzbornik(string[] vrijednosti, KonkretniIzbornik builder)
-        {
-            int kolo;
-            int broj;
-            int sekunde;
-            if (vrijednosti.Length == 3 && vrijednosti[0] == "R" &&
-                Int32.TryParse(vrijednosti[2], out kolo) && !Int32.TryParse(vrijednosti[1], out broj))
-            {
-                builder.DodajZastavicu(vrijednosti[0])
-                    .DodajKlub(vrijednosti[1])
-                    .DodajKolo(kolo);
-                return builder.Build();
-            }
-            else if (vrijednosti.Length == 2 &&
-                (vrijednosti[0] == "T" || vrijednosti[0] == "S" || vrijednosti[0] == "K") &&
-                Int32.TryParse(vrijednosti[1], out kolo))
-            {
-                builder.DodajZastavicu(vrijednosti[0])
-                    .DodajKolo(kolo);
-                return builder.Build();
-            }
-            else if (vrijednosti.Length == 2 && (vrijednosti[0] == "R") && !Int32.TryParse(vrijednosti[1], out broj))
-            {
-                builder.DodajZastavicu(vrijednosti[0])
-                    .DodajKlub(vrijednosti[1]);
-                return builder.Build();
-            }
-
-            else if (vrijednosti.Length == 1 &&
-                (vrijednosti[0] == "T" || vrijednosti[0] == "S" || vrijednosti[0] == "K"))
-            {
-                builder.DodajZastavicu(vrijednosti[0]);
-                return builder.Build();
-            }
-
-            else if (vrijednosti.Length == 5 &&
-                vrijednosti[0] == "D" && Int32.TryParse(vrijednosti[1], out sekunde) && Int32.TryParse(vrijednosti[1], out kolo))
-            {
-                builder.DodajZastavicu(vrijednosti[0])
-                    .DodajKolo(kolo)
-                    .DodajKlub(vrijednosti[2])
-                    .DodajKlub2(vrijednosti[3])
-                    .DodajBroj(sekunde);
-                return builder.Build();
-            }
-
-            else if (vrijednosti.Length == 4 && vrijednosti[0] == "SU" && Int32.TryParse(vrijednosti[1], out kolo))
-            {
-                builder.DodajZastavicu(vrijednosti[0])
-                    .DodajKolo(kolo)
-                    .DodajKlub(vrijednosti[2])
-                    .DodajKlub2(vrijednosti[3]);
-                return builder.Build();
-            }
-            else if (vrijednosti.Length == 2 && vrijednosti[0] == "GR" && Int32.TryParse(vrijednosti[1], out broj))
-            {
-                builder.DodajZastavicu(vrijednosti[0]).DodajKolo(broj);
-                return builder.Build();
-            }
-            else if (vrijednosti.Length == 2 && vrijednosti[0] == "IR")
-            {
-                builder.DodajZastavicu(vrijednosti[0]).DodajKlub(vrijednosti[1]);
-                return builder.Build();
-            }
-            else if (vrijednosti.Length == 2 && vrijednosti[0] == "IK" && Int32.TryParse(vrijednosti[1], out kolo))
-            {
-                builder.DodajZastavicu(vrijednosti[0]).DodajKolo(kolo);
-                return builder.Build();
-            }
-            else if (vrijednosti.Length == 1 && vrijednosti[0] == "IG")
-            {
-                builder.DodajZastavicu(vrijednosti[0]);
-                return builder.Build();
-            }
-            else if (vrijednosti.Length == 2 && vrijednosti[0] == "VR" && Int32.TryParse(vrijednosti[1], out broj)) 
-            {
-                builder.DodajZastavicu(vrijednosti[0]).DodajBroj(broj);
-                return builder.Build();
-            }
-            else
-                return null;
         }
     }
 }

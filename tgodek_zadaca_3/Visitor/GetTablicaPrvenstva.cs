@@ -2,22 +2,23 @@
 using System.Collections.Generic;
 using System.Text;
 using tgodek_zadaca_3.Composite;
+using tgodek_zadaca_3.Util;
 
 namespace tgodek_zadaca_3.Visitor
 {
     class GetTablicaPrvenstva : Statistika<SumaLjestvicePrvenstva>
     {
-        private int _kolo;
-        private int domacinGolovi { get; set; }
-        private int gostGolovi { get; set; }
+        private readonly int _kolo;
+        private int DomacinGolovi { get; set; }
+        private int GostGolovi { get; set; }
 
         private SumaLjestvicePrvenstva suma;
         public GetTablicaPrvenstva(int kolo = 0)
         {
             suma = new SumaLjestvicePrvenstva();
             Rezultat = suma;
-            domacinGolovi = 0;
-            gostGolovi = 0;
+            DomacinGolovi = 0;
+            GostGolovi = 0;
             _kolo = kolo;
         }
 
@@ -36,12 +37,12 @@ namespace tgodek_zadaca_3.Visitor
                 if (dogadaj.Klub.Oznaka == dogadaj.Utakmica.Domacin.Oznaka)
                 {
                     OdrediGoloveZaKlubove(dogadaj.Klub, dogadaj.Utakmica.Gost);
-                    domacinGolovi += 1;
+                    DomacinGolovi += 1;
                 }
                 if (dogadaj.Klub.Oznaka == dogadaj.Utakmica.Gost.Oznaka)
                 {
                     OdrediGoloveZaKlubove(dogadaj.Klub, dogadaj.Utakmica.Domacin);
-                    gostGolovi += 1;
+                    GostGolovi += 1;
                 }
             }
             if(dogadaj.Vrsta == 3)
@@ -49,13 +50,13 @@ namespace tgodek_zadaca_3.Visitor
                 if (dogadaj.Klub.Oznaka == dogadaj.Utakmica.Domacin.Oznaka)
                 {
                     OdrediGoloveZaKlubove(dogadaj.Utakmica.Gost, dogadaj.Klub);
-                    gostGolovi += 1;
+                    GostGolovi += 1;
                 }
 
                 if (dogadaj.Klub.Oznaka == dogadaj.Utakmica.Gost.Oznaka)
                 {
                     OdrediGoloveZaKlubove(dogadaj.Utakmica.Domacin, dogadaj.Klub);
-                    domacinGolovi += 1;
+                    DomacinGolovi += 1;
                 }
             }
         }
@@ -79,7 +80,7 @@ namespace tgodek_zadaca_3.Visitor
             if (utakmica.Domacin.BrojOdigranihKola != utakmica.Kolo)
                 utakmica.Domacin.BrojOdigranihKola += 1;
 
-            if (domacinGolovi > gostGolovi)
+            if (DomacinGolovi > GostGolovi)
             {
                 utakmica.Domacin.BrojBodova += 3;
                 utakmica.Domacin.BrojPobjeda += 1;
@@ -88,7 +89,7 @@ namespace tgodek_zadaca_3.Visitor
                 suma.SumaBrojaPoraza += 1;
                 suma.SumaBrojaBodova += 3;
             }
-            if (gostGolovi > domacinGolovi)
+            if (GostGolovi > DomacinGolovi)
             {
                 utakmica.Gost.BrojBodova += 3;
                 utakmica.Gost.BrojPobjeda += 1;
@@ -97,7 +98,7 @@ namespace tgodek_zadaca_3.Visitor
                 suma.SumaBrojaPoraza += 1;
                 suma.SumaBrojaBodova += 3;
             }
-            if (domacinGolovi == gostGolovi)
+            if (DomacinGolovi == GostGolovi)
             {
                 utakmica.Domacin.BrojBodova += 1;
                 utakmica.Gost.BrojBodova += 1;
@@ -121,15 +122,15 @@ namespace tgodek_zadaca_3.Visitor
             foreach (var igrac in utakmica.Domacin.ListaIgraca())
             {
                 igrac.ResetirajKartone();
-                igrac.ResetState();
+                igrac.ResetirajState();
             }
             foreach (var igrac in utakmica.Gost.ListaIgraca())
             {
                 igrac.ResetirajKartone();
-                igrac.ResetState();
+                igrac.ResetirajState();
             }
-            gostGolovi = 0;
-            domacinGolovi = 0;
+            GostGolovi = 0;
+            DomacinGolovi = 0;
         }
 
         public override void Visit(SastavUtakmice sastav)

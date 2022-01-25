@@ -1,0 +1,558 @@
+﻿Broj;Klub;Vrsta;Igrač;Pozicija
+1;R;S;Nediljko Labrović;G
+1;R;S;Nino Galović;B
+1;R;S;Robert Murić;V
+1;R;S;Adrian Liber;V
+1;R;S;Prince Obeng Ampem;V
+1;R;S;Andrija Vukčević;B
+1;R;S;Ivan Lepinjica;V
+1;R;S;Josip Drmić;N
+1;R;S;Robert Mudražija;V
+1;R;S;Joao Rodrigo Pereira Escoval;B
+1;R;S;Ivan Tomečak;B
+1;R;P;Martin Zlomislić;G
+1;R;P;Filip Braut;B
+1;R;P;Niko Galešić;B
+1;R;P;Jorge Leonardo Obregon Rojas;N
+1;R;P;Darko Velkovski;B
+1;R;P;Matej Vuk;N
+1;R;P;Roko Jurišić;B
+1;R;P;Denis Bušnja;V
+1;R;P;Hrvoje Smolčić;B
+1;G;S;Hrvoje Babec;V
+1;G;S;Ivan Banić;G
+1;G;P;Fran Brodić;N
+1;G;P;Younes Delfi;N
+1;G;S;Matar Dieye;N
+1;G;P;Matija Dvorneković;N
+1;G;P;Toni Fruk;V
+1;G;S;Aleksandar Jovičić;B
+1;G;P;Anthony Kalik;V
+1;G;S;Cheick KEITA;B
+1;G;P;Dominik Kotarski;G
+1;G;S;Kristijan Lovrić;N
+1;G;P;Saša Marjanović;B
+1;G;S;Serge-Junior Bertil Nicolas Martinsson Ngouali;V
+1;G;S;Josip Mitrović;N
+1;G;S;Nasiru Moro;V
+1;G;S;Musa Muhammed;G
+1;G;P;Jurica Pršir;V
+1;G;S;Martin Šroler;N
+1;G;P;Josip Ivan Zorica;N
+2;I;S;Boureima Hassane Bande;N
+2;I;P;Dion Drena Beljo;N
+2;I;S;Slavko Blagojević;V
+2;I;S;Miroslav Iličić;N
+2;I;S;Antonio Ivančić;V
+2;I;P;Mateo Lisica;N
+2;I;S;Ivan Lučić;G
+2;I;S;Luka Marin;B
+2;I;S;Bernardo Matić;B
+2;I;P;Robert Mišković;V
+2;I;S;Frano Mlinar;V
+2;I;S;Rafael Jesus Navarro Mazuecos;B
+2;I;S;Antonio Perera Calderon;V
+2;I;S;Mauro Perković;B
+2;I;P;Jan Paus-Kunšt;G
+2;I;P;Fran Vujnović;V
+2;I;P;Mihael Rovis;B
+2;I;P;Antonio Siljan;V
+2;I;P;David Legović;B
+2;HD;S;Ricardo Bagadur;B
+2;HD;S;Marko Bašić;V
+2;HD;P;Fran Beloša Fijan;V
+2;HD;P;Tin Hrvoj;B
+2;HD;S;Dominik Ivkič;B
+2;HD;P;Bruno Karoglan;V
+2;HD;S;Valentino Majstorović;V
+2;HD;P;Mario Marić;G
+2;HD;P;Karlo Perić;N
+2;HD;S;Vinko Petković;N
+2;HD;S;Ivan Roca;V
+2;HD;S;Zvonimir Šubarić;G
+2;HD;S;Tomislav Valentić;B
+2;HD;P;Mario Veljača;N
+2;HD;P;Luka Viduka;N
+2;HD;P;Stipe Vulikić;B
+2;HD;S;Filip Jazvić;V
+2;HD;S;Martin Sekulić;N
+2;HD;S;Tonio Teklić;N
+2;HD;P;Dino Skorup;V
+3;D;P;Arijan Ademi;V
+3;D;P;Marko Bulat;V
+3;D;P;Duje Čop;N
+3;D;S;Bartol Franjić;V
+3;D;S;Mario Gavranović;V
+3;D;S;Amer Gojak;V
+3;D;S;Luka Ivanušec;V
+3;D;S;Lirim Kastrati;V
+3;D;S;Rasmus Steensbaek Lauritsen;B
+3;D;S;Dominik Livaković;G
+3;D;P;Lovro Majer;N
+3;D;P;Luka Menalo;N
+3;D;P;Josip Mišić;V
+3;D;S;Mislav Oršić;N
+3;D;S;Dino Perić;B
+3;D;P;Bruno Petković;N
+3;D;S;Stefan Ristovski;DB
+3;D;S;Daniel Štefulj;LB
+3;D;P;Josip Šutalo;B
+3;D;P;Danijel Zagorac;G
+3;SP;S;Ivan Čović;G
+3;SP;S;Matko Zirdum;CB
+3;SP;S;Mario Marina;DV
+3;SP;S;Tomislav Božić;CV
+3;SP;S;Mihael Mlinarić;DV
+3;SP;S;Lovro Zvonarek;CN
+3;SP;S;Nemanja Glavčić;CV
+3;SP;S;Goran Paracki;CV
+3;SP;S;Marin Laušić;CDV
+3;SP;S;Bruno Bogojević;DDV
+3;SP;S;Ivan Krstanović;CV
+3;SP;P;Antun Marković;G
+3;SP;P;Damian van Bruggen;CB
+3;SP;P;Nedim Hadžić;CV
+3;SP;P;Mateo Monjac;DB
+3;SP;P;Mateo Kocijan;CB
+3;SP;P;Arijan Brković;CN
+3;SP;P;Vinko Soldo;CB
+3;SP;P;Tomislav Srbljinović;V
+3;SP;P;Antonio Bosec;DB
+4;L;S;Enis Cokaj;V
+4;L;S;Marko Dabro;N
+4;L;P;Luka Dajčer;V
+4;L;S;Justin de Haas;B
+4;L;P;Krunoslav Hendija;G
+4;L;S;Marko Đira;V
+4;L;P;Raul Alexander Florucz;V
+4;L;S;Aliyu Ibrahim;V
+4;L;S;Lukas Kačavenda;V
+4;L;P;Mate Maleš;V
+4;L;S;Mateo Marić;V
+4;L;S;Ivan Milićević;B
+4;L;P;Kemal Osmanković;B
+4;L;P;Josip Pivarić;B
+4;L;P;Hajdin Salihu;B
+4;L;S;Krševan Santini;G
+4;L;S;Nikola Soldo;B
+4;L;P;Luka Stojković;N
+4;L;P;Marko Vranjković;N
+4;L;S;Branimir Cipetić;DB
+4;H;P;Jani Atanasov;V
+4;H;S;Stipe Biuk;N
+4;H;S;David Čolina;B
+4;H;S;Mario Čuić;V
+4;H;P;Jairo De Macedo Da Silva;N
+4;H;P;Lumbardh Dellova;B
+4;H;P;Dimitrios Diamantakos;N
+4;H;P;Ivan Dolček;B
+4;H;S;Josip Elez;B
+4;H;S;Lovre Kalinić;G
+4;H;S;Marko Livaja;N
+4;H;S;Gergő Lovrencsics;B
+4;H;P;Marin Ljubičić;N
+4;H;S;Jan Mlakar;N
+4;H;P;Josip Posavec;G
+4;H;S;Emir Sahiti;V
+4;H;P;Stefan Simić;B
+4;H;S;Josip Vuković;V
+4;H;S;Mario Vušković;B
+4;H;P;Ivan Ćubelić;CN
+5;O;P;Adrian Leon Barišić;B
+5;O;P;Petar Bočkaj;V
+5;O;S;Damjan Bohar;N
+5;O;P;Slavko Bralić;B
+5;O;S;Yevhen Cheberko;B
+5;O;S;Šime Gržan;N
+5;O;P;Amer Hiroš;V
+5;O;S;Ivica Ivušić;G
+5;O;S;Vedran Jugović;V
+5;O;S;Mario Jurčević;B
+5;O;S;Danijel Lončar;B
+5;O;P;Marko Malenica;G
+5;O;P;Antonio Mance;N
+5;O;S;Ramon Nazareno MIEREZ;N
+5;O;S;Mato Miloš;B
+5;O;P;Merveil Valthy Streeker NDOCKYT;V
+5;O;P;Darko Nejašmić;V
+5;O;S;Marin Pilj;V
+5;O;S;Mihael Žaper;V
+5;O;P;Alen Grgić;DB
+5;Š;S;Stipe Bačelić Grgić;V
+5;Š;P;Ignacio Daniel Bailone;N
+5;Š;S;Ivica Batarelo;B
+5;Š;P;Adam Benić;V
+5;Š;S;Karlo Bilić;B
+5;Š;S;Mario Ćurić;V
+5;Š;P;Ivan Delić;N
+5;Š;P;Antonio Đaković;G
+5;Š;P;Doni Grdić;B
+5;Š;P;Edin Julardžija;V
+5;Š;S;Josip Kvesić;B
+5;Š;P;Jose Alejandro Lopez Mejia;V
+5;Š;S;Antonio Marin;N
+5;Š;P;Christian Mena;V
+5;Š;S;Juan Camilo Mesa Antunez;B
+5;Š;S;Stefan Perić;B
+5;Š;P;Niko Rak;V
+5;Š;S;Lovre Rogić;G
+5;Š;S;Suad Sahiti;V
+5;Š;S;Deni Jurić;CV
+6;G;S;Hrvoje Babec;V
+6;G;S;Ivan Banić;G
+6;G;P;Fran Brodić;N
+6;G;P;Younes Delfi;N
+6;G;S;Matar Dieye;N
+6;G;P;Matija Dvorneković;N
+6;G;P;Toni Fruk;V
+6;G;P;Niko Janković;V
+6;G;S;Aleksandar Jovičić;B
+6;G;S;Cheick KEITA;B
+6;G;P;Dominik Kotarski;G
+6;G;S;Krešimir Krizmanić;B
+6;G;S;Kristijan Lovrić;N
+6;G;P;Saša Marjanović;B
+6;G;S;Serge-Junior Bertil Nicolas Martinsson Ngouali;V
+6;G;S;Josip Mitrović;N
+6;G;S;Musa Muhammed;G
+6;G;P;Jurica Pršir;V
+6;G;P;Matthew Rudolf Maria Steenvoorden;B
+6;G;S;Martin Šroler;N
+6;Š;S;Stipe Bačelić Grgić;V
+6;Š;P;Ignacio Daniel Bailone;N
+6;Š;S;Ivica Batarelo;B
+6;Š;P;Adam Benić;V
+6;Š;S;Karlo Bilić;B
+6;Š;S;Mario Ćurić;V
+6;Š;S;Ivan Delić;N
+6;Š;P;Antonio Đaković;G
+6;Š;P;Doni Grdić;B
+6;Š;P;Marin Jakoliš;N
+6;Š;P;Edin Julardžija;V
+6;Š;S;Josip Kvesić;B
+6;Š;P;Jose Alejandro Lopez Mejia;V
+6;Š;S;Antonio Marin;N
+6;Š;P;Christian Mena;V
+6;Š;S;Juan Camilo Mesa Antunez;B
+6;Š;S;Stefan Perić;B
+6;Š;S;Lovre Rogić;G
+6;Š;P;Suad Sahiti;V
+6;Š;S;Deni Jurić;CV
+7;H;P;Jani Atanasov;V
+7;H;S;David Čolina;B
+7;H;P;Mario Čuić;V
+7;H;P;Jairo De Macedo Da Silva;N
+7;H;P;Lumbardh Dellova;B
+7;H;P;Dimitrios Diamantakos;N
+7;H;P;Kristian Traychev Dimitrov;B
+7;H;P;Ivan Dolček;B
+7;H;P;Samuel Emem Eduok;N
+7;H;S;Lovre Kalinić;G
+7;H;S;Filip Krovinović;V
+7;H;S;Marko Livaja;N
+7;H;S;Gergő Lovrencsics;B
+7;H;S;Marin Ljubičić;N
+7;H;S;Jan Mlakar;N
+7;H;P;Josip Posavec;G
+7;H;S;Emir Sahiti;V
+7;H;S;Stefan Simić;B
+7;H;S;Josip Vuković;V
+7;H;S;Mario Vušković;B
+7;O;P;Petar Bočkaj;V
+7;O;S;Damjan Bohar;N
+7;O;P;Slavko Bralić;B
+7;O;P;Yevhen Cheberko;B
+7;O;S;Šime Gržan;N
+7;O;P;Amer Hiroš;V
+7;O;S;Ivica Ivušić;G
+7;O;P;Vedran Jugović;V
+7;O;S;Mario Jurčević;B
+7;O;S;Laszlo Kleinheisler;V
+7;O;S;Danijel Lončar;B
+7;O;P;Marko Malenica;G
+7;O;P;Antonio Mance;N
+7;O;S;Ramon Nazareno MIEREZ;N
+7;O;S;Mato Miloš;B
+7;O;P;Merveil Valthy Streeker NDOCKYT;V
+7;O;S;Darko Nejašmić;V
+7;O;P;Marin Pilj;V
+7;O;S;Mile Škorić;B
+7;O;S;Mihael Žaper;V
+8;SP;S;Ivan Čović;G
+8;SP;S;Matko Zirdum;CB
+8;SP;S;Mario Marina;DV
+8;SP;S;Tomislav Božić;CV
+8;SP;P;Mihael Mlinarić;DV
+8;SP;S;Lovro Zvonarek;CN
+8;SP;S;Nemanja Glavčić;CV
+8;SP;S;Goran Paracki;CV
+8;SP;S;Marin Laušić;CDV
+8;SP;S;Bruno Bogojević;DDV
+8;SP;S;Ivan Krstanović;CV
+8;SP;P;Antun Marković;G
+8;SP;P;Damian van Bruggen;CB
+8;SP;P;Nedim Hadžić;CV
+8;SP;P;Mateo Monjac;DB
+8;SP;P;Mateo Kocijan;CB
+8;SP;S;Arijan Brković;CN
+8;SP;P;Vinko Soldo;CB
+8;SP;P;Antonio Bosec;DB
+8;SP;P;Törles Tim Knöll;CV
+8;L;S;Enis Cokaj;V
+8;L;S;Marko Dabro;N
+8;L;S;Justin de Haas;B
+8;L;P;Raul Alexander Florucz;V
+8;L;S;Aliyu Ibrahim;V
+8;L;S;Lukas Kačavenda;V
+8;L;P;Mate Maleš;V
+8;L;S;Mateo Marić;V
+8;L;S;Ivan Milićević;B
+8;L;P;Kemal Osmanković;B
+8;L;S;Josip Pivarić;B
+8;L;P;Hajdin Salihu;B
+8;L;S;Krševan Santini;G
+8;L;S;Nikola Soldo;B
+8;L;P;Luka Stojković;N
+8;L;P;Marko Vranjković;N
+8;L;S;Branimir Cipetić;DB
+8;L;P;Luka Matasović;G
+8;L;P;Ivan Čeliković;LB
+8;L;P;Luka Dajčer ;CV
+9;HD;P;Domagoj Babin;V
+9;HD;S;Ricardo Bagadur;B
+9;HD;S;Marko Bašić;V
+9;HD;P;Fran Beloša Fijan;V
+9;HD;P;Tin Hrvoj;B
+9;HD;P;Dominik Ivkič;B
+9;HD;P;Bruno Karoglan;V
+9;HD;S;Valentino Majstorović;V
+9;HD;P;Mario Marić;G
+9;HD;S;Karlo Perić;N
+9;HD;P;Vinko Petković;N
+9;HD;S;Zvonimir Šubarić;G
+9;HD;S;Tomislav Valentić;B
+9;HD;S;Mario Veljača;N
+9;HD;S;Luka Viduka;N
+9;HD;S;Stipe Vulikić;B
+9;HD;S;Tonio Teklić;N
+9;HD;S;Dino Skorup;V
+9;HD;P;Danovis Martinez Caliz;DV
+9;HD;P;Jakov Bašić;CB
+9;D;P;Marko Bulat;V
+9;D;P;Duje Čop;N
+9;D;S;Bartol Franjić;V
+9;D;S;Mario Gavranović;V
+9;D;P;Amer Gojak;V
+9;D;S;Luka Ivanušec;V
+9;D;S;Kristijan Jakić;V
+9;D;P;Lirim Kastrati;V
+9;D;S;Dominik Livaković;G
+9;D;S;Lovro Majer;B
+9;D;S;Luka Menalo;N
+9;D;S;Josip Mišić;V
+9;D;P;Jacques Francois Moubandje;LB
+9;D;S;Dino Perić;B
+9;D;P;Bruno Petković;N
+9;D;S;Stefan Ristovski;DB
+9;D;P;Dario Špikić;N
+9;D;S;Josip Šutalo;B
+9;D;P;Kevin Theophile Catherine;B
+9;D;P;Danijel Zagorac;G
+10;R;S;Prince Obeng Ampem;V
+10;R;P;Filip Braut;B
+10;R;S;Josip Drmić;N
+10;R;P;Niko Galešić;B
+10;R;P;Nino Galović;B
+10;R;S;Anton Krešić;B
+10;R;S;Nediljko Labrović;G
+10;R;P;Ivan Lepinjica;V
+10;R;S;Adrian Liber;V
+10;R;S;Robert Mudražija;V
+10;R;P;Jorge Leonardo Obregon Rojas;N
+10;R;S;Domagoj Pavičić;V
+10;R;P;Joao Rodrigo Pereira Escoval;B
+10;R;S;Hrvoje Smolčić;B
+10;R;S;Ivan Tomečak;B
+10;R;S;Darko Velkovski;B
+10;R;S;Andrija Vukčević;B
+10;R;P;Martin Zlomislić;G
+10;R;P;Bernard Karrica;LV
+10;I;S;Boureima Hassane Bande;N
+10;I;P;Dion Drena Beljo;N
+10;I;S;Slavko Blagojević;V
+10;I;S;Damjan Daničić;B
+10;I;P;Joao Pedro Eira Antunes Da Silva;B
+10;I;P;Luka Hujber;B
+10;I;S;Miroslav Iličić;N
+10;I;S;Mateo Lisica;N
+10;I;S;Ivan Lučić;G
+10;I;P;Luka Marin;B
+10;I;S;Bernardo Matić;B
+10;I;P;Robert Mišković;V
+10;I;S;Frano Mlinar;V
+10;I;S;Rafael Jesus Navarro Mazuecos;B
+10;I;S;Antonio Perera Calderon;V
+10;I;S;Mauro Perković;B
+10;I;P;Jan Paus-Kunšt;G
+10;I;P;Fran Vujnović;V
+10;I;P;Antonio Siljan;V
+11;D;P;Marko Bulat;V
+11;D;P;Duje Čop;N
+11;D;S;Bartol Franjić;V
+11;D;S;Mario Gavranović;V
+11;D;S;Luka Ivanušec;V
+11;D;S;Kristijan Jakić;V
+11;D;P;Lirim Kastrati;V
+11;D;S;Dominik Livaković;G
+11;D;S;Lovro Majer;B
+11;D;S;Luka Menalo;N
+11;D;P;Josip Mišić;V
+11;D;P;Sadegh Moharrami Getgasari;B
+11;D;P;Jacques Francois Moubandje;LB
+11;D;S;Mislav Oršić;N
+11;D;S;Dino Perić;B
+11;D;P;Bruno Petković;N
+11;D;S;Stefan Ristovski;DB
+11;D;P;Josip Šutalo;B
+11;D;S;Kevin Theophile Catherine;B
+11;D;P;Danijel Zagorac;G
+11;R;P;Prince Obeng Ampem;V
+11;R;P;Filip Braut;B
+11;R;S;Josip Drmić;N
+11;R;P;Nino Galović;B
+11;R;P;Adam Gnezda Čerin;V
+11;R;S;Abass Issah;N
+11;R;S;Nediljko Labrović;G
+11;R;S;Ivan Lepinjica;V
+11;R;S;Adrian Liber;V
+11;R;P;Mikhail Merkulov;B
+11;R;P;Jorge Leonardo Obregon Rojas;N
+11;R;S;Domagoj Pavičić;V
+11;R;S;Joao Rodrigo Pereira Escoval;B
+11;R;P;Lindon Selahi;V
+11;R;S;Hrvoje Smolčić;B
+11;R;P;Mato Stanić;V
+11;R;S;Ivan Tomečak;B
+11;R;S;Darko Velkovski;B
+11;R;S;Andrija Vukčević;B
+11;R;P;Martin Zlomislić;G
+12;G;S;Hrvoje Babec;V
+12;G;S;Ivan Banić;G
+12;G;P;Fran Brodić;N
+12;G;P;Younes Delfi;N
+12;G;S;Matar Dieye;N
+12;G;P;Albi Doka;B
+12;G;P;Matija Dvorneković;N
+12;G;S;Toni Fruk;V
+12;G;S;Aleksandar Jovičić;B
+12;G;P;Patrik Jug;V
+12;G;P;Cheick KEITA;B
+12;G;P;Dominik Kotarski;G
+12;G;S;Krešimir Krizmanić;B
+12;G;S;Kristijan Lovrić;N
+12;G;P;Saša Marjanović;B
+12;G;S;Josip Mitrović;N
+12;G;S;Musa Muhammed;G
+12;G;S;Jurica Pršir;V
+12;G;S;Matthew Rudolf Maria Steenvoorden;B
+12;G;P;Martin Šroler;N
+12;H;P;Jani Atanasov;V
+12;H;S;Stipe Biuk;N
+12;H;P;David Čolina;B
+12;H;P;Mario Čuić;V
+12;H;P;Jairo De Macedo Da Silva;N
+12;H;P;Lumbardh Dellova;B
+12;H;P;Dimitrios Diamantakos;N
+12;H;P;Kristian Traychev Dimitrov;B
+12;H;S;Ivan Dolček;B
+12;H;S;Josip Elez;B
+12;H;S;Filip Krovinović;V
+12;H;S;Marko Livaja;N
+12;H;S;Gergő Lovrencsics;B
+12;H;P;Marin Ljubičić;N
+12;H;S;Jan Mlakar;N
+12;H;P;Ivan Perić;G
+12;H;S;Josip Posavec;G
+12;H;S;Emir Sahiti;V
+12;H;S;Stefan Simić;B
+12;H;S;Josip Vuković;V
+13;D;S;Marko Bulat;V
+13;D;S;Duje Čop;N
+13;D;P;Bartol Franjić;V
+13;D;P;Amer Gojak;V
+13;D;P;Luka Ivanušec;V
+13;D;S;Kristijan Jakić;V
+13;D;P;Deni Jurić;N
+13;D;S;Lirim Kastrati;V
+13;D;S;Dominik Livaković;G
+13;D;S;Lovro Majer;B
+13;D;S;Luka Menalo;N
+13;D;S;Jacques Francois Moubandje;LB
+13;D;P;Mislav Oršić;N
+13;D;S;Dino Perić;B
+13;D;P;Bruno Petković;N
+13;D;P;Stefan Ristovski;DB
+13;D;P;Dario Špikić;N
+13;D;S;Josip Šutalo;B
+13;D;S;Kevin Theophile Catherine;B
+13;D;P;Danijel Zagorac;G
+13;G;S;Hrvoje Babec;V
+13;G;S;Ivan Banić;G
+13;G;P;Fran Brodić;N
+13;G;S;Younes Delfi;N
+13;G;S;Matar Dieye;N
+13;G;S;Albi Doka;B
+13;G;P;Matija Dvorneković;N
+13;G;P;Toni Fruk;V
+13;G;P;Niko Janković;V
+13;G;S;Aleksandar Jovičić;B
+13;G;S;Cheick KEITA;B
+13;G;S;Krešimir Krizmanić;B
+13;G;S;Kristijan Lovrić;N
+13;G;S;Saša Marjanović;B
+13;G;P;Josip Mitrović;N
+13;G;P;Musa Muhammed;G
+13;G;S;Jurica Pršir;V
+13;G;P;Vlatko Stojanovski;N
+13;G;P;Martin Šroler;N
+13;G;P;Jan Paolo Debijađi;G
+14;O;S;Karlo Bartolec;B
+14;O;S;Petar Bočkaj;V
+14;O;P;Damjan Bohar;N
+14;O;S;Slavko Bralić;B
+14;O;P;Yevhen Cheberko;B
+14;O;P;Mirlind Daku;N
+14;O;P;Šime Gržan;N
+14;O;P;Amer Hiroš;V
+14;O;S;Ivica Ivušić;G
+14;O;S;Vedran Jugović;V
+14;O;S;Laszlo Kleinheisler;V
+14;O;S;Danijel Lončar;B
+14;O;P;Marko Malenica;G
+14;O;S;Antonio Mance;N
+14;O;S;Ramon Nazareno MIEREZ;N
+14;O;P;Mato Miloš;B
+14;O;P;Darko Nejašmić;V
+14;O;P;Marin Pilj;V
+14;O;S;Mile Škorić;B
+14;O;S;Mihael Žaper;V
+14;R;S;Prince Obeng Ampem;V
+14;R;P;Filip Braut;B
+14;R;P;Denis Bušnja;V
+14;R;S;Niko Galešić;B
+14;R;P;Nino Galović;B
+14;R;S;Abass Issah;N
+14;R;S;Anton Krešić;B
+14;R;P;Ivan Lepinjica;V
+14;R;P;Adrian Liber;V
+14;R;P;Robert Mudražija;V
+14;R;S;Robert Murić;V
+14;R;S;Jorge Leonardo Obregon Rojas;N
+14;R;S;Domagoj Pavičić;V
+14;R;P;Joao Rodrigo Pereira Escoval;B
+14;R;S;Andrej Prskalo;G
+14;R;S;Mato Stanić;V
+14;R;S;Ivan Tomečak;B
+14;R;S;Darko Velkovski;B
+14;R;P;Andrija Vukčević;B
+14;R;P;Martin Zlomislić;G

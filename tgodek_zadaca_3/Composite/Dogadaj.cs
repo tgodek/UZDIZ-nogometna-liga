@@ -14,7 +14,7 @@ namespace tgodek_zadaca_3.Composite
         public Igrac Igrac { get; set; }
         public Igrac Zamjena { get; set; }
 
-        public void Accept(IOperation operacija)
+        public void Accept(IVisit operacija)
         {
             operacija.Visit(this);
         }

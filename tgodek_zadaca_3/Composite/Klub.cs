@@ -58,7 +58,7 @@ namespace tgodek_zadaca_3.Composite
         {
             foreach (var igrac in igraci)
             {
-                igrac.ResetState();
+                igrac.ResetirajState();
                 igrac.ResetirajKartone();
                 igrac.ResetirajGolove();
             }
@@ -99,7 +99,7 @@ namespace tgodek_zadaca_3.Composite
             return pronadenIgrac;
         }
 
-        public void Accept(IOperation operacija)
+        public void Accept(IVisit operacija)
         {
             operacija.Visit(this);
             foreach (var igrac in igraci)

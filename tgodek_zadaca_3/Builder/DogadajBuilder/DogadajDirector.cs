@@ -17,7 +17,6 @@ namespace tgodek_zadaca_3.Builder.DogadajBuilder
         public void IzradiOsnovniDogadaj(Utakmica utakmica, string minute, int vrsta)
         {
             this._builder.DodajOsnovno(utakmica, minute, vrsta);
-          
         }
 
         public void IzradiDogadajZaIgraca(Utakmica utakmica, string minute, int vrsta, Klub klub, Igrac igrac)

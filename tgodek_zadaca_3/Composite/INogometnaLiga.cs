@@ -8,6 +8,6 @@ namespace tgodek_zadaca_3.Composite
     public interface INogometnaLiga
     {
         public abstract INogometnaLiga PronadiZapis(string id);
-        public abstract void Accept(IOperation operacija);
+        public abstract void Accept(IVisit operacija);
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace tgodek_zadaca_3
 {
-    class Izbornik
+    public class Izbornik
     {
         public string Zastavica { get; set; }
         public string Klub { get; set; }

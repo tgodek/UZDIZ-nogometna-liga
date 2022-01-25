@@ -2,27 +2,20 @@
 using System.Collections.Generic;
 using ucitavanje_datoteka;
 
-namespace facade
+namespace ucitavanje_facade
 {
     public class UcitavacDatotekaFacade
     {
         private static UcitavacDatotekaFacade instanca;
         private UcitavacDatotekaFactory ucitavacDatoteka;
 
-        public bool DatotekaKlubUcitan { get; private set; } 
-        public bool DatotekaIgracUcitan { get; private set; }
-        public bool DatotekaUtakmicaUcitan { get; private set; }
-        public bool DatotekaSastavUcitan { get; private set; }
-        public bool DatotekaDogadajUcitan { get; private set; }
+        public bool DatotekaKlubUcitan { get; private set; } = false;
+        public bool DatotekaIgracUcitan { get; private set; } = false;
+        public bool DatotekaUtakmicaUcitan { get; private set; } = false;
+        public bool DatotekaSastavUcitan { get; private set; } = false;
+        public bool DatotekaDogadajUcitan { get; private set; } = false;
 
-        private UcitavacDatotekaFacade()
-        {
-            DatotekaKlubUcitan = false;
-            DatotekaIgracUcitan = false;
-            DatotekaUtakmicaUcitan = false;
-            DatotekaSastavUcitan = false;
-            DatotekaDogadajUcitan = false;
-        }
+        private UcitavacDatotekaFacade() { }
 
         public static UcitavacDatotekaFacade DohvatiUcitavacDatoteka()
         {
@@ -42,31 +35,31 @@ namespace facade
             {
                 foreach (var datoteka in popisDatoteka)
                 {
-                    if (datoteka.Key is UlazniParametri.K)
+                    if (datoteka.Key is OsnovniParametri.K)
                     {
                         var rezultat = ucitavacDatoteka.DohvatiPodatke("k");
                         rezultat.UcitajPodatke(datoteka.Value);
                         DatotekaKlubUcitan = true;
                     }
-                    if (datoteka.Key is UlazniParametri.I && DatotekaKlubUcitan)
+                    if (datoteka.Key is OsnovniParametri.I && DatotekaKlubUcitan)
                     {
                         var rezultat = ucitavacDatoteka.DohvatiPodatke("i");
                         rezultat.UcitajPodatke(datoteka.Value);
                         DatotekaIgracUcitan = true;
                     }
-                    if ((datoteka.Key is UlazniParametri.U || datoteka.Key is UlazniParametri.NU) && DatotekaIgracUcitan)
+                    if ((datoteka.Key is OsnovniParametri.U || datoteka.Key is OsnovniParametri.NU) && DatotekaIgracUcitan)
                     {
                         var rezultat = ucitavacDatoteka.DohvatiPodatke("u");
                         rezultat.UcitajPodatke(datoteka.Value);
                         DatotekaUtakmicaUcitan = true;
                     }
-                    if ((datoteka.Key is UlazniParametri.S || datoteka.Key is UlazniParametri.NS) && DatotekaUtakmicaUcitan)
+                    if ((datoteka.Key is OsnovniParametri.S || datoteka.Key is OsnovniParametri.NS) && DatotekaUtakmicaUcitan)
                     {
                         var rezultat = ucitavacDatoteka.DohvatiPodatke("s");
                         rezultat.UcitajPodatke(datoteka.Value);
                         DatotekaSastavUcitan = true;
                     }
-                    if ((datoteka.Key is UlazniParametri.D || datoteka.Key is UlazniParametri.ND) && DatotekaSastavUcitan)
+                    if ((datoteka.Key is OsnovniParametri.D || datoteka.Key is OsnovniParametri.ND) && DatotekaSastavUcitan)
                     {
                         var rezultat = ucitavacDatoteka.DohvatiPodatke("d");
                         rezultat.UcitajPodatke(datoteka.Value);
@@ -98,7 +91,7 @@ namespace facade
                     }
                     catch (ArgumentException)
                     {
-                        Console.WriteLine("Pogreška prilikom obrade ulaznih parametara!\n Datoteka s zadnjom dupliciranom zastavicom se izbacuje!");
+                        Console.WriteLine("Pogreška prilikom obrade ulaznih parametara!\n Moguće da postoje duplikati u unosu!");
                         break;
                     }
                 }

@@ -6,36 +6,39 @@ using tgodek_zadaca_3.Composite;
 
 namespace tgodek_zadaca_3.Visitor
 {
-    class GetTablicaRezultata : IOperation
+    class GetTablicaRezultata : IVisit
     {
-        private int _kolo;
-        private string _oznakaKluba { get; set; }
-        private GolHandler Handler = new GolHandler();
-        private ZamjenaHandler ZamjenaHandler = new ZamjenaHandler();
-        private ZutiKartonHandler ZutKartonHandler = new ZutiKartonHandler();
-        private CrveniKartonHandler CrveniKartonHandler = new CrveniKartonHandler();
-        private AutogolHandler AutogolHandler = new AutogolHandler();
+        private readonly int Kolo;
+        private string OznakaKluba { get; set; }
+        private readonly GolHandler Handler = new GolHandler();
+        private readonly ZamjenaHandler ZamjenaHandler = new ZamjenaHandler();
+        private readonly ZutiKartonHandler ZutKartonHandler = new ZutiKartonHandler();
+        private readonly CrveniKartonHandler CrveniKartonHandler = new CrveniKartonHandler();
+        private readonly AutogolHandler AutogolHandler = new AutogolHandler();
 
         public GetTablicaRezultata(string oznakaKluba, int kolo = 0)
         {
-            _kolo = kolo;
-            _oznakaKluba = oznakaKluba;
-            Handler.SetNextHandler(ZamjenaHandler).SetNextHandler(ZutKartonHandler).SetNextHandler(CrveniKartonHandler).SetNextHandler(AutogolHandler);
+            Kolo = kolo;
+            OznakaKluba = oznakaKluba;
+            Handler.SetNextHandler(ZamjenaHandler)
+                .SetNextHandler(ZutKartonHandler)
+                .SetNextHandler(CrveniKartonHandler)
+                .SetNextHandler(AutogolHandler);
         }
          
         public void Visit(Utakmica utakmica)
         {
-            if (_kolo == 0)
+            if (Kolo == 0)
             {
-                if (utakmica.PostojiDogadaj() && (utakmica.Domacin.Oznaka == _oznakaKluba || utakmica.Gost.Oznaka == _oznakaKluba))
+                if (utakmica.PostojiDogadaj() && (utakmica.Domacin.Oznaka == OznakaKluba || utakmica.Gost.Oznaka == OznakaKluba))
                 {
                     utakmica.Odigrana = true;
                 }
             }
             else
             {
-                if (utakmica.Kolo <= _kolo && utakmica.PostojiDogadaj() &&
-                    (utakmica.Domacin.Oznaka == _oznakaKluba || utakmica.Gost.Oznaka == _oznakaKluba))
+                if (utakmica.Kolo <= Kolo && utakmica.PostojiDogadaj() &&
+                    (utakmica.Domacin.Oznaka == OznakaKluba || utakmica.Gost.Oznaka == OznakaKluba))
                 {
                     utakmica.Odigrana = true;
                 }
@@ -44,12 +47,12 @@ namespace tgodek_zadaca_3.Visitor
             foreach (var igrac in utakmica.Domacin.ListaIgraca())
             {
                 igrac.ResetirajKartone();
-                igrac.ResetState();
+                igrac.ResetirajState();
             }
             foreach (var igrac in utakmica.Gost.ListaIgraca())
             {
                 igrac.ResetirajKartone();
-                igrac.ResetState();
+                igrac.ResetirajState();
             }
         }
 

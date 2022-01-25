@@ -6,7 +6,7 @@ using tgodek_zadaca_3.Composite;
 
 namespace tgodek_zadaca_3.Visitor
 {
-    class GetTablicaStrijelci : IOperation
+    class GetTablicaStrijelci : IVisit
     {
         private int _kolo;
         private GolHandler Handler = new GolHandler();
@@ -44,12 +44,12 @@ namespace tgodek_zadaca_3.Visitor
             foreach (var igrac in utakmica.Domacin.ListaIgraca())
             {
                 igrac.ResetirajKartone();
-                igrac.ResetState();
+                igrac.ResetirajState();
             }
             foreach (var igrac in utakmica.Gost.ListaIgraca())
             {
                 igrac.ResetirajKartone();
-                igrac.ResetState();
+                igrac.ResetirajState();
             }
         }
 

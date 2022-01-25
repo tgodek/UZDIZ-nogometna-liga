@@ -31,7 +31,7 @@ namespace tgodek_zadaca_3.Composite
             else return null;
         }
 
-        public void Accept(IOperation operacija)
+        public void Accept(IVisit operacija)
         {
             operacija.Visit(this);
         }

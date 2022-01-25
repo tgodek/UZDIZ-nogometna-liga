@@ -14,7 +14,7 @@ namespace tgodek_zadaca_3.Composite
     public enum Pozicija
     {
         G, B, LB, DB, CB, V, LDV, DDV, CDV, LV,
-       DV, CV, LOV, DOV, COV, N, LN, DN, CN
+       DV, CV, LOV, DOV, COV, N, LN, DN, CN, NAN
     }
 
     public class Igrac : NKOsoba, INogometnaLiga
@@ -49,7 +49,7 @@ namespace tgodek_zadaca_3.Composite
 
         public bool IgracUIgri() => _state.IgracUIgri();
 
-        public void ResetState() => _state = new Idle();
+        public void ResetirajState() => _state = new Idle();
 
         public void ResetirajKartone()
         {
@@ -71,7 +71,7 @@ namespace tgodek_zadaca_3.Composite
                 return null;
         }
 
-        public void Accept(IOperation operacija)
+        public void Accept(IVisit operacija)
         {
             operacija.Visit(this);
         }
@@ -92,7 +92,7 @@ namespace tgodek_zadaca_3.Composite
                 return null;
         }
 
-        public void Accept(IOperation operacija)
+        public void Accept(IVisit operacija)
         {
             operacija.Visit(this);
         }

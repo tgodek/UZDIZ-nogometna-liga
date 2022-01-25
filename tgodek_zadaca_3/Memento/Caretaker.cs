@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using tgodek_zadaca_3.Composite;
 
 namespace tgodek_zadaca_3.Memento
 {
@@ -10,11 +8,7 @@ namespace tgodek_zadaca_3.Memento
     {
         private static Caretaker instanca;
 
-        private List<IMemento> _mementos = new List<IMemento>();
-
-        private Caretaker()
-        {
-        }
+        private readonly List<Raspored> _mementos = new List<Raspored>();
 
         public static Caretaker DohvatiCaretaker()
         {
@@ -25,97 +19,15 @@ namespace tgodek_zadaca_3.Memento
             return instanca;
         }
 
-        public void Undo(int raspored)
+        public void Backup(Raspored memento)
         {
-            if (this._mementos.Count == 0) 
-            {
-                return;
-            }
-            var postoji = _mementos.Find(m => m.GetRaspored() == raspored);
-            if (postoji != null)
-            {
-                var vazeci = this._mementos.Where(m => m.StanjeVazeci() == true).ToList();
-                if (vazeci != null)
-                {
-                    foreach (var elem in vazeci)
-                        elem.MakniVazeci();
-                }
-                var memento = _mementos.Find(m => m.GetRaspored() == raspored);
-                if (memento != null)
-                    memento.PostaviVazeci();
-            }
-            else 
-                Console.WriteLine("Ne postoji raspored: " + raspored);
-        }
-
-        public void Backup(IMemento memento)
-        {
-            Console.WriteLine("Raspored pohranjen.");
+            Console.WriteLine("Raspored pohranjen!");
             this._mementos.Add(memento);
         }
-
         public int ZadnjiRaspored() => _mementos.Count;
 
-        public void PrikaziPohranjene()
-        {
-            if (ZadnjiRaspored() == 0)
-            {
-                Console.WriteLine("Nema spremljenih rasporeda!\n");
-                return;
-            }
-            else
-            {
-                foreach (var memento in this._mementos)
-                {
-                    var utakmice = memento.GetUtakmice();
-                    if (utakmice != null)
-                    {
-                        foreach (Utakmica utakmica in utakmice)
-                        {
-                            Console.WriteLine(memento.GetRaspored() + " " + memento.GetDatum() + " " + utakmica.Kolo +
-                                " " + utakmica.Domacin.Naziv + " - " + utakmica.Gost.Naziv);
-                        }
-                    }
-                }
-            }
-        }
+        public List<Raspored> GetRasporede() => _mementos; 
 
-        public void PrikaziVazeceZaKlub(Klub klub)
-        {
-            foreach (var memento in this._mementos)
-            {
-                if (memento.StanjeVazeci() == true)
-                {
-                    var utakmice = memento.GetUtakmice().Where(u => u.Domacin == klub || u.Gost == klub).ToList();
-                    if (utakmice != null)
-                    {
-                        foreach (Utakmica utakmica in utakmice)
-                        {
-                            Console.WriteLine(memento.GetRaspored() + " " + memento.GetDatum() + " " + utakmica.Kolo +
-                                " " + utakmica.Domacin.Naziv + " - " + utakmica.Gost.Naziv);
-                        }
-                    }
-                }
-            }
-        }
-
-        public void PrikaziVazeceZaKolo(int kolo)
-        {
-            foreach (var memento in this._mementos)
-            {
-                if (memento.StanjeVazeci() == true)
-                {
-                    var utakmice = memento.GetUtakmice().Select(m => m as Utakmica).Where(u => u.Kolo == kolo).ToList();
-                    if (utakmice != null)
-                    {
-                        foreach (Utakmica utakmica in utakmice)
-                        {
-                            Console.WriteLine(memento.GetRaspored() + " " + memento.GetDatum() + " " + utakmica.Kolo +
-                                " " + utakmica.Domacin.Naziv + " - " + utakmica.Gost.Naziv);
-                        }
-                    }
-                }
-            }
-    }
+        public Raspored PronaziRaspored(int broj) => _mementos.Find(m => m.GetBroj() == broj);
     }
 }

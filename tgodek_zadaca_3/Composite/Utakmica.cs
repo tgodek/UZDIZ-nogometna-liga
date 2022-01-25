@@ -6,7 +6,7 @@ namespace tgodek_zadaca_3.Composite
 {
     public class Utakmica : INogometnaLiga
     {
-        public List<INogometnaLiga> komponente { get; private set; } = new List<INogometnaLiga>();
+        public List<INogometnaLiga> Komponente { get; private set; } = new List<INogometnaLiga>();
 
         public int Broj { get; set; }
         public int Kolo { get; set; }
@@ -16,8 +16,6 @@ namespace tgodek_zadaca_3.Composite
         public int RezultatDomacin { get; set; }
         public int RezultatGost { get; set; }
         public bool Odigrana { get; set; }
-
-
 
         public string RezultatUtakmice()
         {
@@ -35,12 +33,12 @@ namespace tgodek_zadaca_3.Composite
             Domacin = domacin;
         }
 
-        public void DodajKomponentu(INogometnaLiga komponenta) => komponente.Add(komponenta);
+        public void DodajKomponentu(INogometnaLiga komponenta) => Komponente.Add(komponenta);
 
         public bool PostojiDogadaj()
         {
             var postoji = false;
-            foreach (var x in komponente)
+            foreach (var x in Komponente)
             {
                 if (x.GetType() == typeof(Dogadaj))
                     return true;
@@ -57,7 +55,7 @@ namespace tgodek_zadaca_3.Composite
             }
             else
             {
-                foreach (var x in komponente)
+                foreach (var x in Komponente)
                 {
                     if(x.GetType() == typeof(SastavUtakmice))
                         if (x.PronadiZapis(id) != null)
@@ -67,9 +65,9 @@ namespace tgodek_zadaca_3.Composite
             return komponenta;
         }
 
-        public void Accept(IOperation operacija)
+        public void Accept(IVisit operacija)
         {
-            foreach (var komponenta in komponente)
+            foreach (var komponenta in Komponente)
             {
                 komponenta.Accept(operacija);
             }

@@ -1,0 +1,14 @@
+E:\Develop\Github\nogometna-Liga\tgodek_zadaca_3\bin\Debug\netcoreapp3.1\tgodek_zadaca_3.exe
+E:\Develop\Github\nogometna-Liga\tgodek_zadaca_3\bin\Debug\netcoreapp3.1\tgodek_zadaca_3.deps.json
+E:\Develop\Github\nogometna-Liga\tgodek_zadaca_3\bin\Debug\netcoreapp3.1\tgodek_zadaca_3.runtimeconfig.json
+E:\Develop\Github\nogometna-Liga\tgodek_zadaca_3\bin\Debug\netcoreapp3.1\tgodek_zadaca_3.runtimeconfig.dev.json
+E:\Develop\Github\nogometna-Liga\tgodek_zadaca_3\bin\Debug\netcoreapp3.1\tgodek_zadaca_3.dll
+E:\Develop\Github\nogometna-Liga\tgodek_zadaca_3\bin\Debug\netcoreapp3.1\tgodek_zadaca_3.pdb
+E:\Develop\Github\nogometna-Liga\tgodek_zadaca_3\obj\Debug\netcoreapp3.1\tgodek_zadaca_3.GeneratedMSBuildEditorConfig.editorconfig
+E:\Develop\Github\nogometna-Liga\tgodek_zadaca_3\obj\Debug\netcoreapp3.1\tgodek_zadaca_3.AssemblyInfoInputs.cache
+E:\Develop\Github\nogometna-Liga\tgodek_zadaca_3\obj\Debug\netcoreapp3.1\tgodek_zadaca_3.AssemblyInfo.cs
+E:\Develop\Github\nogometna-Liga\tgodek_zadaca_3\obj\Debug\netcoreapp3.1\tgodek_zadaca_3.csproj.CoreCompileInputs.cache
+E:\Develop\Github\nogometna-Liga\tgodek_zadaca_3\obj\Debug\netcoreapp3.1\tgodek_zadaca_3.dll
+E:\Develop\Github\nogometna-Liga\tgodek_zadaca_3\obj\Debug\netcoreapp3.1\tgodek_zadaca_3.pdb
+E:\Develop\Github\nogometna-Liga\tgodek_zadaca_3\obj\Debug\netcoreapp3.1\tgodek_zadaca_3.genruntimeconfig.cache
+E:\Develop\Github\nogometna-Liga\tgodek_zadaca_3\obj\Debug\netcoreapp3.1\tgodek_zadaca_3.csproj.AssemblyReference.cache

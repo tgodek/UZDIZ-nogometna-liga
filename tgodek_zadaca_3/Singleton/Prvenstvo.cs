@@ -1,22 +1,22 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using tgodek_zadaca_3.Composite;
-using tgodek_zadaca_3.Ljestvice;
 using tgodek_zadaca_3.Visitor;
-using System.Linq;
-using tgodek_zadaca_3.Raspored;
 using tgodek_zadaca_3.Memento;
+using tgodek_zadaca_3.Feature;
+using tgodek_zadaca_3.Util;
 
 namespace tgodek_zadaca_3
 {
     class Prvenstvo : INogometnaLiga
     {
-        protected List<INogometnaLiga> liga { get; set; } = new List<INogometnaLiga>();
+        public List<INogometnaLiga> Liga { get; private set; } = new List<INogometnaLiga>();
 
         private static Prvenstvo instanca;
-        private Prvenstvo() 
-        {
-        }
+        private Prvenstvo() { }
+
+        public Originator AktivniRaspored = new Originator();
 
         public static Prvenstvo DohvatiPrvenstvo()
         {
@@ -27,14 +27,17 @@ namespace tgodek_zadaca_3
             return instanca;
         }
 
-        public void DodajKomponentu(INogometnaLiga komponenta) => liga.Add(komponenta);
+        public void DodajKomponentu(INogometnaLiga komponenta) => Liga.Add(komponenta);
        
-        public List<INogometnaLiga> GetLiga() => liga;
+        public List<Klub> GetKlubovi() => Liga.Where(e => e.GetType() == typeof(Klub)).Select(e => e as Klub).ToList();
+
+        public List<Utakmica> GetUtakmice() => Liga.Where(e => e.GetType() == typeof(Utakmica)).Select(e => e as Utakmica).ToList();
+
 
         public INogometnaLiga PronadiZapis(string id)
         {
             INogometnaLiga komponenta = null;
-            foreach (var x in liga)
+            foreach (var x in Liga)
             {
                 if (x.PronadiZapis(id) != null)
                     return komponenta = x.PronadiZapis(id);
@@ -42,101 +45,15 @@ namespace tgodek_zadaca_3
             return komponenta;
         }
 
-        public void IspisLjestvice(Izbornik izbornik)
+        public void ObradiZahtjev(Izbornik izbornik)
         {
-            try
-            {
-                if (izbornik.Zastavica == "R")
-                {
-                    var postojiKlub = PronadiZapis(izbornik.Klub);
-                    if (postojiKlub != null)
-                    {
-                        var ljestvica = new LjestvicaRezultata(izbornik.Klub, izbornik.Kolo);
-                        ljestvica.Ispis();
-                    }
-                    else
-                        Console.WriteLine("Klub ne postoji");
-
-                }
-                if (izbornik.Zastavica == "T")
-                {
-                    var ljestvica = new LjestvicaPrvenstva(izbornik.Kolo);
-                    ljestvica.Ispis();
-                }
-                if (izbornik.Zastavica == "K")
-                {
-                    var ljestvica = new LjestvicaKartoni(izbornik.Kolo);
-                    ljestvica.Ispis();
-                }
-                if (izbornik.Zastavica == "S")
-                {
-                    var ljestvica = new LjestvicaStrijelci(izbornik.Kolo);
-                    ljestvica.Ispis();
-                }
-                if (izbornik.Zastavica == "D")
-                {
-                }
-
-                if (izbornik.Zastavica == "SU")
-                {
-                    var domacin = PronadiZapis(izbornik.Klub) as Klub;
-                    var gost = PronadiZapis(izbornik.Klub2) as Klub;
-                    if (domacin == null)
-                        Console.WriteLine("Klub " + izbornik.Klub + " ne postoji");
-                    else if (gost == null)
-                        Console.WriteLine("Klub " + izbornik.Klub2 + " ne postoji");
-                    else
-                    {
-                        var sastavUtakmice = new RasporedSastav(izbornik.Kolo, domacin, gost);
-                        sastavUtakmice.Sastav();
-                    }
-                }
-                if (izbornik.Zastavica == "GR")
-                {
-                    var algoritam = izbornik.Kolo;
-                    var generator = new GeneratorRasporeda(algoritam);
-                    generator.GenerirajPremaAlgoritmu();
-                }
-
-                if (izbornik.Zastavica == "IR")
-                {
-                    var klub = PronadiZapis(izbornik.Klub) as Klub;
-                    if (klub == null)
-                    {
-                        Console.WriteLine("Klub " + izbornik.Klub + " ne postoji");
-                    }
-                    else
-                    {
-                        var caretaker = Caretaker.DohvatiCaretaker();
-                        caretaker.PrikaziVazeceZaKlub(klub);
-                    }
-                }
-                if (izbornik.Zastavica == "IK")
-                {
-                    var caretaker = Caretaker.DohvatiCaretaker();
-                    caretaker.PrikaziVazeceZaKolo(izbornik.Kolo);
-                }
-                if (izbornik.Zastavica == "IG")
-                {
-                    var caretaker = Caretaker.DohvatiCaretaker();
-                    caretaker.PrikaziPohranjene();
-                }
-                if (izbornik.Zastavica == "VR")
-                {
-                    var caretaker = Caretaker.DohvatiCaretaker();
-                    caretaker.Undo(izbornik.Broj);
-                }
-            }
-            catch (Exception) 
-            {
-                Console.WriteLine("Nije moguce ispisati");
-            }
-           
+            var feature = FactoryFeature.GetFeature(izbornik);
+            if(feature != null) feature.ObradiZahtjev();
         }
 
-        public void Accept(IOperation operacija)
+        public void Accept(IVisit operacija)
         {
-            foreach (var komponenta in liga)
+            foreach (var komponenta in Liga)
             {
                 komponenta.Accept(operacija);
             }
@@ -144,50 +61,27 @@ namespace tgodek_zadaca_3
 
         internal (List<Igrac>, int) PripremljenaLjestvicaStrijelaca(int kolo)
         {
-            List<Igrac> igraci = new List<Igrac>();
-
+            List<Igrac> strijelci = new List<Igrac>();
             var operacija = new GetTablicaStrijelci(kolo);
             this.Accept(operacija);
-            var ukupno = 0;
-            foreach (var klub in liga)
-            {
-                Klub _klub;
-                if (klub.GetType() == typeof(Klub))
-                {
-                    _klub = (Klub)klub;
-                    var _igraci = _klub.ListaIgraca();
-                    foreach (var igrac in _igraci)
-                    {
-                        if (igrac.BrojPogodaka > 0) 
-                        {
-                            ukupno += igrac.BrojPogodaka;
-                            igraci.Add(igrac);
-                        }
-                    }
-                }
-            }
-            return (igraci.OrderByDescending(i => i.BrojPogodaka).ToList(), ukupno);
+            var ukupnoPogodaka = 0;
+            
+            GetKlubovi().ForEach(k => strijelci.AddRange(k.ListaIgraca().FindAll(i => i.BrojPogodaka > 0)));
+            ukupnoPogodaka = strijelci.Sum(i => i.BrojPogodaka);
+            return (strijelci.OrderByDescending(i => i.BrojPogodaka).ToList(), ukupnoPogodaka);
         }
 
         internal (List<Klub>, SumaKartona suma) PripremljenaLjestvicaKartona(int kolo)
         {
-            List<Klub> klubovi = new List<Klub>();
             var operacija = new GetTablicaKartona(kolo);
             this.Accept(operacija);
+
             var sumaKartona = new SumaKartona();
-            foreach (var klub in liga)
-            {
-                Klub _klub;
-                if (klub.GetType() == typeof(Klub))
-                {
-                    _klub = (Klub) klub;
-                    sumaKartona.UkZutih += _klub.ZutiKarton;
-                    sumaKartona.UkDrugihZutih += _klub.DrugiZutiKarton;
-                    sumaKartona.UkCrvenih += _klub.CrveniKarton;
-                    klubovi.Add(_klub);
-                }
-            }
-            return (klubovi.OrderByDescending(k => k.UkupnoKartona())
+            sumaKartona.UkZutih = GetKlubovi().Sum(k => k.ZutiKarton);
+            sumaKartona.UkDrugihZutih = GetKlubovi().Sum(k => k.DrugiZutiKarton);
+            sumaKartona.UkCrvenih = GetKlubovi().Sum(k => k.CrveniKarton);
+
+            return (GetKlubovi().OrderByDescending(k => k.UkupnoKartona())
                 .ThenByDescending(k => k.CrveniKarton)
                 .ThenByDescending(k => k.DrugiZutiKarton)
                 .ToList(), sumaKartona);
@@ -195,63 +89,35 @@ namespace tgodek_zadaca_3
 
         internal (List<Klub>,SumaLjestvicePrvenstva) PripremljenaLjestvicaPrvenstva(int kolo)
         {
-            List<Klub> klubovi = new List<Klub>();
             var operacija = new GetTablicaPrvenstva(kolo);
             this.Accept(operacija);
-            foreach (var klub in liga)
-            {
-                Klub _klub;
-                if (klub.GetType() == typeof(Klub))
-                {
-                    _klub = (Klub)klub;
-                    klubovi.Add(_klub);
-                }
-            }
-            return (klubovi.OrderByDescending(k => k.BrojBodova)
+         
+            return (GetKlubovi().OrderByDescending(k => k.BrojBodova)
                 .ThenByDescending(k => k.RazlikaGolova())
                 .ThenByDescending(k => k.BrojDanihGolova)
                 .ThenByDescending(k => k.BrojPobjeda)
                 .ToList(), operacija.Rezultat);
         }
 
-
         internal List<Utakmica> PripremljenaLjestvicaRezultata(string klub, int kolo)
         {
-            List<Utakmica> utakmice = new List<Utakmica>();
             var operacija = new GetTablicaRezultata(klub, kolo);
             this.Accept(operacija);
-            foreach (var utakmica in liga)
-            {
-                Utakmica _utakmica;
-                if (utakmica.GetType() == typeof(Utakmica))
-                {
-                    _utakmica = (Utakmica)utakmica;
-                    if(_utakmica.Odigrana == true)
-                        utakmice.Add(_utakmica);
-                }
-            }
-            return utakmice;
+           
+            return GetUtakmice().Where(u => u.Odigrana == true).ToList();
         }
-
-        public void Resetiraj()
+        
+        internal void Resetiraj()
         {
-            foreach (var komponenta in liga)
+            foreach (var klub in GetKlubovi())
             {
-                Klub klub;
-                Utakmica utakmica;
+                klub.ResetirajKlub();
+                klub.ResetIgrace();
+            }
 
-                if (komponenta.GetType() == typeof(Utakmica))
-                {
-                    utakmica = (Utakmica)komponenta;
-                    utakmica.ResetirajUtakmicu();
-                }
-
-                if (komponenta.GetType() == typeof(Klub))
-                {
-                    klub = (Klub)komponenta;
-                    klub.ResetirajKlub();
-                    klub.ResetIgrace();
-                }
+            foreach (var utakmica in GetUtakmice())
+            {
+                utakmica.ResetirajUtakmicu();
             }
         }
     }
