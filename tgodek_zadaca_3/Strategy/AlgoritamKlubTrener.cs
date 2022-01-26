@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using tgodek_zadaca_3.Composite;
 
 namespace tgodek_zadaca_3.Strategy
@@ -15,7 +14,11 @@ namespace tgodek_zadaca_3.Strategy
         {
             var prventsvo = Prvenstvo.DohvatiPrvenstvo();
             var klubovi = prventsvo.Liga.FindAll(e => e.GetType() == typeof(Klub));
-            var sortiraniKlubovi = klubovi.Select(k => k as Klub).OrderBy(k => k.Naziv.Length).ThenByDescending(k => GetBrojSamoglasnika(k.Trener.Ime)).ToList();
+            var sortiraniKlubovi = klubovi.Select(k => k as Klub)
+                                          .OrderBy(k => k.Naziv.Length)
+                                          .ThenByDescending(k => GetBrojSamoglasnika(k.Trener.Ime))
+                                          .ToList();
+            
             var brojKlubova = sortiraniKlubovi.Count;
 
             if (brojKlubova % 2 == 0)

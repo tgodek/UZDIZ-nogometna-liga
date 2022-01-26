@@ -35,8 +35,24 @@ namespace tgodek_zadaca_3.Tablica
             Console.Write("-\n");
         }
 
-        public void IspisiPodnozje()
+        public void IspisiPodnozje(List<Tuple<int, string>> podnozje)
         {
+            Console.Write("| ");
+            Console.Write("Ukupno".PadRight(DuljineStupca[0]) + " | ");
+            for (int i = 1; i < Naslovi.Length; i++)
+            {
+                var pronaden = podnozje.Find(x => x.Item1 == i);
+                if (pronaden != null)
+                {
+                    Console.Write(pronaden.Item2.PadLeft(DuljineStupca[i]) + " | ");
+                }
+                else
+                {
+                    Console.Write("".PadLeft(DuljineStupca[i]) + " | ");
+                }
+            }
+            Console.Write("\n");
+            IspisiDivider();
         }
 
 

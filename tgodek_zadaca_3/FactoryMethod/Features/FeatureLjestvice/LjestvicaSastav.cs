@@ -11,7 +11,7 @@ namespace tgodek_zadaca_3.Feature
         private readonly int Kolo;
         private readonly string DomacinOznaka;
         private readonly string GostOznaka;
-        private readonly Prvenstvo liga;
+        private readonly Prvenstvo prvenstvo;
         private readonly ZamjenaHandler ZamjenaHandler = new ZamjenaHandler();
         private readonly ZutiKartonHandler ZutKartonHandler = new ZutiKartonHandler();
         private readonly CrveniKartonHandler CrveniKartonHandler = new CrveniKartonHandler();
@@ -19,7 +19,7 @@ namespace tgodek_zadaca_3.Feature
 
         public LjestvicaSastav(int kolo, string domacin, string gost)
         {
-            liga = Prvenstvo.DohvatiPrvenstvo();
+            prvenstvo = Prvenstvo.DohvatiPrvenstvo();
             Kolo = kolo;
             DomacinOznaka = domacin;
             GostOznaka = gost;
@@ -35,20 +35,20 @@ namespace tgodek_zadaca_3.Feature
             OdigrajUtakmicu(utakmica);
             Console.WriteLine("\nKRAJ UTAKMICE\n");
             IspisiSastav(utakmica);
-            liga.Resetiraj();
+            prvenstvo.Resetiraj();
         }
 
         private Utakmica DohvatiUtakmicu()
         {
-            var domacin = liga.PronadiZapis(DomacinOznaka) as Klub;
-            var gost = liga.PronadiZapis(GostOznaka) as Klub;
+            var domacin = prvenstvo.PronadiZapis(DomacinOznaka) as Klub;
+            var gost = prvenstvo.PronadiZapis(GostOznaka) as Klub;
             if (domacin == null)
                 Console.WriteLine("Klub s oznakom " + DomacinOznaka + " ne postoji");
             else if (gost == null)
                 Console.WriteLine("Klub s oznakom " + GostOznaka + " ne postoji");
             else 
             {
-                var utakmice = liga.GetUtakmice().Where(u => u.Kolo == Kolo).ToList();
+                var utakmice = prvenstvo.GetUtakmice().Where(u => u.Kolo == Kolo).ToList();
                 foreach (Utakmica utakmica in utakmice)
                 {
                     if (utakmica.Kolo == Kolo && (utakmica.Domacin == domacin && utakmica.Gost == gost) ||

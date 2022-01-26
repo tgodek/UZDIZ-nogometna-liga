@@ -9,7 +9,7 @@ namespace tgodek_zadaca_3.Feature
     class PohranjeniRasporedi : Operacija
     {
         private KlasicnaTablica Tablica;
-        private readonly string[] naslovi = { "Raspored", "Datum generiranja" };
+        private readonly string[] naslovi = { "Raspored", "Datum generiranja", "Aktivni" };
 
         public PohranjeniRasporedi() 
         {
@@ -18,6 +18,7 @@ namespace tgodek_zadaca_3.Feature
 
         public override void ObradiZahtjev()
         {
+            var prvenstvo = Prvenstvo.DohvatiPrvenstvo();
             var caretaker = Caretaker.DohvatiCaretaker();
             var rasporedi = caretaker.GetRasporede();
 
@@ -29,11 +30,12 @@ namespace tgodek_zadaca_3.Feature
 
             foreach (var raspored in rasporedi)
             {
-                string[] zapis = { raspored.GetBroj().ToString(), raspored.GetDatum().ToString() };
+                var aktivni = "";
+                if (raspored.GetBroj() == prvenstvo.AktivniRaspored.Broj) aktivni = "✓";
+                string[] zapis = { raspored.GetBroj().ToString(), raspored.GetDatum().ToString(), aktivni };
                 Tablica.DodajRedak(zapis);
             }
             Tablica.Ispis();
-
         }
     }
 }
