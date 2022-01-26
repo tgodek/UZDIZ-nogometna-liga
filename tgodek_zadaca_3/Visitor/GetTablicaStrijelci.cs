@@ -8,7 +8,7 @@ namespace tgodek_zadaca_3.Visitor
 {
     class GetTablicaStrijelci : IVisit
     {
-        private int _kolo;
+        private int Kolo;
         private GolHandler Handler = new GolHandler();
         private ZamjenaHandler ZamjenaHandler = new ZamjenaHandler();
         private ZutiKartonHandler ZutKartonHandler = new ZutiKartonHandler();
@@ -17,19 +17,22 @@ namespace tgodek_zadaca_3.Visitor
 
         public GetTablicaStrijelci(int kolo = 0)
         {
-            _kolo = kolo;
-            Handler.SetNextHandler(ZamjenaHandler).SetNextHandler(ZutKartonHandler).SetNextHandler(CrveniKartonHandler).SetNextHandler(AutogolHandler);
+            Kolo = kolo;
+            Handler.SetNextHandler(ZamjenaHandler)
+                   .SetNextHandler(ZutKartonHandler)
+                   .SetNextHandler(CrveniKartonHandler)
+                   .SetNextHandler(AutogolHandler);
         }
 
         public void Visit(Dogadaj dogadaj)
         {
-            if (_kolo == 0)
+            if (Kolo == 0)
             {
                 Handler.ProccessEvent(dogadaj);
             }
             else 
             {
-                if (dogadaj.Utakmica.Kolo <= _kolo)
+                if (dogadaj.Utakmica.Kolo <= Kolo)
                     Handler.ProccessEvent(dogadaj);
             }
         }

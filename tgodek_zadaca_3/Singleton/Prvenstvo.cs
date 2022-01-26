@@ -91,12 +91,20 @@ namespace tgodek_zadaca_3
         {
             var operacija = new GetTablicaPrvenstva(kolo);
             this.Accept(operacija);
+
+            var suma = new SumaLjestvicePrvenstva();
+            suma.SumaBrojaPobjeda = GetKlubovi().Sum(k => k.BrojPobjeda);
+            suma.SumaBrojaNerjesenih = GetKlubovi().Sum(k => k.BrojNerješenih);
+            suma.SumaBrojaPoraza = GetKlubovi().Sum(k => k.BrojPoraza);
+            suma.SumaBrojaDanihGolova = GetKlubovi().Sum(k => k.BrojDanihGolova);
+            suma.SumaBrojaPrimljenihGolova = GetKlubovi().Sum(k => k.BrojPrimljenihGolova);
+            suma.SumaBrojaBodova = GetKlubovi().Sum(k => k.BrojBodova);
          
             return (GetKlubovi().OrderByDescending(k => k.BrojBodova)
                 .ThenByDescending(k => k.RazlikaGolova())
                 .ThenByDescending(k => k.BrojDanihGolova)
                 .ThenByDescending(k => k.BrojPobjeda)
-                .ToList(), operacija.Rezultat);
+                .ToList(), suma);
         }
 
         internal List<Utakmica> PripremljenaLjestvicaRezultata(string klub, int kolo)
