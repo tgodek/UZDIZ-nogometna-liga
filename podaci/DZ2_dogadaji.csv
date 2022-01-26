@@ -1,0 +1,103 @@
+﻿Broj;Min;Vrsta;Klub;Igrač;Zamjena
+1;0;0;;;
+1;12;10;G;Dieye Matar;
+1;19;10;G;Nasiru Moro;
+1;20;2;R;Robert Murić;
+1;53;20;R;Robert Mudražija;Denis Bušnja
+1;55;1;R;Ivan Lepinjica;
+1;65;20;G;Josip Mitrović;Matija Dvorneković
+1;65;20;G;Josip Drmić;Toni Fruk
+1;76;20;G;Martin Šroler;Jorge Leonardo Obregon Rojas
+1;80;20;R;Robert Murić;Matej Vuk
+1;82;20;G;Dieye Matar;Fran Brodić
+1;82;20;G;Hrvoje Babec;Jurica Pršir
+1;90;99;;;
+2;0;0;;;
+2;10;1;I;Boureima Hassane Bande;
+2;17;1;I;Boureima Hassane Bande;
+2;29;10;HD;Martin Sekulić;
+2;29;20;HD;Martin Sekulić;Karlo Perić
+2;35;10;HD;Marko Bašić;
+2;45+2;10;HD;Filip Jazvić;
+2;45+3;1;I;Bernardo Matić;
+2;46;20;HD;Tonio Teklić;Dino Skorup
+2;49;10;I;Frano Mlinar;
+2;54;20;HD;Vinko Petković;Mario Veljača
+2;54;20;HD;Filip Jazvić;Luka Viduka
+2;66;20;I;Frano Mlinar;Robert Mišković
+2;74;20;I;Slavko Blagojević;Dion Drena Beljo
+2;74;20;I;Miroslav Iličić;Mateo Lisica
+2;77;10;HD;Ivan Roca;
+2;85;20;I;Antonio Ivančić;Antonio Siljan
+2;90+3;20;HD;Marko Bašić;Fran Beloša Fijan
+2;90+3;1;HD;Mario Veljača;
+2;90+3;99;;;
+3;0;0;;;
+3;27;10;SP;Mario Marina;
+3;46;20;D;Amer Gojak;Lovro Majer
+3;50;1;SP;Ivan Krstanović;
+3;60;20;D;Daniel Štefulj;Josip Mišić
+3;60;20;D;Lirim Kastrati;Bruno Petković
+3;60;20;SP;Mihael Mlinarić;Arijan Brković
+3;69;20;SP;Marin Laušić;Antonio Bosec
+3;69;20;SP;Ivan Krstanović;Mateo Monjac
+3;74;20;D;Luka Ivanušec;Luka Menalo
+3;74;20;D;Mislav Oršić;Duje Čop
+3;83;10;SP;Bruno Bogojević;
+3;84;1;SP;Bruno Bogojević;
+3;86;20;SP;Lovro Zvonarek;Damian van Bruggen
+3;90+3;10;SP;Ivan Čović;
+3;90+3;99;;;
+4;0;0;;;
+4;30;1;H;Jan Mlakar;
+4;42;1;L;Nikola Soldo;
+4;47;1;L;Marko Dabro;
+4;55;1;H;Jan Mlakar;
+4;57;20;L;Marko Đira;Josip Pivarić
+4;61;20;H;Mario Čuić;Jani Atanasov
+4;68;10;L;Lukas Kačavenda;
+4;69;20;L;Aliyu Ibrahim;Luka Stojković
+4;73;20;H;Emir Sahiti;Jairo De Macedo Da Silva
+4;81;20;H;Gergő Lovrencsics;Lumbardh Dellova
+4;81;20;H;Stipe Biuk;Marin Ljubičić
+4;84;10;L;Mateo Marić;
+4;88;20;L;Marko Dabro;Raul Alexander Florucz
+4;88;20;L;Lukas Kačavenda;Mate Maleš
+4;90;99;;;
+5;0;0;;;
+5;26;10;O;Mato Miloš;
+5;33;10;O;Marin Pilj;
+5;60;20;Š;Suad Sahiti;Ivan Delić
+5;63;1;O;Ramon Nazareno MIEREZ;
+5;66;20;O;Marin Pilj;Darko Nejašmić
+5;67;10;O;Darko Nejašmić;
+5;77;20;Š;Stipe Bačelić Grgić;Edin Julardžija
+5;80;20;O;Vedran Jugović;Merveil Valthy Streeker NDOCKYT
+5;83;20;Š;Juan Camilo Mesa Antunez;Jose Alejandro Lopez Mejia
+5;90;1;O;Damjan Bohar;
+5;90+1;10;Š;Deni Jurić;
+5;90+2;20;O;Ramon Nazareno MIEREZ;Petar Bočkaj
+5;90+2;20;O;Šime Gržan;Antonio Mance
+5;90+5;2;O;Damjan Bohar;
+5;90+5;99;;;
+6;0;0;;;
+6;27;1;G;Hrvoje Babec;
+6;43;10;Š;Stefan Perić;
+6;50;10;G;Cheick KEITA;
+6;55;20;Š;Stipe Bačelić Grgić;Marin Jakoliš
+6;61;20;G;Josip Mitrović;Toni Fruk
+6;61;20;G;Martin Šroler;Matija Dvorneković
+6;66;1;G;Dieye Matar;
+6;69;3;Š;Karlo Bilić;
+6;70;20;Š;Antonio Marin;Edin Julardžija
+6;70;20;Š;Deni Jurić;Suad Sahiti
+6;72;10;Š;Edin Julardžija;
+6;79;20;G;Dieye Matar;Fran Brodić
+6;82;20;Š;Mario Ćurić;Ignacio Daniel Bailone
+6;86;10;G;Ivan Banić;
+6;87;20;G;Kristijan Lovrić;Matthew Rudolf Maria Steenvoorden
+6;87;20;G;Serge-Junior Bertil Nicolas Martinsson Ngouali;Jurica Pršir
+6;87;1;Š;Karlo Bilić;
+6;88;10;G;Toni Fruk;
+6;90+2;10;Š;Deni Jurić;
+6;90+2;99;;;
