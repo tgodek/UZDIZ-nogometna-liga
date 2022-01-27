@@ -17,7 +17,7 @@ namespace tgodek_zadaca_3.Feature
             if(Algoritam == 1) context.PostaviStrategy(new AlgoritamSlucajniBrojevi());
             if(Algoritam == 2) context.PostaviStrategy(new AlgoritamAbecedno());
             if(Algoritam == 3) context.PostaviStrategy(new AlgoritamKlubTrener());
-            context.PohraniRaspored();
+            context.BackupRaspored();
         }
     }
 }

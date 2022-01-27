@@ -7,6 +7,6 @@ namespace tgodek_zadaca_3.Strategy
 {
     public interface IStrategy
     {
-        (List<Klub>, List<Klub>) Generiraj();
+        (List<Klub>, List<Klub>) GenerirajPolovice();
     }
 }

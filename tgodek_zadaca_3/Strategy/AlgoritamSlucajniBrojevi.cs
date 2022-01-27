@@ -7,10 +7,10 @@ namespace tgodek_zadaca_3.Strategy
 {
     public class AlgoritamSlucajniBrojevi : IStrategy
     {
-        private List<Klub> domacini = new List<Klub>();
-        private List<Klub> gosti = new List<Klub>();
+        private readonly List<Klub> domacini = new List<Klub>();
+        private readonly List<Klub> gosti = new List<Klub>();
 
-        public (List<Klub>, List<Klub>) Generiraj()
+        public (List<Klub>, List<Klub>) GenerirajPolovice()
         {
             var prventsvo = Prvenstvo.DohvatiPrvenstvo();
             var klubovi = prventsvo.Liga.FindAll(e => e.GetType() == typeof(Klub));

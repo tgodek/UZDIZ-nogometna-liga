@@ -35,7 +35,7 @@ namespace tgodek_zadaca_3.Feature
             foreach (var utakmica in utakmice)
             {
                 string[] zapis = { utakmica.Kolo.ToString(), utakmica.Domacin.Naziv, utakmica.Gost.Naziv };
-                Tablica.DodajRedak(zapis);
+                Tablica.DodajRed(zapis);
             }
             Tablica.Ispis();
         }

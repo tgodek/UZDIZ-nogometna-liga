@@ -7,48 +7,47 @@ namespace tgodek_zadaca_3.Tablica
     class KlasicnaTablica 
     {
         private readonly string[] Naslovi;
-        private readonly List<int> DuljineStupca;
-        private List<string[]> Zapisi;
+        private readonly List<int> SirinaStupca;
+        private readonly List<string[]> Zapisi;
+        public List<int> Stupci { get { return SirinaStupca; } }
 
         public KlasicnaTablica(string[] naslovi) 
         {
             Zapisi = new List<string[]>();
             Naslovi = naslovi;
-            DuljineStupca = Naslovi.Select(u => u.Length).ToList();
+            SirinaStupca = Naslovi.Select(u => u.Length).ToList();
         }
 
         private void IspisiNaslov()
         {
             IspisiDivider();
-
             string naslov = "";
             for (int i = 0; i < Naslovi.Length; i++)
-                naslov += "| " + Naslovi[i].PadRight(DuljineStupca[i]) + ' ';
+                naslov += "| " + Naslovi[i].PadRight(SirinaStupca[i]) + ' ';
             Console.Write(naslov + "|\n");
-
             IspisiDivider();
         }
 
-        private void IspisiDivider() 
+        public void IspisiDivider() 
         {
-            DuljineStupca.ForEach(l => Console.Write("--" + new string('-', l) + '-'));
+            SirinaStupca.ForEach(l => Console.Write("--" + new string('-', l) + '-'));
             Console.Write("-\n");
         }
 
         public void IspisiPodnozje(List<Tuple<int, string>> podnozje)
         {
             Console.Write("| ");
-            Console.Write("Ukupno".PadRight(DuljineStupca[0]) + " | ");
+            Console.Write("Ukupno".PadRight(SirinaStupca[0]) + " | ");
             for (int i = 1; i < Naslovi.Length; i++)
             {
                 var pronaden = podnozje.Find(x => x.Item1 == i);
                 if (pronaden != null)
                 {
-                    Console.Write(pronaden.Item2.PadLeft(DuljineStupca[i]) + " | ");
+                    Console.Write(pronaden.Item2.PadLeft(SirinaStupca[i]) + " | ");
                 }
                 else
                 {
-                    Console.Write("".PadLeft(DuljineStupca[i]) + " | ");
+                    Console.Write("".PadLeft(SirinaStupca[i]) + " | ");
                 }
             }
             Console.Write("\n");
@@ -56,27 +55,20 @@ namespace tgodek_zadaca_3.Tablica
         }
 
 
-        public void DodajRedak(string[] redak)
+        public void DodajRed(string[] red)
         {
-            if (Naslovi.Length == redak.Length)
-                Zapisi.Add(redak);
-        }
-
-        private void OdrediDuljinuStupca()
-        {
-            foreach (var redak in Zapisi)
+            if (Naslovi.Length == red.Length) 
             {
-                for (int i = 0; i < redak.Length; i++)
+                Zapisi.Add(red);
+                for (int i = 0; i < SirinaStupca.Count; i++) 
                 {
-                    if (redak[i].Length >= DuljineStupca[i])
-                        DuljineStupca[i] = redak[i].Length;
+                    if (red[i].Length > SirinaStupca[i]) SirinaStupca[i] = red[i].Length;
                 }
             }
         }
 
         public void Ispis()
         {
-            OdrediDuljinuStupca();
             IspisiNaslov();
             foreach (var redak in Zapisi)
             {
@@ -84,9 +76,9 @@ namespace tgodek_zadaca_3.Tablica
                 for (int i = 0; i < redak.Length; i++)
                 {
                     if (int.TryParse(redak[i], out _))
-                        Console.Write(redak[i].PadLeft(DuljineStupca[i]) + " | ");
+                        Console.Write(redak[i].PadLeft(SirinaStupca[i]) + " | ");
                     else
-                        Console.Write(redak[i].PadRight(DuljineStupca[i]) + " | ");
+                        Console.Write(redak[i].PadRight(SirinaStupca[i]) + " | ");
                 }
                 Console.Write("\n");
             }

@@ -31,9 +31,9 @@ namespace tgodek_zadaca_3.Feature
             foreach (var raspored in rasporedi)
             {
                 var aktivni = "";
-                if (raspored.GetBroj() == prvenstvo.AktivniRaspored.Broj) aktivni = "✓";
-                string[] zapis = { raspored.GetBroj().ToString(), raspored.GetDatum().ToString(), aktivni };
-                Tablica.DodajRedak(zapis);
+                if (raspored.Broj == prvenstvo.AktivniRaspored.Broj) aktivni = "✓";
+                string[] zapis = { raspored.Broj.ToString(), raspored.Datum.ToString(), aktivni };
+                Tablica.DodajRed(zapis);
             }
             Tablica.Ispis();
         }

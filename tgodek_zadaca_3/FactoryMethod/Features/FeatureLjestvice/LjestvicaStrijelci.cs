@@ -28,7 +28,7 @@ namespace tgodek_zadaca_3.Feature
             foreach (var igrac in igraci)
             {
                 string[] zapis = { igrac.Ime, igrac.Klub.Naziv, igrac.BrojPogodaka.ToString() };
-                Tablica.DodajRedak(zapis);
+                Tablica.DodajRed(zapis);
             }
 
             Tablica.Ispis();

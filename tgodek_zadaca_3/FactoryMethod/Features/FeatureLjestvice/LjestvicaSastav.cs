@@ -13,9 +13,9 @@ namespace tgodek_zadaca_3.Feature
         private readonly string GostOznaka;
         private readonly Prvenstvo prvenstvo;
         private readonly ZamjenaHandler ZamjenaHandler = new ZamjenaHandler();
-        private readonly ZutiKartonHandler ZutKartonHandler = new ZutiKartonHandler();
+        private readonly ZutiKartonHandler ZutiKartonHandler = new ZutiKartonHandler();
         private readonly CrveniKartonHandler CrveniKartonHandler = new CrveniKartonHandler();
-        private readonly string[] naslovi = { "Pozicija","Domaćin", "Pozicija","Gost" };
+        private readonly string[] naslovi = { "Pozicija", "Igrac", "Pozicija", "Igrac" };
 
         public LjestvicaSastav(int kolo, string domacin, string gost)
         {
@@ -23,7 +23,7 @@ namespace tgodek_zadaca_3.Feature
             Kolo = kolo;
             DomacinOznaka = domacin;
             GostOznaka = gost;
-            ZamjenaHandler.SetNextHandler(ZutKartonHandler).SetNextHandler(CrveniKartonHandler);
+            ZamjenaHandler.SetNextHandler(ZutiKartonHandler).SetNextHandler(CrveniKartonHandler);
         }
         public override void ObradiZahtjev()
         {
@@ -81,19 +81,20 @@ namespace tgodek_zadaca_3.Feature
 
         private void IspisiSastav(Utakmica utakmica)
         {
-            var tablica = new KlasicnaTablica(naslovi);
-
             var domacinIgraci = utakmica.Domacin.ListaIgraca().FindAll(i => i.IgracUIgri()).OrderBy(i => i.Pozicija).ToList();
             var gostigraci = utakmica.Gost.ListaIgraca().FindAll(i => i.IgracUIgri()).OrderBy(i => i.Pozicija).ToList();
             var brojZapisaD = domacinIgraci.Count;
             var brojZapisaG = gostigraci.Count;
             int razlika = 0;
+        
+            var tablica = new KlasicnaTablica(naslovi);
+
             if (brojZapisaD > brojZapisaG)
             {
                 razlika = brojZapisaD - brojZapisaG;
                 for (int i = 0; i < razlika; i++)
                 {
-                    var igrac = new Igrac(new Klub("", "", new Trener("")),"-",Pozicija.NAN,DateTime.Now);
+                    var igrac = new Igrac(Pozicija.UNKNOWN);
                     gostigraci.Add(igrac);
                 }
             }
@@ -102,29 +103,38 @@ namespace tgodek_zadaca_3.Feature
                 razlika = brojZapisaG - brojZapisaD;
                 for (int i = 0; i < razlika; i++)
                 {
-                    var igrac = new Igrac(new Klub("", "", new Trener("")), "-", Pozicija.NAN, DateTime.Now);
+                    var igrac = new Igrac(Pozicija.UNKNOWN);
                     domacinIgraci.Add(igrac);
                 }
             }
 
             for (int i = 0; i < brojZapisaD; i++)
             {
-                var domacinPozicija = domacinIgraci[i].Pozicija.ToString();
-                var domacinIme = domacinIgraci[i].Ime;
-                var gostPozicija = gostigraci[i].Pozicija.ToString();
-                var gostIme = gostigraci[i].Ime;
-
-                if (domacinIgraci[i].Pozicija == Pozicija.NAN)
-                    domacinPozicija = "-";
-                if (gostigraci[i].Pozicija == Pozicija.NAN)
-                    gostPozicija = "-";
+                var domacinImaPoziciju = domacinIgraci[i].Pozicija != Pozicija.UNKNOWN;
+                var domacinImaIme = domacinIgraci[i].Ime != null;
                 
+                var gostImaPoziciju = gostigraci[i].Pozicija != Pozicija.UNKNOWN;
+                var gostImaIme = gostigraci[i].Ime != null;
+
+                string domacinPozicija = domacinImaPoziciju ? domacinIgraci[i].Pozicija.ToString() : "-";
+                string domacinIme = domacinImaIme ? domacinIgraci[i].Ime : "-";
+
+                string gostPozicija = gostImaPoziciju ? gostigraci[i].Pozicija.ToString() : "-";
+                string gostIme = gostImaIme ? gostigraci[i].Ime : "-";
+
                 string[] zapis = { domacinPozicija, domacinIme, gostPozicija, gostIme };
-                tablica.DodajRedak(zapis);
+                tablica.DodajRed(zapis);
             }
+            var domacin = utakmica.Domacin.Naziv;
+            var gost = utakmica.Gost.Naziv;
+
+            var sirinaDomacinStupca = tablica.Stupci[0] + tablica.Stupci[1] + 3;
+            var sirinaGostStupca = tablica.Stupci[2] + tablica.Stupci[3] + 3;
+
+            tablica.IspisiDivider();
+            Console.Write("| " + domacin.PadRight(sirinaDomacinStupca) + " ");
+            Console.Write("| " + gost.PadRight(sirinaGostStupca) + " |\n");
             tablica.Ispis();
         }
-
-      
     }
 }

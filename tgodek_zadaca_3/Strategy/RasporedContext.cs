@@ -10,28 +10,28 @@ namespace tgodek_zadaca_3.Strategy
     {
         private List<Klub> domacini = new List<Klub>();
         private List<Klub> gosti = new List<Klub>();
-        private List<Utakmica> utakmice = new List<Utakmica>();
+        private readonly List<Utakmica> utakmice = new List<Utakmica>();
 
-        private IStrategy _strategy;
+        private IStrategy strategy;
         public RasporedContext() { }
 
         public void PostaviStrategy(IStrategy strategy)
         {
-            this._strategy = strategy;
+            this.strategy = strategy;
         }
 
-        public void PohraniRaspored()
+        public void BackupRaspored()
         {
-            (domacini, gosti) = this._strategy.Generiraj();
+            (domacini, gosti) = this.strategy.GenerirajPolovice();
             GenerirajRaspored();
-            Save();
+            SaveRaspored();
         }
 
         private void GenerirajRaspored()
         {
-            List<(Klub, Klub)> originaliParovi = new List<(Klub, Klub)>();
+            List<(Klub, Klub)> sviParovi = new List<(Klub, Klub)>();
             List<(Klub, Klub)> tempOdabrani = new List<(Klub, Klub)>();
-            List<(Klub, Klub)> tempReverse = new List<(Klub, Klub)>();
+            List<(Klub, Klub)> tempOdabraniReverse = new List<(Klub, Klub)>();
 
             var parovi =
                 from k1 in domacini
@@ -40,61 +40,53 @@ namespace tgodek_zadaca_3.Strategy
 
             foreach (var p in parovi)
             {
-                var domacin = p.domacin;
-                var gost = p.gost;
-                originaliParovi.Add((domacin, gost));
+                sviParovi.Add((p.domacin, p.gost));
             }
 
-            while (originaliParovi.Count > 0)
+            while (sviParovi.Count > 0)
             {
                 var tempKlub = new List<Klub>();
 
                 foreach (var domacin in domacini)
                 {
-                    var pronadenPar = originaliParovi.FindLast(p => p.Item1 == domacin);
+                    var pronadenPar = sviParovi.FindLast(p => p.Item1 == domacin);
                     var gost = pronadenPar.Item2;
                     if (!tempKlub.Contains(gost) && (pronadenPar.Item1 != null && pronadenPar.Item2 != null))
                     {
                         tempKlub.Add(gost);
                         var reverseKlub = (pronadenPar.Item2, pronadenPar.Item1);
                         tempOdabrani.Add(pronadenPar);
-                        tempReverse.Add(reverseKlub);
+                        tempOdabraniReverse.Add(reverseKlub);
                     }
                     else
                     {
-                        var noviPar = originaliParovi.Find(p => p.Item1 == domacin && !tempKlub.Contains(p.Item2));
+                        var noviPar = sviParovi.Find(p => p.Item1 == domacin && !tempKlub.Contains(p.Item2));
                         if (noviPar.Item1 != null && noviPar.Item2 != null)
                         {
                             var reverseKlub = (noviPar.Item2, noviPar.Item1);
                             tempOdabrani.Add(noviPar);
-                            tempReverse.Add(reverseKlub);
+                            tempOdabraniReverse.Add(reverseKlub);
                             tempKlub.Add(noviPar.Item2);
                         }
                     }
                 }
-
+                
                 DodajNoveUtakmice(tempOdabrani);
-                DodajNoveUtakmice(tempReverse);
+                DodajNoveUtakmice(tempOdabraniReverse);
 
-                var rezultat = originaliParovi.Except(tempOdabrani).ToList();
-                originaliParovi = rezultat;
-                tempOdabrani = new List<(Klub, Klub)>();
-                tempReverse = new List<(Klub, Klub)>();
+                var rezultat = sviParovi.Except(tempOdabrani).ToList();
+                sviParovi = rezultat;
+                tempOdabrani.Clear();
+                tempOdabraniReverse.Clear();
             }
         }
 
         private void DodajNoveUtakmice(List<(Klub, Klub)> parovi)
         {
-            var brojUtakmica = utakmice.Count;
-            var brojZadnjeUtakmice = 0;
-            var sadasnjeKolo = 1;
-            if (brojUtakmica != 0)
-            {
-                var zadnjaUtakmica = utakmice.Last();
-                brojZadnjeUtakmice = zadnjaUtakmica.Broj;
-                sadasnjeKolo = zadnjaUtakmica.Kolo + 1;
-            }
-
+            var postojiUtakmica = utakmice.Count != 0;
+            var brojZadnjeUtakmice = postojiUtakmica ? utakmice.Last().Broj : 0;
+            var sadasnjeKolo = postojiUtakmica ? utakmice.Last().Kolo + 1 : 1;
+          
             foreach (var par in parovi)
             {
                 brojZadnjeUtakmice++;
@@ -104,7 +96,7 @@ namespace tgodek_zadaca_3.Strategy
             }
         }
 
-        public void Save()
+        public void SaveRaspored()
         {
             var caretaker = Caretaker.DohvatiCaretaker();
             var prvenstvo = Prvenstvo.DohvatiPrvenstvo();
@@ -112,7 +104,7 @@ namespace tgodek_zadaca_3.Strategy
             prvenstvo.AktivniRaspored.Broj = caretaker.ZadnjiRaspored() + 1;
             prvenstvo.AktivniRaspored.Datum = DateTime.Parse(DateTime.Now.ToString("G"));
             prvenstvo.AktivniRaspored.Utakmice = utakmice;
-            caretaker.Backup(prvenstvo.AktivniRaspored.SaveMemento());
+            caretaker.Backup(prvenstvo.AktivniRaspored.SaveRaspored());
         }
     }
 }

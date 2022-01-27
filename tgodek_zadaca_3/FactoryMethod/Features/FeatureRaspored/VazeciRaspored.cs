@@ -23,7 +23,7 @@ namespace tgodek_zadaca_3.Feature
                 Console.WriteLine($"Raspored {IDRasporeda} ne postoji!");
                 return;
             }
-            prvenstvo.AktivniRaspored.RestoreMemento(raspored);
+            prvenstvo.AktivniRaspored.RestoreRaspored(raspored);
         }
     }
 }

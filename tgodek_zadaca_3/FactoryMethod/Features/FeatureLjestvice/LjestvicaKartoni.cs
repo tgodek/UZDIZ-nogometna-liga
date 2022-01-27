@@ -32,7 +32,7 @@ namespace tgodek_zadaca_3.Feature
             {
                 string[] zapis = { klub.Naziv, klub.ZutiKarton.ToString(),
                     klub.DrugiZutiKarton.ToString(), klub.CrveniKarton.ToString(), klub.UkupnoKartona().ToString()};
-                Tablica.DodajRedak(zapis);
+                Tablica.DodajRed(zapis);
             }
             Tablica.Ispis();
             Tablica.IspisiPodnozje(podnozje);

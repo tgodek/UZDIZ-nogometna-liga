@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace tgodek_zadaca_3.Memento
 {
@@ -8,7 +7,7 @@ namespace tgodek_zadaca_3.Memento
     {
         private static Caretaker instanca;
 
-        private readonly List<Raspored> _mementos = new List<Raspored>();
+        private readonly List<Raspored> rasporedi = new List<Raspored>();
 
         public static Caretaker DohvatiCaretaker()
         {
@@ -19,15 +18,15 @@ namespace tgodek_zadaca_3.Memento
             return instanca;
         }
 
-        public void Backup(Raspored memento)
+        public void Backup(Raspored raspored)
         {
             Console.WriteLine("Raspored pohranjen!");
-            this._mementos.Add(memento);
+            this.rasporedi.Add(raspored);
         }
-        public int ZadnjiRaspored() => _mementos.Count;
+        public int ZadnjiRaspored() => rasporedi.Count;
 
-        public List<Raspored> GetRasporede() => _mementos; 
+        public List<Raspored> GetRasporede() => rasporedi; 
 
-        public Raspored PronaziRaspored(int broj) => _mementos.Find(m => m.GetBroj() == broj);
+        public Raspored PronaziRaspored(int broj) => rasporedi.Find(m => m.Broj == broj);
     }
 }

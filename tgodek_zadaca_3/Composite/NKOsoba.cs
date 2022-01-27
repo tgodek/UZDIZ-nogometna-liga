@@ -14,7 +14,7 @@ namespace tgodek_zadaca_3.Composite
     public enum Pozicija
     {
         G, B, LB, DB, CB, V, LDV, DDV, CDV, LV,
-       DV, CV, LOV, DOV, COV, N, LN, DN, CN, NAN
+       DV, CV, LOV, DOV, COV, N, LN, DN, CN, UNKNOWN
     }
 
     public class Igrac : NKOsoba, INogometnaLiga
@@ -36,6 +36,8 @@ namespace tgodek_zadaca_3.Composite
             this.Pozicija = pozicija;
             this.Datum = datum;
         }
+
+        public Igrac(Pozicija pozicija) { Pozicija = pozicija; }
 
         public void SetState(State state) => _state = state;
 

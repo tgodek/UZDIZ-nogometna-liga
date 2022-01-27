@@ -29,16 +29,16 @@ namespace tgodek_zadaca_3.Memento
             set { utakmice = value; }
         }
 
-        public Raspored SaveMemento() 
+        public Raspored SaveRaspored() 
         {
             return new Raspored(broj, datum, utakmice);
         }
 
-        public void RestoreMemento(Raspored raspored) 
+        public void RestoreRaspored(Raspored raspored) 
         {
-            Broj = raspored.GetBroj();
-            Datum = raspored.GetDatum();
-            Utakmice = raspored.GetUtakmice();
+            Broj = raspored.Broj;
+            Datum = raspored.Datum;
+            Utakmice = raspored.Utakmice;
             Console.WriteLine($"Raspored {Broj} postavljen kao važeći!");
         }
     }

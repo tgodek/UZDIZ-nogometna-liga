@@ -37,7 +37,7 @@ namespace tgodek_zadaca_3.Feature
                 klub.BrojNerješenih.ToString(), klub.BrojPoraza.ToString(), klub.BrojDanihGolova.ToString(), klub.BrojPrimljenihGolova.ToString(),
                 klub.RazlikaGolova().ToString() ,klub.BrojBodova.ToString() };
                 
-                Tablica.DodajRedak(zapis);
+                Tablica.DodajRed(zapis);
             }
 
             Tablica.Ispis();
