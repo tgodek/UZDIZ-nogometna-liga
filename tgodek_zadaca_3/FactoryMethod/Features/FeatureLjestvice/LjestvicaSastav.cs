@@ -51,7 +51,7 @@ namespace tgodek_zadaca_3.Feature
                 var utakmice = prvenstvo.GetUtakmice().Where(u => u.Kolo == Kolo).ToList();
                 foreach (Utakmica utakmica in utakmice)
                 {
-                    if (utakmica.Kolo == Kolo && (utakmica.Domacin == domacin && utakmica.Gost == gost) ||
+                    if (utakmica.Kolo == Kolo && utakmica.PostojiDogadaj() && (utakmica.Domacin == domacin && utakmica.Gost == gost) ||
                         (utakmica.Domacin == gost && utakmica.Gost == domacin))
                     {
                         return utakmica;
